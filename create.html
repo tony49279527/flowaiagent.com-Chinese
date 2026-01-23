@@ -58,16 +58,15 @@
                     <!-- Main Product ASIN -->
                     <div class="form-group">
                         <label for="main-asin">核心产品 ASIN <span class="required">*</span></label>
-                        <textarea id="main-asin" name="mainAsin" placeholder="输入核心产品 ASIN..." required></textarea>
-                        <div class="helper-text">请输入您要分析的核心产品 ASIN</div>
+                        <textarea id="main-asin" name="mainAsin" placeholder="例如: B08N5WRWNW" required></textarea>
+                        <div class="helper-text">在Amazon产品页面的URL或详情页可以找到ASIN</div>
                     </div>
 
                     <!-- Competitor ASINs -->
                     <div class="form-group">
                         <label for="comp-asin">竞争对手 ASIN <span class="required">*</span></label>
-                        <textarea id="comp-asin" name="compAsin" placeholder="输入竞争对手 ASIN (每行一个)..."
-                            required></textarea>
-                        <div class="helper-text">请输入竞品 ASIN,建议 3-5 个</div>
+                        <textarea id="comp-asin" name="compAsin" placeholder="例如: B08N5KWS8V" required></textarea>
+                        <div class="helper-text">每行一个ASIN，建议从"经常一起购买"中选择3-5个</div>
                     </div>
                 </div>
 
@@ -87,7 +86,7 @@
                             <label>参考网站数量</label>
                             <select class="custom-select" name="siteCount">
                                 <option value="10">10 个网站</option>
-                                <option value="20">20 个网站</option>
+                                <option value="20" selected>20 个网站 ⭐推荐</option>
                                 <option value="30">30 个网站</option>
                                 <option value="40">40 个网站</option>
                                 <option value="50">50 个网站</option>
@@ -97,7 +96,7 @@
                             <label>参考 YouTube 数量</label>
                             <select class="custom-select" name="youtubeCount">
                                 <option value="10">10 个视频</option>
-                                <option value="20">20 个视频</option>
+                                <option value="20" selected>20 个视频 ⭐推荐</option>
                                 <option value="30">30 个视频</option>
                                 <option value="40">40 个视频</option>
                                 <option value="50">50 个视频</option>
@@ -107,7 +106,8 @@
                     <!-- Second Row: 2 File Uploads -->
                     <div class="config-grid-uploads">
                         <div class="config-item upload-item">
-                            <label>上传亚马逊退货 CSV (选填)</label>
+                            <label>上传亚马逊退货 CSV (选填) <span title="在卖家后台 Reports → Returns 中可以下载"
+                                    style="cursor: help; color: #667eea;">❓</span></label>
                             <div class="file-upload-box">
                                 <input type="file" id="csv-upload" name="csvFile" accept=".csv" hidden>
                                 <label for="csv-upload" class="upload-label">
