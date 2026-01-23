@@ -6,7 +6,7 @@ on:
       - main  # 只有推送到 main 分支时才触发
 
 env:
-  PROJECT_ID: "550177383294"
+  PROJECT_ID: gen-lang-client-0817070175
   SERVICE_NAME: amz-site-central
   REGION: us-central1
 
