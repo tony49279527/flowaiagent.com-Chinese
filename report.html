@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无线蓝牙耳机竞品分析报告 | 竞品分析助手</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        /* Report Specific Styles */
+        .report-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .report-header-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .report-title h1 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .report-meta-info {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            display: flex;
+            gap: 20px;
+        }
+
+        .report-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .action-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .action-btn.primary {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+        }
+
+        .action-btn.secondary {
+            background: white;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .report-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        /* Table Styles */
+        .data-table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .data-table th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr:hover {
+            background: #f8fafc;
+        }
+
+        /* Sentiment Grid */
+        .sentiment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 24px;
+        }
+
+        .sentiment-card {
+            padding: 24px;
+            border-radius: 16px;
+        }
+
+        .sentiment-card.positive {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+        }
+
+        .sentiment-card.negative {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+        }
+
+        .sentiment-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .sentiment-card.positive h3 {
+            color: #166534;
+        }
+
+        .sentiment-card.negative h3 {
+            color: #991b1b;
+        }
+
+        .sentiment-card ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .sentiment-card li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        /* Suggestion Box */
+        .suggestion-box {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .suggestion-box h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .suggestion-box p {
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .sentiment-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .report-header-section {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-bot">
+                        <path d="M12 8V4H8" />
+                        <rect width="16" height="12" x="4" y="8" rx="2" />
+                        <path d="M2 14h2" />
+                        <path d="M20 14h2" />
+                        <path d="M15 13v2" />
+                        <path d="M9 13v2" />
+                    </svg>
+                </div>
+                <span class="logo-text">AI 竞品分析 <span class="logo-sub">Amazon Analysis Platform</span></span>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="create.html" class="nav-link">创建分析</a>
+                <a href="cases.html" class="nav-link active">案例展示</a>
+                <a href="blog.html" class="nav-link">博客</a>
+            </nav>
+            <div class="lang-switch">
+                <a href="report_en.html" class="lang-btn">EN</a>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="report-container">
+                <!-- Report Header -->
+                <div class="report-header-section">
+                    <div class="report-title">
+                        <h1>无线蓝牙耳机竞品分析报告</h1>
+                        <div class="report-meta-info">
+                            <span>生成时间：2025-09-25 14:30</span>
+                            <span>分析对象：无线耳机品类</span>
+                        </div>
+                    </div>
+                    <div class="report-actions">
+                        <button class="action-btn primary">下载 PDF</button>
+                        <button class="action-btn secondary">分享报告</button>
+                    </div>
+                </div>
+
+                <!-- 1. Market Overview -->
+                <div class="report-section">
+                    <h2 class="section-title">1. 市场概况</h2>
+                    <p style="margin-bottom: 20px; color: var(--text-secondary); line-height: 1.6;">
+                        当前无线蓝牙耳机市场竞争激烈，主要集中在 50-100 美元价格区间。消费者对降噪功能和电池续航的关注度持续上升。根据最新的亚马逊数据，该品类在过去季度增长了 15%。主要竞争对手占据了
+                        60% 的市场份额，品牌集中度较高。
+                    </p>
+                    <div class="data-table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>参数</th>
+                                    <th>Anker Soundcore</th>
+                                    <th>Sony LinkBuds S</th>
+                                    <th>JBL Tune 230NC</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>价格</td>
+                                    <td>$49.99</td>
+                                    <td>$148.00</td>
+                                    <td>$99.95</td>
+                                </tr>
+                                <tr>
+                                    <td>续航时间</td>
+                                    <td>10h / 50h</td>
+                                    <td>6h / 20h</td>
+                                    <td>10h / 40h</td>
+                                </tr>
+                                <tr>
+                                    <td>降噪功能</td>
+                                    <td>Hybrid ANC</td>
+                                    <td>Active ANC</td>
+                                    <td>Active ANC</td>
+                                </tr>
+                                <tr>
+                                    <td>防水等级</td>
+                                    <td>IPX5</td>
+                                    <td>IPX4</td>
+                                    <td>IPX4</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 2. Sentiment Analysis -->
+                <div class="report-section">
+                    <h2 class="section-title">2. 用户反馈情感分析</h2>
+                    <div class="sentiment-grid">
+                        <div class="sentiment-card positive">
+                            <h3>👍 用户好评点</h3>
+                            <ul>
+                                <li>低音效果出众，适合流行音乐</li>
+                                <li>佩戴舒适，长时间使用无压迫感</li>
+                                <li>APP 功能丰富，EQ 调节方便</li>
+                            </ul>
+                        </div>
+                        <div class="sentiment-card negative">
+                            <h3>👎 用户痛点</h3>
+                            <ul>
+                                <li>通话质量一般，户外风噪明显</li>
+                                <li>充电盒盖子略显松动</li>
+                                <li>偶尔出现断连情况</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Marketing Suggestions -->
+                <div class="report-section">
+                    <h2 class="section-title">3. 营销策略建议</h2>
+                    <div class="suggestion-box">
+                        <h3>🎯 场景营销</h3>
+                        <p>在宣传素材中重点展示通勤、健身等高频使用场景，突出降噪与稳固佩戴的优势。</p>
+                    </div>
+                    <div class="suggestion-box">
+                        <h3>📹 KOL 合作</h3>
+                        <p>建议与 YouTube 科技类博主合作，进行"百元内最强降噪耳机"的横向测评。</p>
+                    </div>
+                    <div class="suggestion-box">
+                        <h3>🔍 SEO 优化</h3>
+                        <p>增加 "Budget ANC Earbuds", "Long Battery Life" 等长尾词的覆盖。</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <p>AI 竞品分析 © 2025 AI 竞品分析 - 让数据驱动决策</p>
+        </footer>
+    </div>
+</body>
+
+</html>

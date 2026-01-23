@@ -1,0 +1,52 @@
+﻿                    <div class="page-header">
+                        <h1>
+                            <span class="gradient-text">鎴愬姛妗堜緥</span>
+                            <br>
+                            鐪熷疄鍒嗘瀽鎶ュ憡灞曠ず
+                        </h1>
+                        <p class="page-subtitle">鏌ョ湅鎴戜滑涓哄鎴风敓鎴愮殑娣卞害绔炲搧鍒嗘瀽鎶ュ憡</p>
+                    </div>
+                    <div class="cases-grid">
+                        <!-- Case 1 -->
+                        <div class="case-card">
+                            <div class="case-header">
+                                <span class="case-tag">鐢靛瓙浜у搧</span>
+                                <span class="case-date">2024-03-15</span>
+                            </div>
+                            <h3 class="case-title">鏃犵嚎钃濈墮鑰虫満绔炲搧鍒嗘瀽</h3>
+                            <p class="case-desc">閽堝 Anker Soundcore 涓?Sony LinkBuds S 鐨勬繁搴﹀姣斿垎鏋?鍖呭惈鐢ㄦ埛璇勪环鎯呮劅鍒嗘瀽涓庨€€璐у師鍥犳寲鎺樸€?/p>
+                            <a href="report.html" class="case-link">鏌ョ湅鎶ュ憡 &rarr;</a>
+                        </div>
+
+                        <!-- Case 2 -->
+                        <div class="case-card">
+                            <div class="case-header">
+                                <span class="case-tag">瀹跺眳鐢熸椿</span>
+                                <span class="case-date">2024-03-12</span>
+                            </div>
+                            <h3 class="case-title">鏅鸿兘绌烘皵鍑€鍖栧櫒甯傚満鍒嗘瀽</h3>
+                            <p class="case-desc">鍒嗘瀽 Levoit 涓?Philips 鏍稿績鏈哄瀷鐨勪紭鍔ｅ娍,鎻愪緵鍩轰簬 YouTube 璇勬祴瑙嗛鐨勮惀閿€寤鸿銆?/p>
+                            <a href="report.html" class="case-link">鏌ョ湅鎶ュ憡 &rarr;</a>
+                        </div>
+
+                        <!-- Case 3 -->
+                        <div class="case-card">
+                            <div class="case-header">
+                                <span class="case-tag">鎴峰杩愬姩</span>
+                                <span class="case-date">2024-03-10</span>
+                            </div>
+                            <h3 class="case-title">闇茶惀甯愮绔炲搧瀵规瘮</h3>
+                            <p class="case-desc">瀵规瘮 Coleman 涓?Naturehike 鐨勪骇鍝佺壒鎬?鍒嗘瀽涓嶅悓浠锋牸鍖洪棿鐨勭敤鎴峰亸濂姐€?/p>
+                            <a href="report.html" class="case-link">鏌ョ湅鎶ュ憡 &rarr;</a>
+                        </div>
+                    </div>
+                    </main>
+
+                    <!-- Footer -->
+                    <footer class="main-footer">
+                        <p>AI 绔炲搧鍒嗘瀽 漏 2025 AI 绔炲搧鍒嗘瀽 - 璁╂暟鎹┍鍔ㄥ喅绛?/p>
+                    </footer>
+                </div>
+</body>
+
+</html>

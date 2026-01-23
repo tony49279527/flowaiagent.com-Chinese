@@ -1,0 +1,35 @@
+<a href="report.html" class="case-link">查看报告 &rarr;</a>
+</div>
+
+<!-- Case 2 -->
+<div class="case-card">
+    <div class="case-header">
+        <span class="case-tag">家居生活</span>
+        <span class="case-date">2024-03-12</span>
+    </div>
+    <h3 class="case-title">智能空气净化器市场分析</h3>
+    <p class="case-desc">分析 Levoit 与 Philips 核心机型的优劣势，提供基于 YouTube 评测视频的营销建议。</p>
+    <a href="report.html" class="case-link">查看报告 &rarr;</a>
+</div>
+
+<!-- Case 3 -->
+<div class="case-card">
+    <div class="case-header">
+        <span class="case-tag">户外运动</span>
+        <span class="case-date">2024-03-10</span>
+    </div>
+    <h3 class="case-title">露营帐篷竞品对比</h3>
+    <p class="case-desc">对比 Coleman 与 Naturehike 的产品特性，分析不同价格区间的用户偏好。</p>
+    <a href="report.html" class="case-link">查看报告 &rarr;</a>
+</div>
+</div>
+</main>
+
+<!-- Footer -->
+<footer class="main-footer">
+    <p>AI 竞品分析 © 2025 AI 竞品分析 - 让数据驱动决策</p>
+</footer>
+</div>
+</body>
+
+</html>

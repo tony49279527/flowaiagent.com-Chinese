@@ -1,0 +1,172 @@
+﻿                            <div class="helper-text">璇疯緭鍏ユ偍瑕佸垎鏋愮殑鏍稿績浜у搧 ASIN</div>
+                        </div>
+
+                        <!-- Competitor ASINs -->
+                        <div class="form-group">
+                            <label for="comp-asin">绔炰簤瀵规墜 ASIN <span class="required">*</span></label>
+                            <textarea id="comp-asin" name="compAsin" placeholder="杈撳叆绔炰簤瀵规墜 ASIN (姣忚涓€涓?..."
+                                required></textarea>
+                            <div class="helper-text">璇疯緭鍏ョ珵鍝?ASIN,寤鸿 3-5 涓?/div>
+                        </div>
+                    </div>
+
+                    <!-- Configuration Section -->
+                    <div class="config-section">
+                        <h3 class="section-title">鍒嗘瀽閰嶇疆</h3>
+                        <div class="config-grid">
+                            <div class="config-item">
+                                <label>鎶ュ憡璇█</label>
+                                <select class="custom-select" name="language">
+                                    <option value="zh">涓枃 (Chinese)</option>
+                                    <option value="en">English</option>
+                                </select>
+                            </div>
+                            <div class="config-item">
+                                <label>鍙傝€冪綉绔欐暟閲?/label>
+                                <select class="custom-select" name="siteCount">
+                                    <option value="10">10 涓綉绔?/option>
+                                    <option value="20">20 涓綉绔?/option>
+                                    <option value="30">30 涓綉绔?/option>
+                                    <option value="40">40 涓綉绔?/option>
+                                    <option value="50">50 涓綉绔?/option>
+                                </select>
+                            </div>
+                            <div class="config-item">
+                                <label>鍙傝€?YouTube 鏁伴噺</label>
+                                <select class="custom-select" name="youtubeCount">
+                                    <option value="10">10 涓棰?/option>
+                                    <option value="20">20 涓棰?/option>
+                                    <option value="30">30 涓棰?/option>
+                                    <option value="40">40 涓棰?/option>
+                                    <option value="50">50 涓棰?/option>
+                                </select>
+                            </div>
+                            <div class="config-item upload-item">
+                                <label>涓婁紶浜氶┈閫婇€€璐?CSV (閫夊～)</label>
+                                <div class="file-upload-box">
+                                    <input type="file" id="csv-upload" name="csvFile" accept=".csv" hidden>
+                                    <label for="csv-upload" class="upload-label">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                            <polyline points="17 8 12 3 7 8" />
+                                            <line x1="12" x2="12" y1="3" y2="15" />
+                                        </svg>
+                                        閫夋嫨鏂囦欢
+                                    </label>
+                                    <span class="file-name" id="csv-file-name">鏈€夋嫨鏂囦欢</span>
+                                </div>
+                            </div>
+                            <div class="config-item upload-item">
+                                <label>涓婁紶搴楅摵浜虹兢鐢诲儚 (TXT/CSV)</label>
+                                <div class="file-upload-box">
+                                    <input type="file" id="persona-upload" name="personaFile" accept=".csv,.txt" hidden>
+                                    <label for="persona-upload" class="upload-label">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                            <polyline points="17 8 12 3 7 8" />
+                                            <line x1="12" x2="12" y1="3" y2="15" />
+                                        </svg>
+                                        閫夋嫨鏂囦欢
+                                    </label>
+                                    <span class="file-name" id="persona-file-name">鏈€夋嫨鏂囦欢</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Custom Prompt Section -->
+                    <div class="prompt-section">
+                        <h3 class="section-title">鑷畾涔夋彁绀鸿瘝</h3>
+                        <div class="prompt-chips">
+                            <button type="button" class="chip" onclick="fillPrompt('鍏ㄩ潰鍒嗘瀽浜у搧浼樼己鐐?骞剁粰鍑烘敼杩涘缓璁€?)">鎻愮ず璇?A -
+                                鍏ㄩ潰鍒嗘瀽</button>
+                            <button type="button" class="chip" onclick="fillPrompt('閲嶇偣鍒嗘瀽鐢ㄦ埛閫€璐у師鍥?骞舵彁渚涜В鍐虫柟妗堛€?)">鎻愮ず璇?B -
+                                鍚€€璐у垎鏋?/button>
+                            <button type="button" class="chip" onclick="fillPrompt('鍒嗘瀽绔炲搧鐨勪娇鐢ㄥ満鏅?骞舵嫇灞曟柊鐨勮惀閿€鎬濊矾銆?)">鎻愮ず璇?C -
+                                瀹屾暣鐗?鍚満鏅嫇灞?</button>
+                        </div>
+                        <textarea id="custom-prompt" name="customPrompt" placeholder="杈撳叆鑷畾涔夊垎鏋愯姹?.."></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="submit-section">
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <span class="btn-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L12 3Z" />
+                                </svg>
+                                寮€濮?AI 鍒嗘瀽
+                            </span>
+                            <span class="btn-loading" style="display: none;">澶勭悊涓?..</span>
+                        </button>
+                    </div>
+                </form>
+                </main>
+
+                <!-- Lead Gen Modal -->
+                <div class="modal-overlay" id="leadGenModal">
+                    <div class="modal-container">
+                        <div class="modal-header">
+                            <h3>鑾峰彇鎮ㄧ殑鍒嗘瀽鎶ュ憡</h3>
+                            <button class="close-modal" id="closeModal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="modal-desc">璇峰畬鍠勪互涓嬩俊鎭?鍒嗘瀽瀹屾垚鍚庢姤鍛婂皢鍙戦€佽嚦鎮ㄧ殑閭銆?/p>
+                            <form id="leadGenForm">
+                                <div class="form-group">
+                                    <label for="modal-name">濮撳悕 <span class="required">*</span></label>
+                                    <input type="text" id="modal-name" name="userName" required placeholder="璇疯緭鍏ユ偍鐨勫鍚?>
+                                </div>
+                                <div class="form-group">
+                                    <label for="modal-email">鎺ユ敹閭 <span class="required">*</span></label>
+                                    <input type="email" id="modal-email" name="userEmail" required
+                                        placeholder="name@example.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="modal-industry">琛屼笟绫荤洰 <span class="required">*</span></label>
+                                    <input type="text" id="modal-industry" name="industry" required
+                                        placeholder="渚嬪:鐢靛瓙浜у搧銆佸灞?..">
+                                </div>
+                                <button type="submit" class="submit-btn modal-submit-btn">
+                                    <span class="btn-text">纭骞跺紑濮嬪垎鏋?/span>
+                                    <span class="btn-loading" style="display: none;">澶勭悊涓?..</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <footer class="main-footer">
+                    <p>AI 绔炲搧鍒嗘瀽 漏 2025 AI 绔炲搧鍒嗘瀽 - 璁╂暟鎹┍鍔ㄥ喅绛?/p>
+                </footer>
+            </div>
+
+            <!-- Progress Overlay -->
+            <div class="progress-overlay" id="progressOverlay">
+                <div class="progress-container">
+                    <div class="progress-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-loader-2 animate-spin">
+                            <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                        </svg>
+                    </div>
+                    <h3 class="progress-title">姝ｅ湪杩涜 AI 娣卞害鍒嗘瀽...</h3>
+                    <p class="progress-status" id="progressStatus">杩炴帴浜氶┈閫婃暟鎹帴鍙?..</p>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="progressBar"></div>
+                    </div>
+                </div>
+            </div>
+            <script src="script.js"></script>
+</body>
+
+</html>
