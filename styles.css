@@ -647,6 +647,11 @@ textarea:focus {
 .modal-container {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 450px;
+    width: 90%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 .modal-header {
@@ -1448,11 +1453,32 @@ textarea:focus {
     justify-content: center;
     gap: 20px;
 }
+
 /* Feature Card Refinements */
-.feature-card { background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
-.feature-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; color: #1e293b; }
-.feature-card p { font-size: 1rem; color: #64748b; line-height: 1.6; }
+.feature-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.feature-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #1e293b;
+}
+
+.feature-card p {
+    font-size: 1rem;
+    color: #64748b;
+    line-height: 1.6;
+}
 
 /* ============================================
    CHINESE HOMEPAGE DESIGN OPTIMIZATION
@@ -1483,8 +1509,15 @@ textarea:focus {
 }
 
 @keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
 }
 
 .hero-subtitle {
@@ -1788,16 +1821,16 @@ textarea:focus {
     .hero-title {
         font-size: 2.5rem !important;
     }
-    
+
     .section-heading {
         font-size: 2rem !important;
         margin-bottom: 40px !important;
     }
-    
+
     .hero-section {
         padding: 60px 20px !important;
     }
-    
+
     .step-number {
         width: 56px !important;
         height: 56px !important;
@@ -1807,7 +1840,9 @@ textarea:focus {
 
 /* Remove underline from hero buttons */
 .hero-actions .submit-btn,
-.hero-actions a { text-decoration: none !important; }
+.hero-actions a {
+    text-decoration: none !important;
+}
 
 /* ============================================
    CREATE ANALYSIS PAGE DESIGN OPTIMIZATION
@@ -2068,20 +2103,20 @@ textarea:focus {
     .analysis-form {
         padding: 32px 24px;
     }
-    
+
     .form-grid {
         grid-template-columns: 1fr;
         gap: 24px;
     }
-    
+
     .config-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .page-header h1 {
         font-size: 2.25rem;
     }
-    
+
     .submit-btn {
         width: 100%;
         justify-content: center;
@@ -2089,13 +2124,33 @@ textarea:focus {
 }
 
 /* Updated Config Layout */
-.config-grid-selects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 24px; }
-.config-grid-uploads { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-@media (max-width: 768px) { .config-grid-selects, .config-grid-uploads { grid-template-columns: 1fr; } }
+.config-grid-selects {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.config-grid-uploads {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+@media (max-width: 768px) {
+
+    .config-grid-selects,
+    .config-grid-uploads {
+        grid-template-columns: 1fr;
+    }
+}
 
 
 /* Remove borders from prompt section */
-.prompt-section .section-title { border-bottom: none !important; padding-bottom: 24px; }
+.prompt-section .section-title {
+    border-bottom: none !important;
+    padding-bottom: 24px;
+}
 
 /* ============================================
    BLOG PAGE DESIGN OPTIMIZATION
@@ -2237,11 +2292,12 @@ textarea:focus {
         grid-template-columns: 1fr;
         gap: 24px;
     }
-    
+
     .blog-header h1 {
         font-size: 2.25rem;
     }
 }
+
 /* Blog Header Title Enhancement */
 .blog-header h1 {
     font-size: 3.5rem !important;
@@ -2268,6 +2324,7 @@ textarea:focus {
     .blog-header h1 {
         font-size: 2.5rem !important;
     }
+
     .blog-header p {
         font-size: 1.125rem !important;
     }
