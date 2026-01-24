@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支付中控台 - 管理员</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .status-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .status-label {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .status-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .status-PENDING {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .status-SUCCESS {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .status-FAILED {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-fail {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        .btn-fail:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+        }
+
+        .btn-reset {
+            background: #e2e8f0;
+            color: #475569;
+        }
+
+        .btn-reset:hover {
+            background: #cbd5e1;
+        }
+
+        .log {
+            background: #1e293b;
+            color: #94a3b8;
+            border-radius: 12px;
+            padding: 16px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .log-entry {
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .log-time {
+            color: #64748b;
+        }
+
+        .log-success {
+            color: #10b981;
+        }
+
+        .log-fail {
+            color: #ef4444;
+        }
+
+        .log-pending {
+            color: #f59e0b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎛️ 支付中控台</h1>
+        <p class="subtitle">收到微信/支付宝付款后，点击确认</p>
+
+        <div class="status-card">
+            <p class="status-label">当前支付状态</p>
+            <span class="status-value status-PENDING" id="statusDisplay">PENDING</span>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-success" onclick="updateStatus('SUCCESS')">
+                ✅ 确认收款
+            </button>
+            <button class="btn-fail" onclick="updateStatus('FAILED')">
+                ❌ 支付失败
+            </button>
+        </div>
+
+        <button class="btn-reset" style="width: 100%; margin-bottom: 20px;" onclick="updateStatus('PENDING')">
+            🔄 重置状态 (测试用)
+        </button>
+
+        <div class="log" id="logArea">
+            <div class="log-entry">等待操作...</div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8080';
+
+        function addLog(message, type = 'info') {
+            const log = document.getElementById('logArea');
+            const time = new Date().toLocaleTimeString();
+            const colorClass = type === 'success' ? 'log-success' : type === 'fail' ? 'log-fail' : 'log-pending';
+            log.innerHTML = `<div class="log-entry"><span class="log-time">[${time}]</span> <span class="${colorClass}">${message}</span></div>` + log.innerHTML;
+        }
+
+        function updateStatus(status) {
+            addLog(`正在设置状态: ${status}...`, status === 'SUCCESS' ? 'success' : status === 'FAILED' ? 'fail' : 'pending');
+
+            // Prepare order data for webhook trigger
+            const orderData = {
+                status: status,
+                order_data: {
+                    order_id: 'ORD' + Date.now(),
+                    email: 'aurotony4927@gmail.com',
+                    main_asin: 'B08N5WRWNW',
+                    competitor_asin: 'B09GYQ5SY7',
+                    payment_amount: 299,
+                    payment_time: new Date().toISOString(),
+                    report_type: 'paid'
+                }
+            };
+
+            fetch(`${API_BASE}/api/update_status`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderData)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    const display = document.getElementById('statusDisplay');
+                    display.textContent = status;
+                    display.className = 'status-value status-' + status;
+                    addLog(`✓ 状态已更新: ${status}`, status === 'SUCCESS' ? 'success' : status === 'FAILED' ? 'fail' : 'pending');
+
+                    if (status === 'SUCCESS') {
+                        addLog('💰 付款确认完成！用户页面将自动跳转...', 'success');
+                    }
+                })
+                .catch(err => {
+                    addLog(`✗ 错误: ${err.message}`, 'fail');
+                });
+        }
+
+        // 初始加载当前状态
+        fetch(`${API_BASE}/api/check_status`)
+            .then(res => res.json())
+            .then(data => {
+                const display = document.getElementById('statusDisplay');
+                display.textContent = data.status;
+                display.className = 'status-value status-' + data.status;
+                addLog(`当前状态: ${data.status}`);
+            })
+            .catch(err => addLog('无法连接服务器'));
+    </script>
+</body>
+
+</html>

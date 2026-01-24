@@ -17,6 +17,8 @@ from flask_cors import CORS
 import logging
 from datetime import datetime
 import os
+import requests
+import threading
 
 # Serve static files from current directory
 app = Flask(__name__)
@@ -86,19 +88,62 @@ def check_quota():
     logger.info(f"Quota used for {email}: {current_usage + 1}/2")
     return jsonify({"allowed": True, "usage": current_usage + 1})
 
+
+# n8n Webhook URL for report generation
+N8N_WEBHOOK_URL = 'https://tony4927.app.n8n.cloud/webhook/1573cd32-8e6a-46ac-9d74-1e6f7c9ea5e7'
+
+# Store pending order data for webhook
+pending_order_data = {}
+
+def trigger_n8n_webhook(order_data):
+    """Trigger n8n webhook to generate report"""
+    try:
+        logger.info(f"Triggering n8n webhook with data: {order_data}")
+        response = requests.post(
+            N8N_WEBHOOK_URL,
+            json=order_data,
+            headers={'Content-Type': 'application/json'},
+            timeout=30
+        )
+        logger.info(f"n8n webhook response: {response.status_code} - {response.text[:200]}")
+        return response.status_code == 200
+    except Exception as e:
+        logger.error(f"Error triggering n8n webhook: {e}")
+        return False
+
 @app.route('/api/update_status', methods=['POST'])
 def update_status():
-    """Admin Endpoint to Update Status"""
+    """Admin Endpoint to Update Status and trigger webhook on SUCCESS"""
     data = request.json
     new_status = data.get('status')
+    order_data = data.get('order_data', pending_order_data.get('latest', {}))
     
     if new_status in ['SUCCESS', 'FAILED', 'PENDING']:
         payment_state['status'] = new_status
         payment_state['updated_at'] = datetime.now().isoformat()
         logger.info(f"State Updated: {payment_state}")
-        return jsonify({"message": "Status updated", "current_status": new_status})
+        
+        # If SUCCESS, trigger n8n webhook in background thread
+        if new_status == 'SUCCESS' and order_data:
+            logger.info("Payment SUCCESS - Triggering n8n webhook...")
+            thread = threading.Thread(target=trigger_n8n_webhook, args=(order_data,))
+            thread.start()
+        
+        return jsonify({
+            "message": "Status updated", 
+            "current_status": new_status,
+            "webhook_triggered": new_status == 'SUCCESS'
+        })
     
     return jsonify({"error": "Invalid status"}), 400
+
+@app.route('/api/set_order_data', methods=['POST'])
+def set_order_data():
+    """Store order data for webhook trigger"""
+    data = request.json
+    pending_order_data['latest'] = data
+    logger.info(f"Order data stored: {data}")
+    return jsonify({"message": "Order data stored"})
 
 @app.route('/api/check_status', methods=['GET'])
 def check_status():
