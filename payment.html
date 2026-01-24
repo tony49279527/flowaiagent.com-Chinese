@@ -662,7 +662,7 @@
             showMsg('正在验证支付状态...', 'info');
             setTimeout(() => {
                 // 主动调用查询 API
-                fetch('http://localhost:5000/api/check_status')
+                fetch('/api/check_status')
                     .then(res => res.json())
                     .then(data => {
                         if (data.status === 'SUCCESS') {
@@ -694,7 +694,7 @@
 
         // --- 自动轮询支付状态 (每3秒检查一次) ---
         let checkInterval = setInterval(() => {
-            fetch('http://localhost:5000/api/check_status')
+            fetch('/api/check_status')
                 .then(res => res.json())
                 .then(data => {
                     console.log('Payment Status:', data.status);

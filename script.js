@@ -89,62 +89,65 @@ document.addEventListener('DOMContentLoaded', function () {
     leadGenForm.addEventListener('submit', async function (e) {
         e.preventDefault();
 
-        // --- Freemium Quota Logic (Client-Side) ---
-        const emailInput = document.getElementById('modal-email');
-        const userEmail = emailInput ? emailInput.value.trim().toLowerCase() : '';
-
-        if (userEmail) {
-            const quotaKey = 'amz_quota_' + userEmail;
-            const currentUsage = parseInt(localStorage.getItem(quotaKey) || '0');
-
-            if (currentUsage >= 2) {
-                alert('您的 2 次免费深度分析额度已用完。\n\n感谢您的体验！请升级专业版以解锁无限次分析。');
-                window.location.href = 'payment.html';
-                return; // Stop execution
-            }
-
-            // Increment usage count
-            localStorage.setItem(quotaKey, currentUsage + 1);
-            console.log(`User ${userEmail} usage count: ${currentUsage + 1}/2`);
-        }
-        // ------------------------------------------
-
         const modalSubmitBtn = leadGenForm.querySelector('.submit-btn');
         const btnText = modalSubmitBtn.querySelector('.btn-text');
         const btnLoading = modalSubmitBtn.querySelector('.btn-loading');
 
-        // Show loading state
+        const emailInput = document.getElementById('modal-email');
+        const userEmail = emailInput ? emailInput.value.trim().toLowerCase() : '';
+
+        // Show loading state immediately to prevent double clicks
         modalSubmitBtn.disabled = true;
         btnText.style.display = 'none';
         btnLoading.style.display = 'inline-block';
 
-        // Gather Data from BOTH forms
-        const mainFormData = new FormData(analysisForm);
-        const modalFormData = new FormData(leadGenForm);
-
-        // Combine data into a JSON object
-        // Combine data into a JSON object
-        const rawData = {};
-
-        // Add main form data (excluding files)
-        for (let [key, value] of mainFormData.entries()) {
-            if (value instanceof File) continue;
-            rawData[key] = value;
-        }
-
-        // Add modal form data
-        for (let [key, value] of modalFormData.entries()) {
-            rawData[key] = value;
-        }
-
-        // Handle File Content Reading
-        const csvInput = document.getElementById('csv-upload');
-        const personaInput = document.getElementById('persona-upload');
-
-        let csvContent = "";
-        let personaContent = "";
-
         try {
+            // --- Server-Side Quota Check ---
+            if (userEmail) {
+                const quotaResponse = await fetch('/api/check_quota', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: userEmail })
+                });
+
+                const quotaData = await quotaResponse.json();
+
+                if (!quotaData.allowed) {
+                    alert('您的 2 次免费深度分析额度已用完。\n\n感谢您的体验！请升级专业版以解锁无限次分析。');
+                    window.location.href = 'payment.html';
+                    return; // Stop execution
+                }
+
+                console.log(`User ${userEmail} quota check passed. Usage: ${quotaData.usage}`);
+            }
+            // -------------------------------
+
+            // Gather Data from BOTH forms
+            const mainFormData = new FormData(analysisForm);
+            const modalFormData = new FormData(leadGenForm);
+
+            // Combine data into a JSON object
+            const rawData = {};
+
+            // Add main form data (excluding files)
+            for (let [key, value] of mainFormData.entries()) {
+                if (value instanceof File) continue;
+                rawData[key] = value;
+            }
+
+            // Add modal form data
+            for (let [key, value] of modalFormData.entries()) {
+                rawData[key] = value;
+            }
+
+            // Handle File Content Reading
+            const csvInput = document.getElementById('csv-upload');
+            const personaInput = document.getElementById('persona-upload');
+
+            let csvContent = "";
+            let personaContent = "";
+
+            // Unified try block for Quota + File Reading + Webhook
             if (csvInput && csvInput.files.length > 0) {
                 csvContent = await readFileAsText(csvInput.files[0]);
             }

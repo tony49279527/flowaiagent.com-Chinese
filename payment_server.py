@@ -26,6 +26,25 @@ CORS(app)  # Enable CORS for frontend polling
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+import json
+
+# ... (logging config)
+
+QUOTA_FILE = 'usage_quota.json'
+
+def load_quota():
+    if not os.path.exists(QUOTA_FILE):
+        return {}
+    try:
+        with open(QUOTA_FILE, 'r') as f:
+            return json.load(f)
+    except:
+        return {}
+
+def save_quota(data):
+    with open(QUOTA_FILE, 'w') as f:
+        json.dump(data, f, indent=4)
+
 # --- In-Memory State ---
 payment_state = {
     "status": "PENDING",
@@ -38,66 +57,34 @@ def home():
     """Serve the Main Website Homepage"""
     return send_from_directory('.', 'index.html')
 
-@app.route('/admin')
-def admin_dashboard():
-    """Admin Dashboard for Controlling Payment Status"""
-    return """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Payment Control Center</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-            body { font-family: sans-serif; padding: 20px; text-align: center; }
-            .btn { padding: 20px 40px; font-size: 20px; margin: 10px; border: none; border-radius: 8px; cursor: pointer; color: white; width: 80%; max-width: 300px; }
-            .success { background: #4CAF50; }
-            .failed { background: #f44336; }
-            .reset { background: #9E9E9E; }
-            .status { margin: 20px; padding: 15px; background: #eee; border-radius: 5px; }
-        </style>
-    </head>
-    <body>
-        <h1>🎛️ Payment Control Center</h1>
-        
-        <div class="status">
-            Current Status: <strong id="status-text">PENDING</strong>
-        </div>
-
-        <button class="btn success" onclick="updateStatus('SUCCESS')">✅ Payment Received</button>
-        <br>
-        <button class="btn failed" onclick="updateStatus('FAILED')">❌ Payment Failed</button>
-        <br>
-        <button class="btn reset" onclick="updateStatus('PENDING')">🔄 Reset to Pending</button>
-
-        <script>
-            function updateStatus(status) {
-                fetch('/api/update_status', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({status: status})
-                })
-                .then(res => res.json())
-                .then(data => {
-                    document.getElementById('status-text').innerText = data.current_status;
-                    alert('Status updated to: ' + data.current_status);
-                });
-            }
-            
-            // Initial check
-            fetch('/api/check_status')
-                .then(res => res.json())
-                .then(data => {
-                    document.getElementById('status-text').innerText = data.status;
-                });
-        </script>
-    </body>
-    </html>
-    """
+# ... (admin_dashboard)
 
 @app.route('/<path:path>')
 def serve_static(path):
     """Explicitly serve static files"""
     return send_from_directory('.', path)
+
+@app.route('/api/check_quota', methods=['POST'])
+def check_quota():
+    """Check and increment user quota"""
+    data = request.json
+    email = data.get('email', '').strip().lower()
+    
+    if not email:
+        return jsonify({"error": "Email required"}), 400
+        
+    quota_db = load_quota()
+    current_usage = quota_db.get(email, 0)
+    
+    if current_usage >= 2:
+        return jsonify({"allowed": False, "usage": current_usage, "message": "Quota exceeded"})
+    
+    # Increment and save
+    quota_db[email] = current_usage + 1
+    save_quota(quota_db)
+    
+    logger.info(f"Quota used for {email}: {current_usage + 1}/2")
+    return jsonify({"allowed": True, "usage": current_usage + 1})
 
 @app.route('/api/update_status', methods=['POST'])
 def update_status():
