@@ -26,6 +26,13 @@ CORS(app)  # Enable CORS for frontend polling
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# --- In-Memory State ---
+payment_state = {
+    "status": "PENDING",
+    "updated_at": None,
+    "last_order_id": None
+}
+
 @app.route('/')
 def home():
     """Serve the Main Website Homepage"""
