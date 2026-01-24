@@ -19,23 +19,20 @@ from datetime import datetime
 import os
 
 # Serve static files from current directory
-app = Flask(__name__, static_folder='.', static_url_path='')
+app = Flask(__name__)
 CORS(app)  # Enable CORS for frontend polling
 
 # Configure Logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# --- In-Memory State ---
-# In production, use a database. Here we use a global dictionary.
-payment_state = {
-    "status": "PENDING",
-    "updated_at": None,
-    "last_order_id": None
-}
-
 @app.route('/')
-def index():
+def home():
+    """Serve the Main Website Homepage"""
+    return send_from_directory('.', 'index.html')
+
+@app.route('/admin')
+def admin_dashboard():
     """Admin Dashboard for Controlling Payment Status"""
     return """
     <!DOCTYPE html>
@@ -78,10 +75,22 @@ def index():
                     alert('Status updated to: ' + data.current_status);
                 });
             }
+            
+            // Initial check
+            fetch('/api/check_status')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('status-text').innerText = data.status;
+                });
         </script>
     </body>
     </html>
     """
+
+@app.route('/<path:path>')
+def serve_static(path):
+    """Explicitly serve static files"""
+    return send_from_directory('.', path)
 
 @app.route('/api/update_status', methods=['POST'])
 def update_status():
@@ -104,6 +113,13 @@ def check_status():
     return jsonify(payment_state)
 
 if __name__ == '__main__':
+    # Log files in current directory for debugging
+    try:
+        logger.info(f"Current Directory: {os.getcwd()}")
+        logger.info(f"Files: {os.listdir('.')}")
+    except Exception as e:
+        logger.error(f"Error listing files: {e}")
+
     port = int(os.environ.get('PORT', 8080))
     logger.info(f"Starting Payment Polling Server on port {port}...")
     app.run(host='0.0.0.0', port=port)
