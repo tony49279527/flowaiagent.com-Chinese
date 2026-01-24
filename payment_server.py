@@ -104,5 +104,6 @@ def check_status():
     return jsonify(payment_state)
 
 if __name__ == '__main__':
-    logger.info("Starting Payment Polling Server on port 5000...")
-    app.run(host='0.0.0.0', port=5000)
+    port = int(os.environ.get('PORT', 8080))
+    logger.info(f"Starting Payment Polling Server on port {port}...")
+    app.run(host='0.0.0.0', port=port)

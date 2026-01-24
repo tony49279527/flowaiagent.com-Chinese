@@ -10,8 +10,8 @@ RUN pip install flask flask-cors
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Make port 5000 available to the world outside this container
-EXPOSE 5000
+# Make port 8080 available to the world outside this container
+EXPOSE 8080
 
 # Run payment_server.py when the container launches
 # Note: payment_server.py also serves static files if configured, 
