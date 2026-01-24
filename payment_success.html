@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支付成功 - AI 竞品分析</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .success-container {
+            max-width: 600px;
+            margin: 80px auto;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-icon svg {
+            width: 50px;
+            height: 50px;
+            color: white;
+        }
+
+        .success-title {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+
+        .success-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .order-details {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .order-details h3 {
+            font-size: 1rem;
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .order-row:last-child {
+            border-bottom: none;
+        }
+
+        .order-row .label {
+            color: var(--text-secondary);
+        }
+
+        .order-row .value {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .primary-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .secondary-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .secondary-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .help-text {
+            margin-top: 30px;
+            padding: 16px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--primary-color);
+            animation: confettiFall 3s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 8V4H8" />
+                        <rect width="16" height="12" x="4" y="8" rx="2" />
+                        <path d="M2 14h2" />
+                        <path d="M20 14h2" />
+                        <path d="M15 13v2" />
+                        <path d="M9 13v2" />
+                    </svg>
+                </div>
+                <span class="logo-text">AI 竞品分析 <span class="logo-sub">Amazon Analysis Platform</span></span>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="create.html" class="nav-link">创建分析</a>
+                <a href="cases.html" class="nav-link">案例展示</a>
+                <a href="blog.html" class="nav-link">博客</a>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <div class="success-container">
+                <div class="success-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+
+                <h1 class="success-title">🎉 支付成功！</h1>
+                <p class="success-subtitle">您的完整分析报告已解锁，将在 10 分钟内发送至您的邮箱</p>
+
+                <div class="order-details">
+                    <h3>📋 订单详情</h3>
+                    <div class="order-row">
+                        <span class="label">订单编号</span>
+                        <span class="value" id="orderNo">ORD20260124001</span>
+                    </div>
+                    <div class="order-row">
+                        <span class="label">支付金额</span>
+                        <span class="value">¥299.00</span>
+                    </div>
+                    <div class="order-row">
+                        <span class="label">支付时间</span>
+                        <span class="value" id="payTime">2026-01-24 09:23:00</span>
+                    </div>
+                    <div class="order-row">
+                        <span class="label">接收邮箱</span>
+                        <span class="value" id="userEmail">user@example.com</span>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="create.html" class="primary-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 5v14M5 12h14" />
+                        </svg>
+                        继续分析下一个产品
+                    </a>
+                    <a href="cases.html" class="secondary-btn">
+                        查看更多案例
+                    </a>
+                </div>
+
+                <div class="help-text">
+                    💡 <strong>提示:</strong> 报告通常在 5-10 分钟内生成完成。如果超过 30 分钟未收到，请检查垃圾邮件文件夹或联系客服。
+                </div>
+            </div>
+        </main>
+
+        <footer class="main-footer">
+            <p>AI 竞品分析 © 2025 AI 竞品分析 - 让数据驱动决策</p>
+        </footer>
+    </div>
+
+    <!-- Confetti Animation -->
+    <div class="confetti" id="confetti"></div>
+
+    <script>
+        // Get order info from URL
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderNo = urlParams.get('order');
+
+            if (orderNo) {
+                document.getElementById('orderNo').textContent = orderNo;
+            }
+
+            // Set current time
+            const now = new Date();
+            document.getElementById('payTime').textContent = now.toLocaleString('zh-CN');
+
+            // Get email from localStorage
+            const email = localStorage.getItem('user_email');
+            if (email) {
+                document.getElementById('userEmail').textContent = email;
+            }
+
+            // Trigger confetti
+            createConfetti();
+        });
+
+        function createConfetti() {
+            const confettiContainer = document.getElementById('confetti');
+            const colors = ['#667eea', '#764ba2', '#ff6b6b', '#4CAF50', '#FFD700'];
+
+            for (let i = 0; i < 50; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.animationDelay = Math.random() * 2 + 's';
+                piece.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+                confettiContainer.appendChild(piece);
+            }
+
+            // Remove confetti after animation
+            setTimeout(() => {
+                confettiContainer.innerHTML = '';
+            }, 5000);
+        }
+    </script>
+</body>
+
+</html>

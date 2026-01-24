@@ -4,11 +4,427 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>支付预览 - 竞品分析助手</title>
+    <title>完成支付 - 解锁完整报告 | AI 竞品分析</title>
     <link rel="icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        .payment-page {
+            display: flex;
+            gap: 24px;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 24px 20px;
+        }
+
+        /* 左侧报告预览区 - 70% */
+        .report-preview {
+            flex: 7;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .report-preview-header {
+            padding: 20px 28px;
+            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+        }
+
+        .report-preview-header h2 {
+            font-size: 1.3rem;
+            margin: 0 0 8px 0;
+            color: var(--text-main);
+        }
+
+        .report-preview-header .meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .report-scroll {
+            max-height: 600px;
+            overflow-y: auto;
+            padding: 28px;
+        }
+
+        /* 报告内容样式 */
+        .report-section {
+            margin-bottom: 32px;
+        }
+
+        .report-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .report-text {
+            font-size: 0.92rem;
+            line-height: 1.75;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .data-table th {
+            background: rgba(102, 126, 234, 0.08);
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr:hover {
+            background: rgba(102, 126, 234, 0.03);
+        }
+
+        .sentiment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .sentiment-card {
+            padding: 18px;
+            border-radius: 12px;
+        }
+
+        .sentiment-card.positive {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+        }
+
+        .sentiment-card.negative {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+        }
+
+        .sentiment-card h4 {
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .sentiment-card.positive h4 {
+            color: #166534;
+        }
+
+        .sentiment-card.negative h4 {
+            color: #991b1b;
+        }
+
+        .sentiment-card ul {
+            padding-left: 18px;
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .sentiment-card li {
+            margin-bottom: 6px;
+        }
+
+        .suggestion-box {
+            background: rgba(102, 126, 234, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .suggestion-box h4 {
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .suggestion-box p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* 模糊遮罩 */
+        .blurred {
+            filter: blur(5px);
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .lock-mask {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 250px;
+            background: linear-gradient(transparent, var(--card-bg) 60%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 40px;
+        }
+
+        .lock-mask svg {
+            width: 48px;
+            height: 48px;
+            color: var(--primary-color);
+            margin-bottom: 14px;
+        }
+
+        .lock-mask h3 {
+            font-size: 1.1rem;
+            margin: 0 0 6px;
+            color: var(--text-main);
+        }
+
+        .lock-mask p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* 右侧支付面板 - 30% */
+        .payment-sidebar {
+            flex: 3;
+            min-width: 320px;
+            max-width: 360px;
+        }
+
+        .payment-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            position: sticky;
+            top: 90px;
+        }
+
+        .payment-box h3 {
+            text-align: center;
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+
+        .order-id {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .price-card {
+            text-align: center;
+            padding: 18px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .price-card .old {
+            text-decoration: line-through;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .price-card .now {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 0 8px;
+        }
+
+        .price-card .tag {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        .benefits {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+
+        .benefits li {
+            padding: 7px 0;
+            font-size: 0.88rem;
+            color: var(--text-main);
+        }
+
+        .benefits li::before {
+            content: '✓';
+            color: #4CAF50;
+            margin-right: 8px;
+            font-weight: 600;
+        }
+
+        .method-switch {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .method-btn {
+            flex: 1;
+            padding: 12px 8px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            background: transparent;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .method-btn:hover {
+            border-color: var(--primary-color);
+        }
+
+        .method-btn.active {
+            border-color: var(--primary-color);
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .method-btn img {
+            width: 22px;
+            height: 22px;
+        }
+
+        .qr-display {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .qr-display img {
+            max-width: 220px;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .qr-display .scan-text {
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .qr-display .amount-text {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .qr-display .tip-text {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .confirm-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .confirm-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .msg-box {
+            text-align: center;
+            padding: 10px;
+            margin-top: 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        .msg-box.show {
+            display: block;
+        }
+
+        .msg-box.info {
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--primary-color);
+        }
+
+        .msg-box.warn {
+            background: rgba(255, 107, 107, 0.1);
+            color: #ff6b6b;
+        }
+
+        .safe-note {
+            text-align: center;
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+        }
+
+        .safe-note span {
+            color: #4CAF50;
+        }
+
+        @media (max-width: 960px) {
+            .payment-page {
+                flex-direction: column;
+            }
+
+            .payment-sidebar {
+                max-width: none;
+                min-width: auto;
+            }
+
+            .report-scroll {
+                max-height: 400px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -17,8 +433,7 @@
             <div class="logo-section">
                 <div class="logo-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-bot">
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 8V4H8" />
                         <rect width="16" height="12" x="4" y="8" rx="2" />
                         <path d="M2 14h2" />
@@ -33,39 +448,33 @@
                 <a href="index.html" class="nav-link">首页</a>
                 <a href="create.html" class="nav-link">创建分析</a>
                 <a href="cases.html" class="nav-link">案例展示</a>
-                <a href="payment.html" class="nav-link active">支付预览</a>
+                <a href="blog.html" class="nav-link">博客</a>
             </nav>
-            <div class="lang-switch">
-                <a href="payment_en.html" class="lang-btn">EN</a>
-            </div>
+            <div class="lang-switch"><a href="payment_en.html" class="lang-btn">EN</a></div>
         </header>
-        <main class="main-content">
-            <div class="payment-preview">
-                <h1>报告预览</h1>
-                <p class="preview-subtitle">支付后即可查看完整报告</p>
-                <!-- Visible Content -->
-                <div class="preview-content-visible">
-                    <section class="report-section">
-                        <h3 class="section-title">1. 市场概况</h3>
-                        <p>当前无线蓝牙耳机市场竞争激烈,主要集中在 50-100 美元价格区间。消费者对降噪功能和电池续航的关注度持续上升。根据最新的亚马逊数据,该品类在过去季度增长了
-                            15%。主要竞争对手占据了 60% 的市场份额,品牌集中度较高。</p>
-                        <div class="chart-placeholder">
-                            <div class="chart-label">图表:市场份额分布 (预览)</div>
-                        </div>
-                    </section>
-                </div>
 
-                <!-- Blurred Content -->
-                <div class="preview-content-blurred">
-                    <section class="report-section">
-                        <h3 class="section-title">2. 竞品核心参数对比</h3>
-                        <div class="table-container">
+        <main class="main-content">
+            <div class="payment-page">
+                <!-- 左侧: 报告预览 70% -->
+                <div class="report-preview">
+                    <div class="report-preview-header">
+                        <h2>📊 无线蓝牙耳机竞品分析报告</h2>
+                        <p class="meta">ASIN: B08N5WRWNW · 生成时间: 2026-01-24 09:30</p>
+                    </div>
+
+                    <div class="report-scroll">
+                        <!-- 第1节: 市场概况 (可见) -->
+                        <div class="report-section">
+                            <h3 class="section-title">📈 1. 市场概况</h3>
+                            <p class="report-text">当前无线蓝牙耳机市场竞争激烈，主要集中在 50-100
+                                美元价格区间。消费者对降噪功能和电池续航的关注度持续上升。根据最新的亚马逊数据，该品类在过去季度增长了 15%。主要竞争对手占据了 60% 的市场份额，品牌集中度较高。</p>
                             <table class="data-table">
                                 <thead>
                                     <tr>
                                         <th>参数</th>
                                         <th>Anker Soundcore</th>
                                         <th>Sony LinkBuds S</th>
+                                        <th>JBL Tune 230NC</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -73,92 +482,234 @@
                                         <td>价格</td>
                                         <td>$49.99</td>
                                         <td>$148.00</td>
+                                        <td>$99.95</td>
+                                    </tr>
+                                    <tr>
+                                        <td>续航时间</td>
+                                        <td>10h / 50h</td>
+                                        <td>6h / 20h</td>
+                                        <td>10h / 40h</td>
+                                    </tr>
+                                    <tr>
+                                        <td>降噪功能</td>
+                                        <td>Hybrid ANC</td>
+                                        <td>Active ANC</td>
+                                        <td>Active ANC</td>
+                                    </tr>
+                                    <tr>
+                                        <td>防水等级</td>
+                                        <td>IPX5</td>
+                                        <td>IPX4</td>
+                                        <td>IPX4</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <p>(此处包含详细的竞品参数对比分析,包括续航、降噪、防水等级等核心指标的深度横向测评...)</p>
-                    </section>
 
-                    <section class="report-section">
-                        <h3 class="section-title">3. 用户反馈情感分析</h3>
-                        <div class="sentiment-grid">
-                            <div class="sentiment-card positive">
-                                <h3>👍 用户好评点</h3>
-                                <ul>
-                                    <li>低音效果出众...</li>
-                                </ul>
+                        <!-- 第2节: 用户反馈 (部分模糊) -->
+                        <div class="report-section">
+                            <h3 class="section-title">💬 2. 用户反馈情感分析</h3>
+                            <div class="sentiment-grid">
+                                <div class="sentiment-card positive">
+                                    <h4>👍 用户好评点</h4>
+                                    <ul>
+                                        <li>低音效果出众，适合流行音乐</li>
+                                        <li>佩戴舒适，长时间使用无压迫感</li>
+                                        <li>APP 功能丰富，EQ 调节方便</li>
+                                    </ul>
+                                </div>
+                                <div class="sentiment-card negative">
+                                    <h4>👎 用户痛点</h4>
+                                    <ul>
+                                        <li>通话质量一般，户外风噪明显</li>
+                                        <li>充电盒盖子略显松动</li>
+                                        <li>偶尔出现断连情况</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                        <p>(此处包含 5000+ 条用户评论的深度情感分析,挖掘用户真实痛点与爽点...)</p>
-                    </section>
 
-                    <section class="report-section">
-                        <h3 class="section-title">4. 营销策略建议</h3>
-                        <p>(此处包含针对性的 SEO 关键词优化建议、KOL 合作方向及场景营销策略...)</p>
-                    </section>
-                </div>
+                        <!-- 第3节: 营销建议 (模糊) -->
+                        <div class="report-section blurred">
+                            <h3 class="section-title">🎯 3. 营销策略建议</h3>
+                            <div class="suggestion-box">
+                                <h4>🎬 场景营销</h4>
+                                <p>在宣传素材中重点展示通勤、健身等高频使用场景，突出降噪与稳固佩戴的优势。推荐采用户外运动场景的高清视频素材...</p>
+                            </div>
+                            <div class="suggestion-box">
+                                <h4>📹 KOL 合作</h4>
+                                <p>建议与 YouTube 科技类博主合作，进行"百元内最强降噪耳机"的横向测评。重点推荐 MKBHD、Dave Lee 等频道...</p>
+                            </div>
+                            <div class="suggestion-box">
+                                <h4>🔍 SEO 优化</h4>
+                                <p>增加 "Budget ANC Earbuds", "Long Battery Life", "Best Wireless Earbuds Under $50"
+                                    等长尾词的覆盖...</p>
+                            </div>
+                        </div>
 
-                <!-- Lock Overlay -->
-                <div class="lock-overlay">
-                    <div class="lock-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- 第4节: 完全模糊 -->
+                        <div class="report-section blurred">
+                            <h3 class="section-title">📊 4. 竞品定价策略分析</h3>
+                            <p class="report-text">基于对竞品全年价格波动、促销节奏、优惠券策略的深度分析，为您提供定价优化建议...</p>
+                        </div>
+
+                        <div class="report-section blurred">
+                            <h3 class="section-title">🎥 5. YouTube 视频营销洞察</h3>
+                            <p class="report-text">分析了 50+ 条相关 YouTube 视频，提取关键词、情感倾向、热门评论话题...</p>
+                        </div>
+                    </div>
+
+                    <!-- 锁定遮罩 -->
+                    <div class="lock-mask">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                             <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                         </svg>
+                        <h3>🔒 支付后解锁完整报告</h3>
+                        <p>剩余 85% 内容需付费查看</p>
                     </div>
-                    <h3>解锁完整报告</h3>
-                    <p>获取深度数据分析、营销建议及完整图表</p>
-                    <p class="lock-sub">剩余 85% 内容仅供付费用户查看</p>
                 </div>
-            </div>
 
-            <!-- Payment Action -->
-            <div class="payment-action">
-                <div class="price-tag">
-                    <span class="original-price">¥599</span>
-                    <span class="current-price">¥299</span>
-                    <span class="discount-badge">限时 5 折</span>
-                </div>
-                <ul class="feature-list">
-                    <li>✅ 完整竞品对比分析</li>
-                    <li>✅ 用户情感与痛点挖掘</li>
-                    <li>✅ YouTube 视频营销洞察</li>
-                    <li>✅ 可导出 PDF/Excel 格式</li>
-                    <li>✅ 7 天无理由退款保证</li>
-                </ul>
-                <button class="unlock-btn" id="payButton">立即解锁报告</button>
-                <div class="payment-methods">
-                    <span>支持支付方式:</span>
-                    <div class="methods-icons">
-                        <span>WeChat Pay</span>
-                        <span>Alipay</span>
-                        <span>Credit Card</span>
+                <!-- 右侧: 支付面板 30% -->
+                <div class="payment-sidebar">
+                    <div class="payment-box">
+                        <h3>🔓 解锁完整报告</h3>
+                        <p class="order-id">订单号: ORD<span id="orderId">20260124001</span></p>
+
+                        <div class="price-card">
+                            <span class="old">¥599</span>
+                            <span class="now">¥299</span>
+                            <span class="tag">限时5折</span>
+                        </div>
+
+                        <ul class="benefits">
+                            <li>完整竞品对比分析 (20+维度)</li>
+                            <li>用户情感与痛点深度挖掘</li>
+                            <li>YouTube视频营销洞察</li>
+                            <li>可导出 PDF / Excel</li>
+                            <li>7天无理由退款</li>
+                        </ul>
+
+                        <!-- 支付方式切换 -->
+                        <div class="method-switch">
+                            <button class="method-btn active" id="wechatBtn" onclick="switchQR('wechat')">
+                                <img src="https://cdn.jsdelivr.net/gh/nicepkg/nice-cdn@latest/assets/icons/wechat-pay.svg"
+                                    alt="微信">
+                                微信支付
+                            </button>
+                            <button class="method-btn" id="alipayBtn" onclick="switchQR('alipay')">
+                                <img src="https://cdn.jsdelivr.net/gh/nicepkg/nice-cdn@latest/assets/icons/alipay.svg"
+                                    alt="支付宝">
+                                支付宝
+                            </button>
+                        </div>
+
+                        <!-- 收款码显示区 -->
+                        <div class="qr-display">
+                            <!-- 
+                                ========================================
+                                请将您的个人收款码图片放到项目根目录:
+                                - wechat_qr.png (微信收款码)
+                                - alipay_qr.png (支付宝收款码)
+                                ========================================
+                            -->
+                            <img id="qrImage" src="wechat_qr.jpg" alt="收款码"
+                                onerror="this.src='https://via.placeholder.com/180x180/667eea/fff?text=请添加收款码'">
+                            <p class="amount-text">请扫码支付 ¥299</p>
+                            <p class="scan-text">使用 <span id="methodText">微信</span> 扫一扫</p>
+                            <p class="tip-text">支付后请点击下方按钮确认</p>
+                        </div>
+
+                        <button class="confirm-btn" onclick="confirmPayment()">我已完成支付</button>
+                        <div class="msg-box" id="msgBox"></div>
+
+                        <div class="safe-note">
+                            <span>🛡️ 7天无理由退款</span> · 安全支付有保障
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
 
-        <!-- Footer -->
         <footer class="main-footer">
-            <p>AI 竞品分析 © 2025 AI 竞品分析 - 让数据驱动决策</p>
+            <p>AI 竞品分析 © 2025 - 让数据驱动决策</p>
         </footer>
     </div>
 
     <script>
-        document.getElementById('payButton').addEventListener('click', function () {
-            // Simulate payment process
-            const btn = this;
-            const originalText = btn.textContent;
-            btn.textContent = '正在处理支付...';
-            btn.disabled = true;
+        // 初始化订单号
+        document.getElementById('orderId').textContent = Date.now().toString().slice(-10);
 
+        // 切换支付方式
+        function switchQR(method) {
+            document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(method + 'Btn').classList.add('active');
+
+            const qrImg = document.getElementById('qrImage');
+            const methodText = document.getElementById('methodText');
+
+            if (method === 'wechat') {
+                qrImg.src = 'wechat_qr.jpg';
+                methodText.textContent = '微信';
+            } else {
+                qrImg.src = 'alipay_qr.jpg';
+                methodText.textContent = '支付宝';
+            }
+        }
+
+        // 确认支付 (手动)
+        function confirmPayment() {
+            showMsg('正在验证支付状态...', 'info');
             setTimeout(() => {
-                alert('支付成功!完整报告已发送至您的邮箱。');
-                window.location.href = 'success.html';
-            }, 1500);
-        });
+                // 主动调用查询 API
+                fetch('http://localhost:5000/api/check_status')
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.status === 'SUCCESS') {
+                            window.location.href = 'payment_success.html?order=' + document.getElementById('orderId').textContent;
+                        } else {
+                            // 如果服务器还是 PENDING，询问用户
+                            if (confirm('服务器尚未收到付款通知。您确定已完成支付吗？\n\n如果已支付请点击"确定"强制跳转，否则点击"取消"等待自动确认。')) {
+                                window.location.href = 'payment_success.html?order=' + document.getElementById('orderId').textContent;
+                            } else {
+                                showMsg('请稍候，系统正在自动同步状态...', 'warn');
+                            }
+                        }
+                    })
+                    .catch(err => {
+                        // 离线/演示模式
+                        const confirmed = confirm('请确认您已完成支付\n\n点击"确定"进入报告页面\n点击"取消"返回重试');
+                        if (confirmed) {
+                            window.location.href = 'payment_success.html?order=' + document.getElementById('orderId').textContent;
+                        }
+                    });
+            }, 1000);
+        }
+
+        function showMsg(text, type) {
+            const box = document.getElementById('msgBox');
+            box.textContent = text;
+            box.className = 'msg-box show ' + type;
+        }
+
+        // --- 自动轮询支付状态 (每3秒检查一次) ---
+        let checkInterval = setInterval(() => {
+            fetch('http://localhost:5000/api/check_status')
+                .then(res => res.json())
+                .then(data => {
+                    console.log('Payment Status:', data.status);
+                    if (data.status === 'SUCCESS') {
+                        clearInterval(checkInterval);
+                        showMsg('✅ 收到付款通知！正在跳转...', 'success');
+                        setTimeout(() => {
+                            window.location.href = 'payment_success.html?order=' + document.getElementById('orderId').textContent;
+                        }, 1000);
+                    } else if (data.status === 'FAILED') {
+                        window.location.href = 'payment_failed.html';
+                    }
+                })
+                .catch(err => console.log('Polling server not running...'));
+        }, 3000);
     </script>
 </body>
 
