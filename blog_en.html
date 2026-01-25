@@ -8,6 +8,7 @@
     <meta name="description" content="Latest insights on Amazon seller strategies, AI tools, and market trends.">
     <link rel="icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="blog_styles_addon.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="manifest" href="manifest.json">
@@ -17,7 +18,7 @@
 
 <body>
     <div class="app-container">
-                <header class="main-header">
+        <header class="main-header">
             <a href="index_en.html" class="logo-link">
                 <div class="logo-section">
                     <div class="logo-icon">
@@ -32,7 +33,7 @@
                             <path d="M9 13v2" />
                         </svg>
                     </div>
-                <span class="logo-text">FlowAI Agent <span class="logo-sub">Amazon Analysis Platform</span></span>
+                    <span class="logo-text">FlowAI Agent <span class="logo-sub">Amazon Analysis Platform</span></span>
                 </div>
             </a>
             <nav class="main-nav" id="mainNav">
@@ -54,15 +55,25 @@
         </header>
 
         <!-- Mobile Menu Overlay -->
-        
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+            <nav class="mobile-nav">
+                <a href="index_en.html" class="mobile-nav-link ">Home</a>
+                <a href="create_en.html" class="mobile-nav-link">Create Analysis</a>
+                <a href="cases_en.html" class="mobile-nav-link">Case Studies</a>
+                <a href="blog_en.html" class="mobile-nav-link active">Blog</a>
+                <a href="blog.html" class="mobile-nav-link">🇨🇳 Chinese</a>
+            </nav>
+        </div>
 
         <main class="main-content">
-            <section class="blog-header">
-                <h1>Blog <span class="gradient-text">Insights</span></h1>
-                <p>Latest strategies and trends for Amazon sellers</p>
-            </section>
+            <div class="blog-header-section" style="text-align: center; margin-bottom: 60px;">
+                <h1 class="page-title">Blog <span class="gradient-text">Insights</span></h1>
+                <p style="color: var(--text-secondary); margin-top: 10px;">Latest strategies and trends for Amazon
+                    sellers</p>
+            </div>
 
-            <div class="blog-grid">
+            <div class="blog-grid"
+                style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-bottom: 80px;">
                 <!-- Card 1 -->
                 <a href="amazon-listing-image-optimization-ai-visual-script_en.html" class="blog-card-link">
                     <article class="blog-card">
@@ -70,17 +81,20 @@
                             <img src="images/visual-script-optimization.webp" alt="AI Visual Script Optimization"
                                 class="blog-card-image" loading="lazy">
                         </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <span>?? 2025-01-15</span>
-                                <span>?? 6 Min Read</span>
+                        <div class="blog-content" style="padding: 24px;">
+                            <div class="blog-meta"
+                                style="margin-bottom: 15px; font-size: 0.85rem; color: var(--text-secondary); display: flex; gap: 15px;">
+                                <span>📅 2025-01-15</span>
+                                <span>⏱️ 6 Min Read</span>
                             </div>
-                            <h3 class="blog-title">Stop "Guesswork Design": How to Use AI to Generate "Visual Scripts"
-                            </h3>
-                            <p class="blog-excerpt">Are your images beautiful but low-converting? Learn how AMZ
-                                FlowAgent translates user pain points into specific 'Visual Scripts' to direct
-                                photographers.</p>
-                            <span class="blog-read-more">Read More</span>
+                            <h3 class="blog-title" style="font-size: 1.25rem; margin-bottom: 12px; line-height: 1.4;">
+                                Stop "Guesswork Design": How to Use AI to Generate "Visual Scripts"</h3>
+                            <p class="blog-excerpt"
+                                style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">
+                                Are your images beautiful but low-converting? Learn how AMZ FlowAgent translates user
+                                pain points into specific 'Visual Scripts'.</p>
+                            <span class="blog-read-more" style="color: var(--primary-color); font-weight: 600;">Read
+                                More →</span>
                         </div>
                     </article>
                 </a>
@@ -92,16 +106,20 @@
                             <img src="images/efficiency-cost-calculator.webp" alt="Competitor Analysis Cost Calculator"
                                 class="blog-card-image" loading="lazy">
                         </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <span>?? 2025-01-12</span>
-                                <span>?? 5 Min Read</span>
+                        <div class="blog-content" style="padding: 24px;">
+                            <div class="blog-meta"
+                                style="margin-bottom: 15px; font-size: 0.85rem; color: var(--text-secondary); display: flex; gap: 15px;">
+                                <span>📅 2025-01-12</span>
+                                <span>⏱️ 5 Min Read</span>
                             </div>
-                            <h3 class="blog-title">Is Your Operations Team Still "Hand-Rolling" Competitor Analysis?
-                            </h3>
-                            <p class="blog-excerpt">Is your team trapped in 'Inefficient Diligence'? We break down the
-                                true cost of manual competitor research and show how AI automates the 'dirty work'.</p>
-                            <span class="blog-read-more">Read More</span>
+                            <h3 class="blog-title" style="font-size: 1.25rem; margin-bottom: 12px; line-height: 1.4;">Is
+                                Your Operations Team Still "Hand-Rolling" Competitor Analysis?</h3>
+                            <p class="blog-excerpt"
+                                style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">
+                                Is your team trapped in 'Inefficient Diligence'? We break down the true cost of manual
+                                competitor research.</p>
+                            <span class="blog-read-more" style="color: var(--primary-color); font-weight: 600;">Read
+                                More →</span>
                         </div>
                     </article>
                 </a>
@@ -113,143 +131,149 @@
                             <img src="images/sop-automation-agency-scaling.webp" alt="SOP Automation for Agencies"
                                 class="blog-card-image" loading="lazy">
                         </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <span>?? 2025-01-10</span>
-                                <span>?? 6 Min Read</span>
+                        <div class="blog-content" style="padding: 24px;">
+                            <div class="blog-meta"
+                                style="margin-bottom: 15px; font-size: 0.85rem; color: var(--text-secondary); display: flex; gap: 15px;">
+                                <span>📅 2025-01-10</span>
+                                <span>⏱️ 6 Min Read</span>
                             </div>
-                            <h3 class="blog-title">The SOP Automation Revolution: Solving the "Talent Gap"</h3>
-                            <p class="blog-excerpt">Hard to hire senior staff? Discover how to use FlowAI Agent to
-                                automate SOPs, bridge the 'Talent Gap,' and compress a week of manual research into
-                                minutes.</p>
-                            <span class="blog-read-more">Read More</span>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- Card 4 -->
-                <a href="reduce-amazon-fba-returns-packaging-ai-analysis_en.html" class="blog-card-link">
-                    <article class="blog-card">
-                        <div class="blog-card-image-container">
-                            <img src="images/fba-returns-packaging-hero.webp" alt="Reduce FBA Returns with AI"
-                                class="blog-card-image">
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <span>?? 2025-01-08</span>
-                                <span>?? 5 Min Read</span>
-                            </div>
-                            <h3 class="blog-title">FBA Profit Killer: Mining Million-Dollar "Packaging Improvements"
-                            </h3>
-                            <p class="blog-excerpt">High return rates are the invisible killer of FBA profits. Learn how
-                                FlowAI Agent pinpoints 'shipping damage' and proposes 'Heavy Duty' packaging upgrades.
-                            </p>
-                            <span class="blog-read-more">Read More</span>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- Card 5 -->
-                <a href="amazon-case-study-polishing-wheel-blue-ocean_en.html" class="blog-card-link">
-                    <article class="blog-card">
-                        <div class="blog-card-image-container">
-                            <img src="images/polishing-wheel-case-study.webp" alt="Polishing Wheel Case Study"
-                                class="blog-card-image" loading="lazy">
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <span>?? 2025-01-05</span>
-                                <span>?? 7 Min Read</span>
-                            </div>
-                            <h3 class="blog-title">Case Study: How a Generic "Polishing Wheel" Found a Blue Ocean</h3>
-                            <p class="blog-excerpt">Stuck in a price war with giants like 3M? See how a generic seller
-                                analyzed 50+ YouTube videos to build an 'Expert Content Moat' and dominate a niche.</p>
-                            <span class="blog-read-more">Read More</span>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- Card 6 -->
-                <a href="amazon-cosmo-rufus-algorithm-intent-graph_en.html" class="blog-card-link">
-                    <article class="blog-card">
-                        <div class="blog-card-image-container">
-                            <img src="images/cosmo-rufus-hero.webp" alt="COSMO and Rufus Algorithm"
-                                class="blog-card-image">
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <span>?? 2025-07-31</span>
-                                <span>?? 6 Min Read</span>
-                            </div>
-                            <h3 class="blog-title">Deciphering COSMO & Rufus: How to Use "Intent Graphs"</h3>
-                            <p class="blog-excerpt">Traditional keyword stuffing is dead. Decode the Amazon COSMO
-                                algorithm and Rufus assistant. Learn how to use 'Intent Graphs' and scenario-based
-                                keywords.</p>
-                            <span class="blog-read-more">Read More</span>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- Card 7 -->
-                <a href="agentic-ai-amazon-operations-2025_en.html" class="blog-card-link">
-                    <article class="blog-card">
-                        <div class="blog-card-image-container">
-                            <img src="images/agentic-ai-hero.webp" alt="Agentic AI in Amazon Operations"
-                                class="blog-card-image">
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <span>?? 2025-07-24</span>
-                                <span>?? 5 Min Read</span>
-                            </div>
-                            <h3 class="blog-title">Farewell to "Data Movers": Why 2025 Amazon Victory Point is Agentic
-                                AI</h3>
-                            <p class="blog-excerpt">Amazon operations in 2025 aren't about more SaaS tools. Discover how
-                                Agentic AI bridges the 'Strategic Insight Gap,' turning you from a data mover into a
-                                decision-maker.</p>
-                            <span class="blog-read-more">Read More</span>
+                            <h3 class="blog-title" style="font-size: 1.25rem; margin-bottom: 12px; line-height: 1.4;">
+                                The SOP Automation Revolution: Solving the "Talent Gap"</h3>
+                            <p class="blog-excerpt"
+                                style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">
+                                Hard to hire senior staff? Discover how to use FlowAI Agent to automate SOPs and bridge
+                                the 'Talent Gap'.</p>
+                            <span class="blog-read-more" style="color: var(--primary-color); font-weight: 600;">Read
+                                More →</span>
                         </div>
                     </article>
                 </a>
             </div>
-        </main>
 
-                <!-- Footer -->
-                <!-- Footer -->
-        <footer class="main-footer enhanced-footer">
-            <div class="footer-content">
-                <div class="footer-section footer-brand">
-                    <div class="footer-logo">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
-                        <span>FlowAI Agent</span>
+            <!-- Card 4 -->
+            <a href="reduce-amazon-fba-returns-packaging-ai-analysis_en.html" class="blog-card-link">
+                <article class="blog-card">
+                    <div class="blog-card-image-container"
+                        style="background: #f1f5f9; height: 200px; display: flex; align-items: center; justify-content: center;">
+                        <img src="images/fba-returns-packaging-hero.webp" alt="Reduce FBA Returns with AI"
+                            class="blog-card-image" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
-                    <p class="footer-tagline">AI Driven Amazon Competitor Analysis Platform</p>
+                    <div class="blog-content" style="padding: 24px;">
+                        <div class="blog-meta"
+                            style="margin-bottom: 15px; font-size: 0.85rem; color: var(--text-secondary); display: flex; gap: 15px;">
+                            <span>📅 2025-01-08</span>
+                            <span>⏱️ 5 Min Read</span>
+                        </div>
+                        <h3 class="blog-title" style="font-size: 1.25rem; margin-bottom: 12px; line-height: 1.4;">FBA
+                            Profit Killer: Mining "Packaging Improvements"</h3>
+                        <p class="blog-excerpt"
+                            style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">
+                            High return rates are the killer of profits. Learn how AI pinpoints 'shipping damage'
+                            upgrades.</p>
+                        <span class="blog-read-more" style="color: var(--primary-color); font-weight: 600;">Read More
+                            →</span>
+                    </div>
+                </article>
+            </a>
+
+            <!-- Card 5 -->
+            <a href="amazon-case-study-polishing-wheel-blue-ocean_en.html" class="blog-card-link">
+                <article class="blog-card">
+                    <div class="blog-card-image-container"
+                        style="background: #f1f5f9; height: 200px; display: flex; align-items: center; justify-content: center;">
+                        <img src="images/polishing-wheel-case-study.webp" alt="Polishing Wheel Case Study"
+                            class="blog-card-image" loading="lazy"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="blog-content" style="padding: 24px;">
+                        <div class="blog-meta"
+                            style="margin-bottom: 15px; font-size: 0.85rem; color: var(--text-secondary); display: flex; gap: 15px;">
+                            <span>📅 2025-01-05</span>
+                            <span>⏱️ 7 Min Read</span>
+                        </div>
+                        <h3 class="blog-title" style="font-size: 1.25rem; margin-bottom: 12px; line-height: 1.4;">Case
+                            Study: Generic "Polishing Wheel" Blue Ocean</h3>
+                        <p class="blog-excerpt"
+                            style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">
+                            Stuck in a price war? See how a generic seller built an 'Expert Content Moat' with AI.</p>
+                        <span class="blog-read-more" style="color: var(--primary-color); font-weight: 600;">Read More
+                            →</span>
+                    </div>
+                </article>
+            </a>
+
+            <!-- Card 6 -->
+            <a href="amazon-cosmo-rufus-algorithm-intent-graph_en.html" class="blog-card-link">
+                <article class="blog-card">
+                    <div class="blog-card-image-container"
+                        style="background: #f1f5f9; height: 200px; display: flex; align-items: center; justify-content: center;">
+                        <img src="images/cosmo-rufus-hero.webp" alt="COSMO and Rufus Algorithm" class="blog-card-image"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="blog-content" style="padding: 24px;">
+                        <div class="blog-meta"
+                            style="margin-bottom: 15px; font-size: 0.85rem; color: var(--text-secondary); display: flex; gap: 15px;">
+                            <span>📅 2025-07-31</span>
+                            <span>⏱️ 6 Min Read</span>
+                        </div>
+                        <h3 class="blog-title" style="font-size: 1.25rem; margin-bottom: 12px; line-height: 1.4;">
+                            Deciphering COSMO & Rufus: Intent Graphs</h3>
+                        <p class="blog-excerpt"
+                            style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">
+                            Keyword stuffing is dead. Decode COSMO and Rufus to use 'Intent Graphs' for scenario SEO.
+                        </p>
+                        <span class="blog-read-more" style="color: var(--primary-color); font-weight: 600;">Read More
+                            →</span>
+                    </div>
+                </article>
+            </a>
+    </div>
+    </main>
+
+    <!-- Footer -->
+    <!-- Footer -->
+    <footer class="main-footer enhanced-footer">
+        <div class="footer-content">
+            <div class="footer-section footer-brand">
+                <div class="footer-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M12 8V4H8" />
+                        <rect width="16" height="12" x="4" y="8" rx="2" />
+                        <path d="M2 14h2" />
+                        <path d="M20 14h2" />
+                        <path d="M15 13v2" />
+                        <path d="M9 13v2" />
+                    </svg>
+                    <span>FlowAI Agent</span>
                 </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="index_en.html">Home</a></li>
-                        <li><a href="create_en.html">Create Analysis</a></li>
-                        <li><a href="cases_en.html">Case Studies</a></li>
-                        <li><a href="blog_en.html">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact Us</h4>
-                    <ul class="footer-links">
-                        <li>📧 support@flowaiagent.com</li>
-                        <li>💬 WeChat: FlowAI_Agent</li>
-                    </ul>
-                </div>
+                <p class="footer-tagline">AI Driven Amazon Competitor Analysis Platform</p>
             </div>
-            <div class="footer-bottom">
-                <p>© 2025 FlowAI Agent - Data Driven Decisions</p>
-                <div class="footer-legal">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index_en.html">Home</a></li>
+                    <li><a href="create_en.html">Create Analysis</a></li>
+                    <li><a href="cases_en.html">Case Studies</a></li>
+                    <li><a href="blog_en.html">Blog</a></li>
+                </ul>
             </div>
-        </footer>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <ul class="footer-links">
+                    <li>📧 support@flowaiagent.com</li>
+                    <li>💬 WeChat: FlowAI_Agent</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 FlowAI Agent - Data Driven Decisions</p>
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -287,4 +311,3 @@
 </body>
 
 </html>
-

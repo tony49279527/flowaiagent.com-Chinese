@@ -99,7 +99,7 @@
 
 <body>
     <div class="app-container">
-                <header class="main-header">
+        <header class="main-header">
             <a href="index_en.html" class="logo-link">
                 <div class="logo-section">
                     <div class="logo-icon">
@@ -114,7 +114,7 @@
                             <path d="M9 13v2" />
                         </svg>
                     </div>
-                <span class="logo-text">FlowAI Agent <span class="logo-sub">Amazon Analysis Platform</span></span>
+                    <span class="logo-text">FlowAI Agent <span class="logo-sub">Amazon Analysis Platform</span></span>
                 </div>
             </a>
             <nav class="main-nav" id="mainNav">
@@ -136,7 +136,7 @@
         </header>
 
         <!-- Mobile Menu Overlay -->
-        
+
 
         <main class="main-content">
             <section class="hero-section">
@@ -145,16 +145,18 @@
             </section>
 
             <!-- Cases Grid (No Images) -->
-            <div class="cases-grid-container">
+            <div class="cases-grid-container"
+                style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-bottom: 80px;">
 
                 <!-- Case 1: Wireless Earbuds -->
                 <a href="report_en.html" class="blog-card-link">
                     <article class="case-card-simple">
                         <span class="case-tag">Electronics</span>
-                        <h3 class="case-title">Wireless Earbuds Competitor Analysis: Anker vs Sony</h3>
+                        <h3 class="case-title">Wireless Earbuds: Anker vs Sony</h3>
                         <p class="case-summary">In-depth comparison of Anker Soundcore vs Sony LinkBuds S, including
-                            sentiment analysis and return reason mining.</p>
-                        <div class="case-meta">
+                            sentiment analysis.</p>
+                        <div class="case-meta"
+                            style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border-color); display: flex; gap: 15px; font-size: 0.85rem; color: #94a3b8;">
                             <span>📅 Sep 25, 2025</span>
                             <span>⏱️ 15 min read</span>
                         </div>
@@ -165,10 +167,11 @@
                 <a href="report_en.html" class="blog-card-link">
                     <article class="case-card-simple">
                         <span class="case-tag">Home & Living</span>
-                        <h3 class="case-title">Smart Air Purifier Market Analysis: Levoit vs Philips</h3>
+                        <h3 class="case-title">Air Purifier: Levoit vs Philips</h3>
                         <p class="case-summary">Analysis of core models with marketing suggestions based on YouTube
                             review videos.</p>
-                        <div class="case-meta">
+                        <div class="case-meta"
+                            style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border-color); display: flex; gap: 15px; font-size: 0.85rem; color: #94a3b8;">
                             <span>📅 Sep 18, 2025</span>
                             <span>⏱️ 12 min read</span>
                         </div>
@@ -179,10 +182,11 @@
                 <a href="report_en.html" class="blog-card-link">
                     <article class="case-card-simple">
                         <span class="case-tag">Outdoor Sports</span>
-                        <h3 class="case-title">Camping Tent Comparison: Coleman vs Naturehike</h3>
-                        <p class="case-summary">Comparison of product features and user preferences across different
-                            price ranges.</p>
-                        <div class="case-meta">
+                        <h3 class="case-title">Camping Tent: Coleman vs Naturehike</h3>
+                        <p class="case-summary">Comparison of product features and user preferences across price ranges.
+                        </p>
+                        <div class="case-meta"
+                            style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border-color); display: flex; gap: 15px; font-size: 0.85rem; color: #94a3b8;">
                             <span>📅 Sep 11, 2025</span>
                             <span>⏱️ 10 min read</span>
                         </div>
@@ -192,13 +196,21 @@
             </div>
         </main>
 
-                <!-- Footer -->
-                <!-- Footer -->
+        <!-- Footer -->
+        <!-- Footer -->
         <footer class="main-footer enhanced-footer">
             <div class="footer-content">
                 <div class="footer-section footer-brand">
                     <div class="footer-logo">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M12 8V4H8" />
+                            <rect width="16" height="12" x="4" y="8" rx="2" />
+                            <path d="M2 14h2" />
+                            <path d="M20 14h2" />
+                            <path d="M15 13v2" />
+                            <path d="M9 13v2" />
+                        </svg>
                         <span>FlowAI Agent</span>
                     </div>
                     <p class="footer-tagline">AI Driven Amazon Competitor Analysis Platform</p>
@@ -265,4 +277,3 @@
 </body>
 
 </html>
-
