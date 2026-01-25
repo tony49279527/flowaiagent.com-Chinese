@@ -425,6 +425,9 @@
             }
         }
     </style>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 
 <body>
@@ -594,12 +597,12 @@
                         <div class="method-switch">
                             <button class="method-btn active" id="wechatBtn" onclick="switchQR('wechat')">
                                 <img src="https://cdn.jsdelivr.net/gh/nicepkg/nice-cdn@latest/assets/icons/wechat-pay.svg"
-                                    alt="微信">
+                                    alt="微信" loading="lazy">
                                 微信支付
                             </button>
                             <button class="method-btn" id="alipayBtn" onclick="switchQR('alipay')">
                                 <img src="https://cdn.jsdelivr.net/gh/nicepkg/nice-cdn@latest/assets/icons/alipay.svg"
-                                    alt="支付�?>
+                                    alt="支付�? loading="lazy">
                                 支付�?
                             </button>
                         </div>
@@ -614,7 +617,7 @@
                                 ========================================
                             -->
                             <img id="qrImage" src="wechat_qr.jpg" alt="收款�?
-                                onerror="this.src='https://via.placeholder.com/180x180/667eea/fff?text=请添加收款码'">
+                                onerror="this.src='https://via.placeholder.com/180x180/667eea/fff?text=请添加收款码'" loading="lazy">
                             <p class="amount-text">请扫码支�?¥299</p>
                             <p class="scan-text">使用 <span id="methodText">微信</span> 扫一�?/p>
                             <p class="tip-text">支付后请点击下方按钮确认</p>
@@ -710,6 +713,15 @@
                 })
                 .catch(err => console.log('Polling server not running...'));
         }, 3000);
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW registered'))
+                    .catch(err => console.log('SW failed', err));
+            });
+        }
     </script>
 </body>
 

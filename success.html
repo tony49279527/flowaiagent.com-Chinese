@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 
 <body>
@@ -54,25 +57,19 @@
                     </div>
                     <h1 class="success-title">提交成功！报告正在生成中</h1>
                     <p class="success-message">
-                        我们已收到您的分析请求。AI 正在深入挖掘 ASIN 数据并生成策略报告�?
+                        我们已收到您的分析请求。AI 正在深入挖掘 ASIN 数据并生成策略报告。
                     </p>
-                    <div class="email-notice"
-                        style="background: #f0f7ff; border: 1px solid #cce5ff; border-radius: 8px; padding: 16px; margin-top: 24px;">
-                        <p style="color: #0066cc; font-weight: 600; margin-bottom: 8px;">🎁 您的免费额度还剩 1 �?/p>
-                        <p>完整的分析报告将�?<strong>15-30 分钟</strong> 内发送至您的邮箱�?/p>
-                        <p class="sub-text">请留意您的收件箱（包括垃圾邮件文件夹）�?/p>
+                    <div class="email-notice">
+                        <p class="notice-title">🎁 您的免费额度还剩 1 次</p>
+                        <p>完整的分析报告将在 <strong>15-30 分钟</strong> 内发送至您的邮箱。</p>
+                        <p class="sub-text">请留意您的收件箱（包括垃圾邮件文件夹）。</p>
                     </div>
                     <!-- Second Report CTA -->
-                    <div
-                        style="margin-top: 24px; padding: 24px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 12px; border: 2px dashed #667eea;">
-                        <h3 style="font-size: 1.1rem; color: #1e293b; margin: 0 0 12px;">💡 趁热打铁，再分析一个竞品？</h3>
-                        <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 16px;">您还�?<strong
-                                style="color: #667eea;">1 次免费分析机�?/strong>，不妨再选一个竞品对比一下，找出更多优化灵感�?/p>
-                        <a href="create.html" class="cta-btn primary"
-                            style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin-right: 12px;">立即生成�?份报�?
-                            �?/a>
-                        <a href="cases.html"
-                            style="display: inline-block; color: #667eea; text-decoration: none; padding: 12px 24px; font-weight: 600;">或者先看看案例</a>
+                    <div class="cta-box">
+                        <h3>💡 趁热打铁，再分析一个竞品？</h3>
+                        <p>您还有 <strong>1 次免费分析机会</strong>，不妨再选一个竞品对比一下，找出更多优化灵感。</p>
+                        <a href="create.html" class="cta-btn primary btn-primary-gradient">立即生成第2份报告 →</a>
+                        <a href="cases.html" class="btn-secondary-link">或者先看看案例</a>
                     </div>
                     <a href="index.html" class="cta-btn primary" style="margin-top: 16px;">返回首页</a>
                 </div>
@@ -83,7 +80,15 @@
             <p>AI 竞品分析 © 2025 AI 竞品分析 - 让数据驱动决�?/p>
         </footer>
     </div>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW registered'))
+                    .catch(err => console.log('SW failed', err));
+            });
+        }
+    </script>
 </body>
 
 </html>
-

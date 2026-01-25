@@ -14,36 +14,51 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 
 <body>
     <div class="app-container">
-        <header class="main-header">
-            <div class="logo-section">
-                <div class="logo-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-bot">
-                        <path d="M12 8V4H8" />
-                        <rect width="16" height="12" x="4" y="8" rx="2" />
-                        <path d="M2 14h2" />
-                        <path d="M20 14h2" />
-                        <path d="M15 13v2" />
-                        <path d="M9 13v2" />
-                    </svg>
+                <header class="main-header">
+            <a href="index_en.html" class="logo-link">
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-bot">
+                            <path d="M12 8V4H8" />
+                            <rect width="16" height="12" x="4" y="8" rx="2" />
+                            <path d="M2 14h2" />
+                            <path d="M20 14h2" />
+                            <path d="M15 13v2" />
+                            <path d="M9 13v2" />
+                        </svg>
+                    </div>
+                <span class="logo-text">FlowAI Agent <span class="logo-sub">Amazon Analysis Platform</span></span>
                 </div>
-                <span class="logo-text">AI Analysis <span class="logo-sub">Amazon Analysis Platform</span></span>
-            </div>
-            <nav class="main-nav">
-                <a href="index_en.html" class="nav-link">Home</a>
-                <a href="create_en.html" class="nav-link">Create Analysis</a>
-                <a href="cases_en.html" class="nav-link">Case Studies</a>
+            </a>
+            <nav class="main-nav" id="mainNav">
+                <a href="index_en.html" class="nav-link ">Home</a>
+                <a href="create_en.html" class="nav-link ">Create Analysis</a>
+                <a href="cases_en.html" class="nav-link ">Case Studies</a>
                 <a href="blog_en.html" class="nav-link active">Blog</a>
             </nav>
-            <div class="lang-switch">
-                <a href="reduce-amazon-fba-returns-packaging-ai-analysis.html" class="lang-btn">�?/a>
+            <div class="header-right">
+                <div class="lang-switch">
+                    <a href="reduce-amazon-fba-returns-packaging-ai-analysis.html" class="lang-btn">🇨🇳 CN</a>
+                </div>
+                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
             </div>
         </header>
+
+        <!-- Mobile Menu Overlay -->
+        
 
         <main class="main-content">
             <div class="blog-layout">
@@ -201,10 +216,76 @@
             </div>
         </main>
 
-        <footer class="main-footer">
-            <p>AI Competitor Analysis © 2025 AI Competitor Analysis - Data Driven Decisions</p>
+                <!-- Footer -->
+                <!-- Footer -->
+        <footer class="main-footer enhanced-footer">
+            <div class="footer-content">
+                <div class="footer-section footer-brand">
+                    <div class="footer-logo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                        <span>FlowAI Agent</span>
+                    </div>
+                    <p class="footer-tagline">AI Driven Amazon Competitor Analysis Platform</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index_en.html">Home</a></li>
+                        <li><a href="create_en.html">Create Analysis</a></li>
+                        <li><a href="cases_en.html">Case Studies</a></li>
+                        <li><a href="blog_en.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-links">
+                        <li>📧 support@flowaiagent.com</li>
+                        <li>💬 WeChat: FlowAI_Agent</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 FlowAI Agent - Data Driven Decisions</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
         </footer>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Hamburger Menu
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+
+            if (hamburgerBtn && mobileMenuOverlay) {
+                hamburgerBtn.addEventListener('click', function () {
+                    hamburgerBtn.classList.toggle('active');
+                    mobileMenuOverlay.classList.toggle('active');
+                    document.body.style.overflow = mobileMenuOverlay.classList.contains('active') ? 'hidden' : '';
+                    hamburgerBtn.setAttribute('aria-expanded', mobileMenuOverlay.classList.contains('active'));
+                });
+
+                mobileMenuOverlay.querySelectorAll('.mobile-nav-link').forEach(link => {
+                    link.addEventListener('click', function () {
+                        hamburgerBtn.classList.remove('active');
+                        mobileMenuOverlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+            }
+        });
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW registered'))
+                    .catch(err => console.log('SW failed', err));
+            });
+        }
+    </script>
 </body>
 
 </html>

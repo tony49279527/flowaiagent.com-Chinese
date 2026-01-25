@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: flowai_server
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./orders.db:/app/orders.db
+      - ./usage_quota.json:/app/usage_quota.json
+    environment:
+      - PORT=8080
+    restart: always

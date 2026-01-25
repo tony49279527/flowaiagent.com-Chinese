@@ -1,15 +1,15 @@
 """
-Unified Payment Polling Server
+Unified Payment Polling Server (SQLite Version)
 
 Features:
-1. Stores payment status in memory
+1. Stores payment status in SQLite database (orders.db)
 2. Provides /api/check_status for frontend polling
 3. Provides /api/update_status for admin trigger
-4. Provides /trigger UI for admin control
+4. Auto-creates SQLite table on startup
 
 Usage:
 1. Run: python payment_server.py
-2. Expose: ngrok http 5000
+2. Expose: ngrok http 8080
 """
 
 from flask import Flask, jsonify, request, send_from_directory
@@ -19,6 +19,8 @@ from datetime import datetime
 import os
 import requests
 import threading
+import sqlite3
+import json
 
 # Serve static files from current directory
 app = Flask(__name__)
@@ -28,72 +30,62 @@ CORS(app)  # Enable CORS for frontend polling
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-import json
+DB_FILE = 'orders.db'
 
-# ... (logging config)
+def get_db_connection():
+    conn = sqlite3.connect(DB_FILE)
+    conn.row_factory = sqlite3.Row
+    return conn
 
-QUOTA_FILE = 'usage_quota.json'
-
-def load_quota():
-    if not os.path.exists(QUOTA_FILE):
-        return {}
+def init_db():
     try:
-        with open(QUOTA_FILE, 'r') as f:
-            return json.load(f)
-    except:
-        return {}
+        conn = get_db_connection()
+        conn.execute('''
+            CREATE TABLE IF NOT EXISTS orders (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                status TEXT NOT NULL DEFAULT 'PENDING',
+                order_data TEXT,
+                updated_at TEXT,
+                email TEXT,
+                quota_usage INTEGER DEFAULT 0
+            )
+        ''')
+        # Initialize default row if not exists (for single-user demo)
+        cur = conn.execute('SELECT * FROM orders WHERE id = 1')
+        if not cur.fetchone():
+            conn.execute("INSERT INTO orders (id, status, updated_at) VALUES (1, 'PENDING', ?)", (datetime.now().isoformat(),))
+            logger.info("Initialized default order row.")
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        logger.error(f"DB Init Error: {e}")
 
-def save_quota(data):
-    with open(QUOTA_FILE, 'w') as f:
-        json.dump(data, f, indent=4)
-
-# --- In-Memory State ---
-payment_state = {
-    "status": "PENDING",
-    "updated_at": None,
-    "last_order_id": None
-}
+# Initialize DB on start
+init_db()
 
 @app.route('/')
 def home():
     """Serve the Main Website Homepage"""
     return send_from_directory('.', 'index.html')
 
-# ... (admin_dashboard)
-
 @app.route('/<path:path>')
 def serve_static(path):
     """Explicitly serve static files"""
     return send_from_directory('.', path)
 
-@app.route('/api/check_quota', methods=['POST'])
-def check_quota():
-    """Check and increment user quota"""
-    data = request.json
-    email = data.get('email', '').strip().lower()
-    
-    if not email:
-        return jsonify({"error": "Email required"}), 400
-        
-    quota_db = load_quota()
-    current_usage = quota_db.get(email, 0)
-    
-    if current_usage >= 2:
-        return jsonify({"allowed": False, "usage": current_usage, "message": "Quota exceeded"})
-    
-    # Increment and save
-    quota_db[email] = current_usage + 1
-    save_quota(quota_db)
-    
-    logger.info(f"Quota used for {email}: {current_usage + 1}/2")
-    return jsonify({"allowed": True, "usage": current_usage + 1})
-
+@app.route('/api/check_status', methods=['GET'])
+def check_status():
+    """Frontend Endpoint to Poll Status"""
+    try:
+        conn = get_db_connection()
+        row = conn.execute('SELECT status, updated_at FROM orders WHERE id = 1').fetchone()
+        conn.close()
+        return jsonify(dict(row))
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # n8n Webhook URL for report generation
 N8N_WEBHOOK_URL = 'https://tony4927.app.n8n.cloud/webhook/1573cd32-8e6a-46ac-9d74-1e6f7c9ea5e7'
-
-# Store pending order data for webhook
-pending_order_data = {}
 
 def trigger_n8n_webhook(order_data):
     """Trigger n8n webhook to generate report"""
@@ -116,49 +108,40 @@ def update_status():
     """Admin Endpoint to Update Status and trigger webhook on SUCCESS"""
     data = request.json
     new_status = data.get('status')
-    order_data = data.get('order_data', pending_order_data.get('latest', {}))
+    
+    # Optional: Update specific order data
+    order_data = data.get('order_data', {})
     
     if new_status in ['SUCCESS', 'FAILED', 'PENDING']:
-        payment_state['status'] = new_status
-        payment_state['updated_at'] = datetime.now().isoformat()
-        logger.info(f"State Updated: {payment_state}")
-        
-        # If SUCCESS, trigger n8n webhook in background thread
-        if new_status == 'SUCCESS' and order_data:
-            logger.info("Payment SUCCESS - Triggering n8n webhook...")
-            thread = threading.Thread(target=trigger_n8n_webhook, args=(order_data,))
-            thread.start()
-        
-        return jsonify({
-            "message": "Status updated", 
-            "current_status": new_status,
-            "webhook_triggered": new_status == 'SUCCESS'
-        })
+        updated_at = datetime.now().isoformat()
+        try:
+            conn = get_db_connection()
+            # Update default row 1
+            conn.execute('UPDATE orders SET status = ?, updated_at = ?, order_data = ? WHERE id = 1',
+                         (new_status, updated_at, json.dumps(order_data)))
+            conn.commit()
+            conn.close()
+            
+            logger.info(f"State Updated: {new_status}")
+            
+            # If SUCCESS, trigger n8n webhook in background thread
+            if new_status == 'SUCCESS' and order_data:
+                logger.info("Payment SUCCESS - Triggering n8n webhook...")
+                thread = threading.Thread(target=trigger_n8n_webhook, args=(order_data,))
+                thread.start()
+            
+            return jsonify({
+                "message": "Status updated", 
+                "current_status": new_status,
+                "webhook_triggered": new_status == 'SUCCESS'
+            })
+        except Exception as e:
+            logger.error(f"DB Update Error: {e}")
+            return jsonify({"error": str(e)}), 500
     
     return jsonify({"error": "Invalid status"}), 400
 
-@app.route('/api/set_order_data', methods=['POST'])
-def set_order_data():
-    """Store order data for webhook trigger"""
-    data = request.json
-    pending_order_data['latest'] = data
-    logger.info(f"Order data stored: {data}")
-    return jsonify({"message": "Order data stored"})
-
-@app.route('/api/check_status', methods=['GET'])
-def check_status():
-    """Frontend Endpoint to Poll Status"""
-    # Return current state
-    return jsonify(payment_state)
-
 if __name__ == '__main__':
-    # Log files in current directory for debugging
-    try:
-        logger.info(f"Current Directory: {os.getcwd()}")
-        logger.info(f"Files: {os.listdir('.')}")
-    except Exception as e:
-        logger.error(f"Error listing files: {e}")
-
     port = int(os.environ.get('PORT', 8080))
-    logger.info(f"Starting Payment Polling Server on port {port}...")
+    logger.info(f"Starting Payment Polling Server (SQLite) on port {port}...")
     app.run(host='0.0.0.0', port=port)

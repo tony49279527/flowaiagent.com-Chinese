@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Amazon Competitor Analysis Tool | FlowAI Agent</title>
     <meta name="description"
-        content="FlowAI Agent - Professional AI-powered Amazon competitor analysis tool. Generate in-depth reports in 15 minutes.">
+        content="FlowAI Agent - Professional AI-powered Amazon competitor analysis tool. Generate in-depth reports in 15 minutes. Analyze reviews, find pain points, get marketing strategies.">
     <meta name="keywords"
         content="Amazon Competitor Analysis, AI Product Research Tool, Amazon Review Analysis, FlowAI Agent">
     <link rel="canonical" href="https://flowaiagent.com/index_en.html">
@@ -14,6 +14,338 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <a href="index_en.html" class="logo-link">
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 8V4H8" />
+                            <rect width="16" height="12" x="4" y="8" rx="2" />
+                            <path d="M2 14h2" />
+                            <path d="M20 14h2" />
+                            <path d="M15 13v2" />
+                            <path d="M9 13v2" />
+                        </svg>
+                    </div>
+                    <span class="logo-text">FlowAI Agent <span class="logo-sub">Amazon Analysis Platform</span></span>
+                </div>
+            </a>
+            <nav class="main-nav" id="mainNav">
+                <a href="index_en.html" class="nav-link active">Home</a>
+                <a href="create_en.html" class="nav-link">Create Analysis</a>
+                <a href="cases_en.html" class="nav-link">Case Studies</a>
+                <a href="blog_en.html" class="nav-link">Blog</a>
+            </nav>
+            <div class="header-right">
+                <div class="lang-switch">
+                    <a href="index.html" class="lang-btn">🇨🇳 CN</a>
+                </div>
+                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+            <nav class="mobile-nav">
+                <a href="index_en.html" class="mobile-nav-link active">Home</a>
+                <a href="create_en.html" class="mobile-nav-link">Create Analysis</a>
+                <a href="cases_en.html" class="mobile-nav-link">Case Studies</a>
+                <a href="blog_en.html" class="mobile-nav-link">Blog</a>
+                <a href="index.html" class="mobile-nav-link">🇨🇳 Chinese</a>
+            </nav>
+        </div>
+
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="gradient-text">Free 2nd Report!</span>
+                        <br>Find Top 5 Competitor Pain Points in 3 Minutes
+                    </h1>
+                    <p class="hero-subtitle">
+                        No credit card required. AI analyzes 3000+ reviews to auto-summarize weaknesses.
+                        <br>Identify 3-5 missed opportunities and boost conversion by 15-30%.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="create_en.html" class="submit-btn">Get My Free Report</a>
+                        <a href="cases_en.html" class="upload-label"
+                            style="text-decoration: none; padding: 16px 32px; font-size: 1.1rem; font-weight: 600;">View
+                            Case Studies</a>
+                    </div>
+                    <p class="hero-trust-badge" style="margin-top: 16px; font-size: 0.9rem; color: #4b5563;">
+                        🔒 100% Secure · 50,000+ ASINs Analyzed · 123 Reports Today
+                    </p>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features-section">
+                <h2 class="section-heading">What You Get</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Spot Weaknesses in 5s</h3>
+                        <p>Auto-compare prices, images, Q&A, variations... See where they are lazy and where your
+                            opportunity lies.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Find Top 3 Customer Complaints</h3>
+                        <p>AI reads negative reviews to find "fragile", "too small", "bad packaging"... Your improvement
+                            direction is here.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📹</div>
+                        <h3>Copy Winning Ad Strategies</h3>
+                        <p>Analyze viral YouTube videos to find best selling points, script ideas, and thumbnail
+                            designs.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Steps Section -->
+            <section class="steps-section">
+                <h2 class="section-heading">How It Works</h2>
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h3>Enter ASIN</h3>
+                        <p>Fill in the main product and competitor ASIN numbers.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h3>AI Analysis</h3>
+                        <p>System auto-extracts data and performs deep analysis.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h3>Get Report</h3>
+                        <p>Generate complete analysis report with charts.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trust Metrics Section -->
+            <section class="testimonials-section">
+                <h2 class="section-heading">Data Speaks</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card" style="text-align: center; padding: 40px 24px;">
+                        <div
+                            style="font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                            200+</div>
+                        <h3 style="font-size: 1.1rem; margin: 12px 0 8px; color: #1e293b;">Reviews Analyzed</h3>
+                        <p style="color: #64748b; font-size: 0.9rem;">Per report average</p>
+                    </div>
+                    <div class="testimonial-card" style="text-align: center; padding: 40px 24px;">
+                        <div
+                            style="font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                            50+</div>
+                        <h3 style="font-size: 1.1rem; margin: 12px 0 8px; color: #1e293b;">Categories</h3>
+                        <p style="color: #64748b; font-size: 0.9rem;">Electronics, Home, Outdoor...</p>
+                    </div>
+                    <div class="testimonial-card" style="text-align: center; padding: 40px 24px;">
+                        <div
+                            style="font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                            92%</div>
+                        <h3 style="font-size: 1.1rem; margin: 12px 0 8px; color: #1e293b;">Retention</h3>
+                        <p style="color: #64748b; font-size: 0.9rem;">Users come back for more</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section class="faq-section">
+                <h2 class="section-heading">FAQ</h2>
+                <div class="faq-accordion">
+                    <div class="faq-accordion-item">
+                        <button class="faq-accordion-header">
+                            <span>How long does it take to generate a report?</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
+                        <div class="faq-accordion-content">
+                            <p>Typically, a complete deep analysis report takes only 15-30 minutes to generate. 10x
+                                faster than reading 100 reviews manually!</p>
+                        </div>
+                    </div>
+                    <div class="faq-accordion-item">
+                        <button class="faq-accordion-header">
+                            <span>Which Amazon marketplaces are supported?</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
+                        <div class="faq-accordion-content">
+                            <p>We currently support Amazon US, UK, Germany, Japan and other major marketplaces.</p>
+                        </div>
+                    </div>
+                    <div class="faq-accordion-item">
+                        <button class="faq-accordion-header">
+                            <span>How is data accuracy ensured?</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
+                        <div class="faq-accordion-content">
+                            <p>We extract Amazon frontend data in real-time and use AI models for multi-dimensional
+                                cross-validation to ensure analysis accuracy.</p>
+                        </div>
+                    </div>
+                    <div class="faq-accordion-item">
+                        <button class="faq-accordion-header">
+                            <span>Can I export the report?</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
+                        <div class="faq-accordion-content">
+                            <p>Yes! You can export the generated report as a PDF for easy sharing and archiving.</p>
+                        </div>
+                    </div>
+                    <div class="faq-accordion-item">
+                        <button class="faq-accordion-header">
+                            <span>What if the report is inaccurate?</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
+                        <div class="faq-accordion-content">
+                            <p>We offer a satisfaction guarantee. If you are not satisfied with the report quality,
+                                contact us for a re-run or refund.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="main-footer enhanced-footer">
+            <div class="footer-content">
+                <div class="footer-section footer-brand">
+                    <div class="footer-logo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M12 8V4H8" />
+                            <rect width="16" height="12" x="4" y="8" rx="2" />
+                            <path d="M2 14h2" />
+                            <path d="M20 14h2" />
+                            <path d="M15 13v2" />
+                            <path d="M9 13v2" />
+                        </svg>
+                        <span>FlowAI Agent</span>
+                    </div>
+                    <p class="footer-tagline">AI Driven Amazon Competitor Analysis Platform</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index_en.html">Home</a></li>
+                        <li><a href="create_en.html">Create Analysis</a></li>
+                        <li><a href="cases_en.html">Case Studies</a></li>
+                        <li><a href="blog_en.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-links">
+                        <li>📧 support@flowaiagent.com</li>
+                        <li>💬 WeChat: FlowAI_Agent</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 FlowAI Agent - Data Driven Decisions</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Hamburger Menu
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+
+            if (hamburgerBtn && mobileMenuOverlay) {
+                hamburgerBtn.addEventListener('click', function () {
+                    hamburgerBtn.classList.toggle('active');
+                    mobileMenuOverlay.classList.toggle('active');
+                    document.body.style.overflow = mobileMenuOverlay.classList.contains('active') ? 'hidden' : '';
+                    hamburgerBtn.setAttribute('aria-expanded', mobileMenuOverlay.classList.contains('active'));
+                });
+
+                mobileMenuOverlay.querySelectorAll('.mobile-nav-link').forEach(link => {
+                    link.addEventListener('click', function () {
+                        hamburgerBtn.classList.remove('active');
+                        mobileMenuOverlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+            }
+
+            // FAQ Accordion
+            document.querySelectorAll('.faq-accordion-header').forEach(button => {
+                button.addEventListener('click', function () {
+                    const item = this.parentElement;
+                    const isActive = item.classList.contains('active');
+
+                    document.querySelectorAll('.faq-accordion-item').forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                    });
+
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW registered'))
+                    .catch(err => console.log('SW failed', err));
+            });
+        }
+    </script>
+</body>
+
+</html>
+<meta name="description"
+    content="FlowAI Agent - Professional AI-powered Amazon competitor analysis tool. Generate in-depth reports in 15 minutes.">
+<meta name="keywords"
+    content="Amazon Competitor Analysis, AI Product Research Tool, Amazon Review Analysis, FlowAI Agent">
+<link rel="canonical" href="https://flowaiagent.com/index_en.html">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 
 <body>
@@ -124,32 +456,33 @@
                         <p class="testimonial-text">"This is the best competitor analysis tool I've used! It helped me
                             find competitor pain points and my new product got great reviews immediately."</p>
                         <div class="rating">⭐⭐⭐⭐�?/div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="user-info">
-                            <div class="user-avatar">AL</div>
-                            <div>
-                                <div class="user-name">Alice Li</div>
-                                <div class="user-role">Product Manager</div>
-                            </div>
                         </div>
-                        <p class="testimonial-text">"The report is very detailed, especially the sentiment analysis,
-                            which saved me weeks of market research."</p>
-                        <div class="rating">⭐⭐⭐⭐�?/div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="user-info">
-                            <div class="user-avatar">MK</div>
-                            <div>
-                                <div class="user-name">Mike K.</div>
-                                <div class="user-role">E-commerce Director</div>
+                        <div class="testimonial-card">
+                            <div class="user-info">
+                                <div class="user-avatar">AL</div>
+                                <div>
+                                    <div class="user-name">Alice Li</div>
+                                    <div class="user-role">Product Manager</div>
+                                </div>
                             </div>
-                        </div>
-                        <p class="testimonial-text">"Highly recommended! Not only analyzes competitors but also gives
-                            marketing advice based on YouTube videos. Very valuable."</p>
-                        <div class="rating">⭐⭐⭐⭐�?/div>
-                    </div>
-                </div>
+                            <p class="testimonial-text">"The report is very detailed, especially the sentiment analysis,
+                                which saved me weeks of market research."</p>
+                            <div class="rating">⭐⭐⭐⭐�?/div>
+                            </div>
+                            <div class="testimonial-card">
+                                <div class="user-info">
+                                    <div class="user-avatar">MK</div>
+                                    <div>
+                                        <div class="user-name">Mike K.</div>
+                                        <div class="user-role">E-commerce Director</div>
+                                    </div>
+                                </div>
+                                <p class="testimonial-text">"Highly recommended! Not only analyzes competitors but also
+                                    gives
+                                    marketing advice based on YouTube videos. Very valuable."</p>
+                                <div class="rating">⭐⭐⭐⭐�?/div>
+                                </div>
+                            </div>
             </section>
 
             <!-- FAQ -->
@@ -187,7 +520,15 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW registered'))
+                    .catch(err => console.log('SW failed', err));
+            });
+        }
+    </script>
 </body>
 
 </html>
-

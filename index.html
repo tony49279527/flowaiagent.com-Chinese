@@ -72,6 +72,9 @@
       "description": "AI驱动的亚马逊竞品分析工具，15-30分钟生成专业分析报告，包含数据挖掘、情感分析和营销策略建议"
     }
     </script>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 
 <body>
@@ -445,6 +448,15 @@
                 });
             });
         });
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW registered'))
+                    .catch(err => console.log('SW failed', err));
+            });
+        }
     </script>
 </body>
 

@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 
 <body>
@@ -52,8 +55,8 @@
                 <a href="amazon-listing-image-optimization-ai-visual-script_en.html" class="blog-card-link">
                     <article class="blog-card">
                         <div class="blog-card-image-container">
-                            <img src="images/visual-script-optimization.jpg" alt="AI Visual Script Optimization"
-                                class="blog-card-image">
+                            <img src="images/visual-script-optimization.webp" alt="AI Visual Script Optimization"
+                                class="blog-card-image" loading="lazy">
                         </div>
                         <div class="blog-content">
                             <div class="blog-meta">
@@ -74,8 +77,8 @@
                 <a href="amazon-competitor-analysis-efficiency-cost-calculator_en.html" class="blog-card-link">
                     <article class="blog-card">
                         <div class="blog-card-image-container">
-                            <img src="images/efficiency-cost-calculator.jpg" alt="Competitor Analysis Cost Calculator"
-                                class="blog-card-image">
+                            <img src="images/efficiency-cost-calculator.webp" alt="Competitor Analysis Cost Calculator"
+                                class="blog-card-image" loading="lazy">
                         </div>
                         <div class="blog-content">
                             <div class="blog-meta">
@@ -95,8 +98,8 @@
                 <a href="amazon-agency-sop-automation-ai-scalability_en.html" class="blog-card-link">
                     <article class="blog-card">
                         <div class="blog-card-image-container">
-                            <img src="images/sop-automation-agency-scaling.jpg" alt="SOP Automation for Agencies"
-                                class="blog-card-image">
+                            <img src="images/sop-automation-agency-scaling.webp" alt="SOP Automation for Agencies"
+                                class="blog-card-image" loading="lazy">
                         </div>
                         <div class="blog-content">
                             <div class="blog-meta">
@@ -116,7 +119,7 @@
                 <a href="reduce-amazon-fba-returns-packaging-ai-analysis_en.html" class="blog-card-link">
                     <article class="blog-card">
                         <div class="blog-card-image-container">
-                            <img src="images/fba-returns-packaging-hero.jpg" alt="Reduce FBA Returns with AI"
+                            <img src="images/fba-returns-packaging-hero.webp" alt="Reduce FBA Returns with AI"
                                 class="blog-card-image">
                         </div>
                         <div class="blog-content">
@@ -138,8 +141,8 @@
                 <a href="amazon-case-study-polishing-wheel-blue-ocean_en.html" class="blog-card-link">
                     <article class="blog-card">
                         <div class="blog-card-image-container">
-                            <img src="images/polishing-wheel-case-study.png" alt="Polishing Wheel Case Study"
-                                class="blog-card-image">
+                            <img src="images/polishing-wheel-case-study.webp" alt="Polishing Wheel Case Study"
+                                class="blog-card-image" loading="lazy">
                         </div>
                         <div class="blog-content">
                             <div class="blog-meta">
@@ -158,7 +161,7 @@
                 <a href="amazon-cosmo-rufus-algorithm-intent-graph_en.html" class="blog-card-link">
                     <article class="blog-card">
                         <div class="blog-card-image-container">
-                            <img src="images/cosmo-rufus-hero.png" alt="COSMO and Rufus Algorithm"
+                            <img src="images/cosmo-rufus-hero.webp" alt="COSMO and Rufus Algorithm"
                                 class="blog-card-image">
                         </div>
                         <div class="blog-content">
@@ -179,7 +182,7 @@
                 <a href="agentic-ai-amazon-operations-2025_en.html" class="blog-card-link">
                     <article class="blog-card">
                         <div class="blog-card-image-container">
-                            <img src="images/agentic-ai-hero.png" alt="Agentic AI in Amazon Operations"
+                            <img src="images/agentic-ai-hero.webp" alt="Agentic AI in Amazon Operations"
                                 class="blog-card-image">
                         </div>
                         <div class="blog-content">
@@ -203,6 +206,15 @@
             <p>AI Competitor Analysis © 2025 AI Competitor Analysis - Data Driven Decisions</p>
         </footer>
     </div>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW registered'))
+                    .catch(err => console.log('SW failed', err));
+            });
+        }
+    </script>
 </body>
 
 </html>

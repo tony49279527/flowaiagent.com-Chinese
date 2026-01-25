@@ -4,17 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>支付中控�?- 管理�?/title>
+    <title>FlowAI Payment Console</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -22,189 +19,212 @@
             padding: 20px;
         }
 
-        .container {
+        .admin-card {
             background: white;
             border-radius: 24px;
             padding: 40px;
-            max-width: 500px;
+            max-width: 480px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
-        h1 {
+        .admin-header {
             text-align: center;
-            margin-bottom: 10px;
-            color: #1e293b;
+            margin-bottom: 32px;
         }
 
-        .subtitle {
+        .admin-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: var(--primary-color);
+        }
+
+        .status-box {
+            background: #f1f5f9;
+            border-radius: 16px;
+            padding: 24px;
             text-align: center;
-            color: #64748b;
-            margin-bottom: 30px;
-        }
-
-        .status-card {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 24px;
-            text-align: center;
-        }
-
-        .status-label {
-            font-size: 0.9rem;
-            color: #64748b;
-            margin-bottom: 8px;
+            margin-bottom: 32px;
+            transition: all 0.3s ease;
         }
 
         .status-value {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            padding: 8px 20px;
-            border-radius: 20px;
-            display: inline-block;
+            display: block;
+            margin-top: 8px;
         }
 
         .status-PENDING {
-            background: #fef3c7;
             color: #d97706;
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
         }
 
         .status-SUCCESS {
-            background: #d1fae5;
             color: #059669;
+            background: #ecfdf5;
+            border: 1px solid #6ee7b7;
         }
 
         .status-FAILED {
-            background: #fee2e2;
             color: #dc2626;
+            background: #fef2f2;
+            border: 1px solid #fca5a5;
         }
 
-        .btn-group {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 20px;
+        .control-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
-        button {
-            flex: 1;
+        .btn-control {
             padding: 16px;
-            border: none;
             border-radius: 12px;
-            font-size: 1rem;
             font-weight: 600;
+            border: none;
             cursor: pointer;
             transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .btn-success {
-            background: linear-gradient(135deg, #10b981, #059669);
+        .btn-approve {
+            background: #10b981;
             color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
 
-        .btn-success:hover {
+        .btn-approve:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+            background: #059669;
         }
 
-        .btn-fail {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
+        .btn-reject {
+            background: white;
+            color: #ef4444;
+            border: 1px solid #ef4444;
         }
 
-        .btn-fail:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+        .btn-reject:hover {
+            background: #fef2f2;
         }
 
-        .btn-reset {
-            background: #e2e8f0;
-            color: #475569;
-        }
-
-        .btn-reset:hover {
-            background: #cbd5e1;
-        }
-
-        .log {
-            background: #1e293b;
-            color: #94a3b8;
+        .console-log {
+            background: #0f172a;
             border-radius: 12px;
             padding: 16px;
-            font-family: monospace;
-            font-size: 0.85rem;
-            max-height: 200px;
+            color: #94a3b8;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            height: 180px;
             overflow-y: auto;
+            border: 1px solid #334155;
         }
 
-        .log-entry {
+        .log-item {
             margin-bottom: 6px;
-            padding-bottom: 6px;
-            border-bottom: 1px solid #334155;
-        }
-
-        .log-time {
-            color: #64748b;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 4px;
         }
 
         .log-success {
-            color: #10b981;
+            color: #4ade80;
         }
 
-        .log-fail {
-            color: #ef4444;
+        .log-error {
+            color: #f87171;
         }
 
-        .log-pending {
-            color: #f59e0b;
+        .log-info {
+            color: #60a5fa;
         }
     </style>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 
 <body>
-    <div class="container">
-        <h1>🎛�?支付中控�?/h1>
-        <p class="subtitle">收到微信/支付宝付款后，点击确�?/p>
-
-        <div class="status-card">
-            <p class="status-label">当前支付状�?/p>
-            <span class="status-value status-PENDING" id="statusDisplay">PENDING</span>
+    <div class="admin-card">
+        <div class="admin-header">
+            <div class="admin-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 8V4H8" />
+                    <rect width="16" height="12" x="4" y="8" rx="2" />
+                    <path d="M2 14h2" />
+                    <path d="M20 14h2" />
+                    <path d="M15 13v2" />
+                    <path d="M9 13v2" />
+                </svg>
+                <h2 style="margin:0; font-size: 1.5rem;">Payment Console</h2>
+            </div>
+            <p style="color: var(--text-secondary);">Manual Payment Verification System</p>
         </div>
 
-        <div class="btn-group">
-            <button class="btn-success" onclick="updateStatus('SUCCESS')">
-                �?确认收款
+        <div class="status-box status-PENDING" id="statusBox">
+            <span style="font-size: 0.9rem; opacity: 0.8;">Current Status</span>
+            <span class="status-value" id="statusDisplay">PENDING</span>
+        </div>
+
+        <div class="control-grid">
+            <button class="btn-control btn-approve" onclick="updateStatus('SUCCESS')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="M20 6 9 17l-5-5" />
+                </svg>
+                Approve
             </button>
-            <button class="btn-fail" onclick="updateStatus('FAILED')">
-                �?支付失败
+            <button class="btn-control btn-reject" onclick="updateStatus('FAILED')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="m15 9-6 6" />
+                    <path d="m9 9 6 6" />
+                </svg>
+                Reject
             </button>
         </div>
 
-        <button class="btn-reset" style="width: 100%; margin-bottom: 20px;" onclick="updateStatus('PENDING')">
-            🔄 重置状�?(测试�?
+        <button class="btn-control" style="width: 100%; margin-bottom: 24px; background: #f1f5f9; color: #64748b;"
+            onclick="updateStatus('PENDING')">
+            Reset State (Testing)
         </button>
 
-        <div class="log" id="logArea">
-            <div class="log-entry">等待操作...</div>
+        <div class="console-log" id="logArea">
+            <div class="log-item">> System Ready...</div>
         </div>
     </div>
 
     <script>
-        // Use relative path for production, or localhost for local testing
         const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
 
-        function addLog(message, type = 'info') {
+        function addLog(msg, type = 'info') {
             const log = document.getElementById('logArea');
-            const time = new Date().toLocaleTimeString();
-            const colorClass = type === 'success' ? 'log-success' : type === 'fail' ? 'log-fail' : 'log-pending';
-            log.innerHTML = `<div class="log-entry"><span class="log-time">[${time}]</span> <span class="${colorClass}">${message}</span></div>` + log.innerHTML;
+            const time = new Date().toLocaleTimeString('en-US', { hour12: false });
+            const colorClass = type === 'success' ? 'log-success' : type === 'fail' ? 'log-error' : 'log-info';
+            log.innerHTML = `<div class="log-item"><span style="opacity:0.5">[${time}]</span> <span class="${colorClass}">${msg}</span></div>` + log.innerHTML;
+        }
+
+        function updateUI(status) {
+            const display = document.getElementById('statusDisplay');
+            const box = document.getElementById('statusBox');
+            display.textContent = status;
+            box.className = `status-box status-${status}`;
         }
 
         function updateStatus(status) {
-            addLog(`正在设置状�? ${status}...`, status === 'SUCCESS' ? 'success' : status === 'FAILED' ? 'fail' : 'pending');
+            addLog(`Setting status to ${status}...`, 'info');
 
-            // Prepare order data for webhook trigger
             const orderData = {
                 status: status,
                 order_data: {
@@ -225,32 +245,32 @@
             })
                 .then(res => res.json())
                 .then(data => {
-                    const display = document.getElementById('statusDisplay');
-                    display.textContent = status;
-                    display.className = 'status-value status-' + status;
-                    addLog(`�?状态已更新: ${status}`, status === 'SUCCESS' ? 'success' : status === 'FAILED' ? 'fail' : 'pending');
-
-                    if (status === 'SUCCESS') {
-                        addLog('💰 付款确认完成！用户页面将自动跳转...', 'success');
-                    }
+                    updateUI(status);
+                    addLog(`Status updated: ${status}`, status === 'SUCCESS' ? 'success' : status === 'FAILED' ? 'fail' : 'info');
                 })
                 .catch(err => {
-                    addLog(`�?错误: ${err.message}`, 'fail');
+                    addLog(`Error: ${err.message}`, 'fail');
                 });
         }
 
-        // 初始加载当前状�?
+        // Init
         fetch(`${API_BASE}/api/check_status`)
             .then(res => res.json())
             .then(data => {
-                const display = document.getElementById('statusDisplay');
-                display.textContent = data.status;
-                display.className = 'status-value status-' + data.status;
-                addLog(`当前状�? ${data.status}`);
+                updateUI(data.status);
+                addLog(`Current State: ${data.status}`);
             })
-            .catch(err => addLog('无法连接服务�?));
+            .catch(err => addLog('Connection Error', 'fail'));
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW registered'))
+                    .catch(err => console.log('SW failed', err));
+            });
+        }
     </script>
 </body>
 
 </html>
-
