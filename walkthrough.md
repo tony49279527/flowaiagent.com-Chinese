@@ -75,13 +75,15 @@
 *   **首页显示**: 在最近的测试中，由于 GitHub Pages 的全球 CDN 缓存更新延迟，首页仍可能短暂显示旧版本的乱码。
 *   **解决方案**: 我们已推送了 `flowai-v2` 强制缓存更新协议。用户只需等待 CDN 刷新或手动清除由于缓存即可看到已在代码库中验证过的完美版本。
 
-### 5. (最新) 线上乱码紧急修复 (Round 2)
-我们在 2026-01-25 23:30 进行了第二轮紧急修复。
+### 5. (最新) 全站内容与编码大修复 (Round 3)
+我们在 2026-01-25 23:50 进行了第三轮、也是最彻底的全局修复。
+*   **问题根源**: 乱码问题不仅存在于首页，还波及了所有的博客文章、案例展示页以及部分 JS/CSS 引用。
 *   **修复措施**: 
-    1. 为 `index.html`, `create.html`, `payment.html` 添加了 **v2.1** 版本标记（位于 Footer）。
-    2. 彻底重写了 `payment.html` 的 JavaScript 部分，修复了因乱码导致的语法错误。
-    3. 再次强制推送到 GitHub 以触发 Fresh Build。
-*   **验证方法**: 看到页面底部显示 `v2.1` 即代表最新修复已加载。
+    1. **全局重写**: 重新编写了 12+ 个核心 HTML 文件，确保其物理编码为 UTF-8。
+    2. **案例页修复**: 修正了 `cases.html` 中所有因乱码损坏的中文描述。
+    3. **博客全遍历**: 修复了全部 7 篇博客文章标题和正文中的乱码。
+    4. **版本标记升级**: 所有页面的 Footer 均已更新为 `v2.2` 以示区别。
+*   **验证方法**: 看到页面底部显示 `v2.2` 且中文字符（如“案例展示”）显示完美即代表修复成功。
 
 ---
 
@@ -100,6 +102,7 @@
 10. chore: setup docker-compose and sqlite persistence (P6)
 11. fix: emergency utf-8 encoding repair for index/create/payment (Round 1)
 12. fix: Round 2 - Add v2.1 markers and fix JS syntax errors in payment.html
+13. fix: Global site-wide encoding repair (Round 3) and v2.2 parity
 ```
 
 ---
