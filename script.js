@@ -102,15 +102,32 @@ document.addEventListener('DOMContentLoaded', function () {
         btnLoading.style.display = 'inline-block';
 
         try {
-            // --- Server-Side Quota Check ---
+            // --- Server-Side Quota Check with Client-Side Fallback ---
             if (userEmail) {
-                const quotaResponse = await fetch('/api/check_quota', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: userEmail })
-                });
-
-                const quotaData = await quotaResponse.json();
+                let quotaData = { allowed: true, usage: 0 };
+                try {
+                    const quotaResponse = await fetch('/api/check_quota', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: userEmail })
+                    });
+                    if (quotaResponse.ok) {
+                        quotaData = await quotaResponse.json();
+                    } else {
+                        throw new Error('Backend not reachable');
+                    }
+                } catch (e) {
+                    console.log('Backend unreachable, using client-side demo quota.');
+                    // Fallback to localStorage for Demo Mode
+                    const usageKey = 'flowai_usage_' + userEmail;
+                    let usage = parseInt(localStorage.getItem(usageKey) || '0');
+                    if (usage >= 2) {
+                        quotaData = { allowed: false, usage: usage };
+                    } else {
+                        localStorage.setItem(usageKey, usage + 1);
+                        quotaData = { allowed: true, usage: usage + 1 };
+                    }
+                }
 
                 if (!quotaData.allowed) {
                     alert('您的 2 次免费深度分析额度已用完。\n\n感谢您的体验！请升级专业版以解锁无限次分析。');
