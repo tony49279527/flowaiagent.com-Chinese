@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>支付中控台 - 管理员</title>
+    <title>支付中控�?- 管理�?/title>
     <style>
         * {
             box-sizing: border-box;
@@ -164,25 +164,25 @@
 
 <body>
     <div class="container">
-        <h1>🎛️ 支付中控台</h1>
-        <p class="subtitle">收到微信/支付宝付款后，点击确认</p>
+        <h1>🎛�?支付中控�?/h1>
+        <p class="subtitle">收到微信/支付宝付款后，点击确�?/p>
 
         <div class="status-card">
-            <p class="status-label">当前支付状态</p>
+            <p class="status-label">当前支付状�?/p>
             <span class="status-value status-PENDING" id="statusDisplay">PENDING</span>
         </div>
 
         <div class="btn-group">
             <button class="btn-success" onclick="updateStatus('SUCCESS')">
-                ✅ 确认收款
+                �?确认收款
             </button>
             <button class="btn-fail" onclick="updateStatus('FAILED')">
-                ❌ 支付失败
+                �?支付失败
             </button>
         </div>
 
         <button class="btn-reset" style="width: 100%; margin-bottom: 20px;" onclick="updateStatus('PENDING')">
-            🔄 重置状态 (测试用)
+            🔄 重置状�?(测试�?
         </button>
 
         <div class="log" id="logArea">
@@ -202,7 +202,7 @@
         }
 
         function updateStatus(status) {
-            addLog(`正在设置状态: ${status}...`, status === 'SUCCESS' ? 'success' : status === 'FAILED' ? 'fail' : 'pending');
+            addLog(`正在设置状�? ${status}...`, status === 'SUCCESS' ? 'success' : status === 'FAILED' ? 'fail' : 'pending');
 
             // Prepare order data for webhook trigger
             const orderData = {
@@ -228,28 +228,29 @@
                     const display = document.getElementById('statusDisplay');
                     display.textContent = status;
                     display.className = 'status-value status-' + status;
-                    addLog(`✓ 状态已更新: ${status}`, status === 'SUCCESS' ? 'success' : status === 'FAILED' ? 'fail' : 'pending');
+                    addLog(`�?状态已更新: ${status}`, status === 'SUCCESS' ? 'success' : status === 'FAILED' ? 'fail' : 'pending');
 
                     if (status === 'SUCCESS') {
                         addLog('💰 付款确认完成！用户页面将自动跳转...', 'success');
                     }
                 })
                 .catch(err => {
-                    addLog(`✗ 错误: ${err.message}`, 'fail');
+                    addLog(`�?错误: ${err.message}`, 'fail');
                 });
         }
 
-        // 初始加载当前状态
+        // 初始加载当前状�?
         fetch(`${API_BASE}/api/check_status`)
             .then(res => res.json())
             .then(data => {
                 const display = document.getElementById('statusDisplay');
                 display.textContent = data.status;
                 display.className = 'status-value status-' + data.status;
-                addLog(`当前状态: ${data.status}`);
+                addLog(`当前状�? ${data.status}`);
             })
-            .catch(err => addLog('无法连接服务器'));
+            .catch(err => addLog('无法连接服务�?));
     </script>
 </body>
 
 </html>
+
