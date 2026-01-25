@@ -75,12 +75,13 @@
 *   **首页显示**: 在最近的测试中，由于 GitHub Pages 的全球 CDN 缓存更新延迟，首页仍可能短暂显示旧版本的乱码。
 *   **解决方案**: 我们已推送了 `flowai-v2` 强制缓存更新协议。用户只需等待 CDN 刷新或手动清除由于缓存即可看到已在代码库中验证过的完美版本。
 
-### 5. (最新) 线上乱码紧急修复
-我们在 2026-01-25 23:00 进行了线上巡检，发现首页、创建页和支付页仍存在乱码 (Mojibake)。
-*   **问题根源**: 部分文件上传或保存时编码格式未能正确识别为 UTF-8。
-*   **修复措施**: 已强制重写核心页面 (`index.html`, `create.html`, `payment.html`) 确保 UTF-8 编码。
-*   **巡检记录**:
-![Live Site Encoding Check](file:///C:/Users/sales-Tony/.gemini/antigravity/brain/d49a1785-0485-402d-b34b-8575c1678b33/live_site_check_1769353826282.webp)
+### 5. (最新) 线上乱码紧急修复 (Round 2)
+我们在 2026-01-25 23:30 进行了第二轮紧急修复。
+*   **修复措施**: 
+    1. 为 `index.html`, `create.html`, `payment.html` 添加了 **v2.1** 版本标记（位于 Footer）。
+    2. 彻底重写了 `payment.html` 的 JavaScript 部分，修复了因乱码导致的语法错误。
+    3. 再次强制推送到 GitHub 以触发 Fresh Build。
+*   **验证方法**: 看到页面底部显示 `v2.1` 即代表最新修复已加载。
 
 ---
 
@@ -97,6 +98,8 @@
 8. perf: optimize images to WebP and enable lazy loading (P4)
 9. feat: enable PWA with manifest and service worker (P5)
 10. chore: setup docker-compose and sqlite persistence (P6)
+11. fix: emergency utf-8 encoding repair for index/create/payment (Round 1)
+12. fix: Round 2 - Add v2.1 markers and fix JS syntax errors in payment.html
 ```
 
 ---
