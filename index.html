@@ -281,30 +281,78 @@
             <!-- FAQ Section -->
             <section class="faq-section">
                 <h2 class="section-heading">常见问题</h2>
-                <div class="faq-grid">
-                    <div class="faq-item">
-                        <h3 class="faq-question">分析报告需要多长时间生成？</h3>
-                        <p class="faq-answer">通常情况下，一份完整的深度分析报告只需�?15-30 分钟即可生成。比你人工看100条评论还�?0倍！</p>
+                <div class="faq-accordion">
+                    <div class="faq-accordion-item">
+                        <button class="faq-accordion-header">
+                            <span>分析报告需要多长时间生成？</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
+                        <div class="faq-accordion-content">
+                            <p>通常情况下，一份完整的深度分析报告只需 15-30 分钟即可生成。比你人工看100条评论还快10倍！</p>
+                        </div>
                     </div>
-                    <div class="faq-item">
-                        <h3 class="faq-question">支持哪些亚马逊站点？</h3>
-                        <p class="faq-answer">目前我们支持亚马逊美国站、英国站、德国站、日本站等主要站点�?/p>
+                    <div class="faq-accordion-item">
+                        <button class="faq-accordion-header">
+                            <span>支持哪些亚马逊站点？</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
+                        <div class="faq-accordion-content">
+                            <p>目前我们支持亚马逊美国站、英国站、德国站、日本站等主要站点。</p>
+                        </div>
                     </div>
-                    <div class="faq-item">
-                        <h3 class="faq-question">如何保证数据的准确性？</h3>
-                        <p class="faq-answer">我们实时抓取亚马逊前台数据，并结�?AI 大模型进行多维度交叉验证，确保分析结果的准确性�?/p>
+                    <div class="faq-accordion-item">
+                        <button class="faq-accordion-header">
+                            <span>如何保证数据的准确性？</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
+                        <div class="faq-accordion-content">
+                            <p>我们实时抓取亚马逊前台数据，并结合 AI 大模型进行多维度交叉验证，确保分析结果的准确性。</p>
+                        </div>
                     </div>
-                    <div class="faq-item">
-                        <h3 class="faq-question">我可以导出报告吗�?/h3>
-                            <p class="faq-answer">当然！您可以将生成的报告导出�?PDF 格式，方便分享和存档�?/p>
+                    <div class="faq-accordion-item">
+                        <button class="faq-accordion-header">
+                            <span>我可以导出报告吗？</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
+                        <div class="faq-accordion-content">
+                            <p>当然！您可以将生成的报告导出为 PDF 格式，方便分享和存档。</p>
+                        </div>
                     </div>
-                    <div class="faq-item">
-                        <h3 class="faq-question">如果报告不准确怎么办？</h3>
-                        <p class="faq-answer">我们提供满意保证。如果您认为报告质量不达标，可以联系我们重新生成或退还分析额度�?/p>
+                    <div class="faq-accordion-item">
+                        <button class="faq-accordion-header">
+                            <span>如果报告不准确怎么办？</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
+                        <div class="faq-accordion-content">
+                            <p>我们提供满意保证。如果您认为报告质量不达标，可以联系我们重新生成或退还分析额度。</p>
+                        </div>
                     </div>
-                    <div class="faq-item">
-                        <h3 class="faq-question">需要绑定店铺或授权API吗？</h3>
-                        <p class="faq-answer">完全不需要！我们只需要您提供ASIN编号，不需要任何店铺授权或API接入�?00%安全�?/p>
+                    <div class="faq-accordion-item">
+                        <button class="faq-accordion-header">
+                            <span>需要绑定店铺或授权API吗？</span>
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
+                        <div class="faq-accordion-content">
+                            <p>完全不需要！我们只需要您提供ASIN编号，不需要任何店铺授权或API接入，100%安全。</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -378,6 +426,24 @@
                     });
                 });
             }
+
+            // FAQ Accordion Toggle
+            document.querySelectorAll('.faq-accordion-header').forEach(button => {
+                button.addEventListener('click', function () {
+                    const item = this.parentElement;
+                    const isActive = item.classList.contains('active');
+
+                    // Close all other items
+                    document.querySelectorAll('.faq-accordion-item').forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                    });
+
+                    // Toggle current item
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
         });
     </script>
 </body>

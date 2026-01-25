@@ -842,6 +842,70 @@ textarea:focus {
     line-height: 1.6;
 }
 
+/* FAQ Accordion */
+.faq-accordion {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-accordion-item {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+}
+
+.faq-accordion-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.faq-accordion-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-main);
+    text-align: left;
+}
+
+.faq-accordion-header:hover {
+    background: #f8fafc;
+}
+
+.faq-icon {
+    transition: transform 0.3s;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+}
+
+.faq-accordion-item.active .faq-icon {
+    transform: rotate(180deg);
+}
+
+.faq-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.faq-accordion-item.active .faq-accordion-content {
+    max-height: 200px;
+}
+
+.faq-accordion-content p {
+    padding: 0 24px 20px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
 /* Modal Styles */
 .modal-overlay {
     position: fixed;
