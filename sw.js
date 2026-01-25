@@ -1,13 +1,13 @@
 
 const CACHE_NAME = 'flowai-v1';
 const ASSETS_TO_CACHE = [
-    '/',
-    '/index.html',
-    '/styles.css',
-    '/script.js',
-    '/mobile-menu.js',
-    '/favicon.png',
-    '/icon-192.png'
+    './',
+    './index.html',
+    './styles.css',
+    './script.js',
+    './mobile-menu.js',
+    './favicon.png',
+    './icon-192.png'
 ];
 
 self.addEventListener('install', (event) => {
