@@ -123,9 +123,10 @@
             </nav>
             <div class="header-right">
                 <div class="lang-switch">
+                    <span class="lang-btn active">🇨🇳 CN</span>
                     <a href="cases_en.html" class="lang-btn">🌐 EN</a>
                 </div>
-                <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单" aria-expanded="false">
+                <button class="hamburger-btn" id="hamburgerBtn" aria-label="菜单" aria-expanded="false">
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
@@ -197,40 +198,40 @@
             </div>
         </main>
 
-        <footer class="main-footer">
-            <p>AI 竞品分析 © 2025 AI 竞品分析 - 让数据驱动决策 <span
-                    style="opacity: 0.5; font-size: 0.8em; margin-left: 10px;">v2.2</span></p>
-        </footer>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const hamburgerBtn = document.getElementById('hamburgerBtn');
-            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-            if (hamburgerBtn && mobileMenuOverlay) {
-                hamburgerBtn.addEventListener('click', function () {
-                    hamburgerBtn.classList.toggle('active');
-                    mobileMenuOverlay.classList.toggle('active');
-                    document.body.style.overflow = mobileMenuOverlay.classList.contains('active') ? 'hidden' : '';
+        <div class="footer-bottom">
+            <p>© 2025-2026 FlowAI Agent - 数据驱动决策 <span
+                    style="opacity: 0.5; font-size: 0.8em; margin-left: 10px;">v2.6</span></p>
+            <div class="footer-legal">
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const hamburgerBtn = document.getElementById('hamburgerBtn');
+                    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+                    if (hamburgerBtn && mobileMenuOverlay) {
+                        hamburgerBtn.addEventListener('click', function () {
+                            hamburgerBtn.classList.toggle('active');
+                            mobileMenuOverlay.classList.toggle('active');
+                            document.body.style.overflow = mobileMenuOverlay.classList.contains('active') ? 'hidden' : '';
+                        });
+                        mobileMenuOverlay.querySelectorAll('.mobile-nav-link').forEach(link => {
+                            link.addEventListener('click', function () {
+                                hamburgerBtn.classList.remove('active');
+                                mobileMenuOverlay.classList.remove('active');
+                                document.body.style.overflow = '';
+                            });
+                        });
+                    }
                 });
-                mobileMenuOverlay.querySelectorAll('.mobile-nav-link').forEach(link => {
-                    link.addEventListener('click', function () {
-                        hamburgerBtn.classList.remove('active');
-                        mobileMenuOverlay.classList.remove('active');
-                        document.body.style.overflow = '';
+            </script>
+            <script>
+                if ('serviceWorker' in navigator) {
+                    window.addEventListener('load', () => {
+                        navigator.serviceWorker.register('sw.js')
+                            .then(reg => console.log('SW registered'))
+                            .catch(err => console.log('SW failed', err));
                     });
-                });
-            }
-        });
-    </script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('SW registered'))
-                    .catch(err => console.log('SW failed', err));
-            });
-        }
-    </script>
+                }
+            </script>
 </body>
 
 </html>

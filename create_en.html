@@ -43,6 +43,7 @@
             <div class="header-right">
                 <div class="lang-switch">
                     <a href="create.html" class="lang-btn">🇨🇳 CN</a>
+                    <span class="lang-btn active">🌐 EN</span>
                 </div>
                 <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
                     <span class="hamburger-line"></span>
@@ -270,7 +271,8 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2025 FlowAI Agent - Data Driven Decisions</p>
+                <p>© 2025-2026 FlowAI Agent - Data Driven Decisions <span
+                        style="opacity: 0.5; font-size: 0.8em; margin-left: 10px;">v2.6</span></p>
                 <div class="footer-legal">
                     <a href="#">Privacy Policy</a>
                     <a href="#">Terms of Service</a>
@@ -526,15 +528,15 @@
     </div>
 </div>
 <script src="script.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('SW registered'))
-                    .catch(err => console.log('SW failed', err));
-            });
-        }
-    </script>
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('SW registered'))
+                .catch(err => console.log('SW failed', err));
+        });
+    }
+</script>
 </body>
 
 </html>
