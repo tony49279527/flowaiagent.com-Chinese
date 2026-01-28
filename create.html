@@ -126,13 +126,13 @@
                             </select>
                         </div>
                     </div>
-                    <!-- Second Row: 2 File Uploads -->
+                    <!-- Second Row: 2 File Uploads (Multi-file) -->
                     <div class="config-grid-uploads">
                         <div class="config-item upload-item">
-                            <label>上传亚马逊退货 CSV (选填) <span title="在卖家后台 Reports → Returns 中可以下载"
+                            <label>上传亚马逊退货 CSV (选填，可多选) <span title="在卖家后台 Reports → Returns 中可以下载"
                                     style="cursor: help; color: #667eea;">?</span></label>
                             <div class="file-upload-box">
-                                <input type="file" id="csv-upload" name="csvFile" accept=".csv" hidden>
+                                <input type="file" id="csv-upload" name="csvFile" accept=".csv" multiple hidden>
                                 <label for="csv-upload" class="upload-label">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -143,13 +143,14 @@
                                     </svg>
                                     选择文件
                                 </label>
-                                <span class="file-name" id="csv-file-name">未选择文件</span>
+                                <button type="button" class="clear-all-btn" id="csv-clear-all" style="display:none;" title="清除全部">清除全部</button>
                             </div>
+                            <div class="file-list" id="csv-file-list"></div>
                         </div>
                         <div class="config-item upload-item">
-                            <label>上传产品人群画像 CSV/TXT (选填)</label>
+                            <label>上传产品人群画像 CSV/TXT (选填，可多选)</label>
                             <div class="file-upload-box">
-                                <input type="file" id="persona-upload" name="personaFile" accept=".csv,.txt" hidden>
+                                <input type="file" id="persona-upload" name="personaFile" accept=".csv,.txt" multiple hidden>
                                 <label for="persona-upload" class="upload-label">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -160,8 +161,9 @@
                                     </svg>
                                     选择文件
                                 </label>
-                                <span class="file-name" id="persona-file-name">未选择文件</span>
+                                <button type="button" class="clear-all-btn" id="persona-clear-all" style="display:none;" title="清除全部">清除全部</button>
                             </div>
+                            <div class="file-list" id="persona-file-list"></div>
                         </div>
                     </div>
                 </div>
