@@ -129,9 +129,9 @@
                     <!-- Second Row: 2 File Uploads -->
                     <div class="config-grid-uploads">
                         <div class="config-item upload-item">
-                            <label>Upload Return CSV (Optional)</label>
+                            <label>Upload Return CSV (Optional, multiple allowed)</label>
                             <div class="file-upload-box">
-                                <input type="file" id="csv-upload" name="csvFile" accept=".csv" hidden>
+                                <input type="file" id="csv-upload" name="csvFile" accept=".csv" multiple hidden>
                                 <label for="csv-upload" class="upload-label">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -140,15 +140,16 @@
                                         <polyline points="17 8 12 3 7 8" />
                                         <line x1="12" x2="12" y1="3" y2="15" />
                                     </svg>
-                                    Select File
+                                    Select Files
                                 </label>
-                                <span class="file-name" id="csv-file-name">No file selected</span>
+                                <button type="button" class="clear-all-btn" id="csv-clear-all" style="display:none;" title="Clear all">Clear All</button>
                             </div>
+                            <div class="file-list" id="csv-file-list"></div>
                         </div>
                         <div class="config-item upload-item">
-                            <label>Upload Product Persona CSV/TXT (Optional)</label>
+                            <label>Upload Product Persona CSV/TXT (Optional, multiple allowed)</label>
                             <div class="file-upload-box">
-                                <input type="file" id="persona-upload" name="personaFile" accept=".csv,.txt" hidden>
+                                <input type="file" id="persona-upload" name="personaFile" accept=".csv,.txt" multiple hidden>
                                 <label for="persona-upload" class="upload-label">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -157,10 +158,11 @@
                                         <polyline points="17 8 12 3 7 8" />
                                         <line x1="12" x2="12" y1="3" y2="15" />
                                     </svg>
-                                    Select File
+                                    Select Files
                                 </label>
-                                <span class="file-name" id="persona-file-name">No file selected</span>
+                                <button type="button" class="clear-all-btn" id="persona-clear-all" style="display:none;" title="Clear all">Clear All</button>
                             </div>
+                            <div class="file-list" id="persona-file-list"></div>
                         </div>
                     </div>
                 </div>

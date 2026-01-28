@@ -22,28 +22,80 @@ function readFileAsText(file) {
     });
 }
 
-// File Upload Handling
-function setupFileUpload(inputId, displayId) {
-    const fileInput = document.getElementById(inputId);
-    const fileNameDisplay = document.getElementById(displayId);
+// Multi-file Upload Handling
+// Store files in a Map so we can add/remove individually
+const multiFileStores = {};
 
-    if (fileInput && fileNameDisplay) {
-        fileInput.addEventListener('change', function (e) {
-            if (this.files && this.files.length > 0) {
-                fileNameDisplay.textContent = this.files[0].name;
-                fileNameDisplay.style.color = 'var(--text-main)';
-            } else {
-                // Simple check for language based on document title or html lang attribute could be better,
-                // but for now defaulting to a neutral behavior or existing text is fine.
-                // We'll just reset to default style, text might remain 'No file selected' from HTML.
-                fileNameDisplay.style.color = 'var(--text-secondary)';
+function formatFileSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+}
+
+function setupMultiFileUpload(inputId, listId, clearBtnId) {
+    const fileInput = document.getElementById(inputId);
+    const fileListEl = document.getElementById(listId);
+    const clearBtn = document.getElementById(clearBtnId);
+
+    if (!fileInput || !fileListEl) return;
+
+    // Initialize store for this upload
+    multiFileStores[inputId] = [];
+
+    function renderFileList() {
+        const files = multiFileStores[inputId];
+        fileListEl.innerHTML = '';
+
+        if (clearBtn) {
+            clearBtn.style.display = files.length > 0 ? 'inline-block' : 'none';
+        }
+
+        files.forEach(function (file, index) {
+            const item = document.createElement('div');
+            item.className = 'file-list-item';
+            item.innerHTML =
+                '<span class="file-item-name" title="' + file.name + '">' + file.name + '</span>' +
+                '<span class="file-item-size">' + formatFileSize(file.size) + '</span>' +
+                '<button type="button" class="remove-file-btn" title="删除此文件">&times;</button>';
+
+            item.querySelector('.remove-file-btn').addEventListener('click', function () {
+                multiFileStores[inputId].splice(index, 1);
+                renderFileList();
+            });
+
+            fileListEl.appendChild(item);
+        });
+    }
+
+    fileInput.addEventListener('change', function () {
+        if (this.files && this.files.length > 0) {
+            // Append new files to existing list
+            for (var i = 0; i < this.files.length; i++) {
+                // Avoid duplicates by name+size
+                var f = this.files[i];
+                var exists = multiFileStores[inputId].some(function (existing) {
+                    return existing.name === f.name && existing.size === f.size;
+                });
+                if (!exists) {
+                    multiFileStores[inputId].push(f);
+                }
             }
+            renderFileList();
+        }
+        // Reset input so same file can be re-selected
+        this.value = '';
+    });
+
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function () {
+            multiFileStores[inputId] = [];
+            renderFileList();
         });
     }
 }
 
-setupFileUpload('csv-upload', 'csv-file-name');
-setupFileUpload('persona-upload', 'persona-file-name');
+setupMultiFileUpload('csv-upload', 'csv-file-list', 'csv-clear-all');
+setupMultiFileUpload('persona-upload', 'persona-file-list', 'persona-clear-all');
 
 
 // Modal and Form Handling
@@ -157,20 +209,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 rawData[key] = value;
             }
 
-            // Handle File Content Reading
-            const csvInput = document.getElementById('csv-upload');
-            const personaInput = document.getElementById('persona-upload');
+            // Handle Multi-file Content Reading
+            const csvFiles = (multiFileStores && multiFileStores['csv-upload']) || [];
+            const personaFiles = (multiFileStores && multiFileStores['persona-upload']) || [];
 
-            let csvContent = "";
-            let personaContent = "";
+            let csvContents = [];
+            let personaContents = [];
 
-            // Unified try block for Quota + File Reading + Webhook
-            if (csvInput && csvInput.files.length > 0) {
-                csvContent = await readFileAsText(csvInput.files[0]);
+            for (let i = 0; i < csvFiles.length; i++) {
+                const content = await readFileAsText(csvFiles[i]);
+                csvContents.push({ filename: csvFiles[i].name, content: content });
             }
 
-            if (personaInput && personaInput.files.length > 0) {
-                personaContent = await readFileAsText(personaInput.files[0]);
+            for (let i = 0; i < personaFiles.length; i++) {
+                const content = await readFileAsText(personaFiles[i]);
+                personaContents.push({ filename: personaFiles[i].name, content: content });
             }
 
             // Construct the final payload with correct keys and types
@@ -178,17 +231,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 user_name: rawData.userName,
                 user_email: rawData.userEmail,
                 industry: rawData.industry,
-                // Split by newline, trim whitespace, and filter out empty strings
                 main_asins: rawData.mainAsin ? rawData.mainAsin.split('\n').map(s => s.trim()).filter(s => s) : [],
                 competitor_asins: rawData.compAsin ? rawData.compAsin.split('\n').map(s => s.trim()).filter(s => s) : [],
                 language: rawData.language,
                 custom_prompt: rawData.customPrompt,
                 reference_site_count: parseInt(rawData.siteCount) || 10,
                 reference_youtube_count: parseInt(rawData.youtubeCount) || 10,
-                review_doc_link: "", // Placeholder
-                csv_file_url: csvContent, // Sending content in this field as requested
-                persona_file_url: personaContent,
-                analysis_id: "", // Placeholder
+                review_doc_link: "",
+                csv_file_url: csvContents.length === 1 ? csvContents[0].content : "",
+                csv_files: csvContents,
+                persona_file_url: personaContents.length === 1 ? personaContents[0].content : "",
+                persona_files: personaContents,
+                analysis_id: "",
                 submitted_at: new Date().toISOString()
             };
 
