@@ -1,10 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>支付成功 - AI 竞品分析</title>
+    <title>支付成功 - AI亚马逊竞品分析 | FlowAI Agent</title>
+    <meta name="description" content="支付成功！您的完整竞品分析报告已解锁，将在10分钟内发送至您的邮箱。">
     <link rel="icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -28,15 +29,8 @@
         }
 
         @keyframes scaleIn {
-            from {
-                transform: scale(0);
-                opacity: 0;
-            }
-
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .success-icon svg {
@@ -79,18 +73,10 @@
             border-bottom: 1px solid var(--border-color);
         }
 
-        .order-row:last-child {
-            border-bottom: none;
-        }
+        .order-row:last-child { border-bottom: none; }
 
-        .order-row .label {
-            color: var(--text-secondary);
-        }
-
-        .order-row .value {
-            color: var(--text-main);
-            font-weight: 500;
-        }
+        .order-row .label { color: var(--text-secondary); }
+        .order-row .value { color: var(--text-main); font-weight: 500; }
 
         .action-buttons {
             display: flex;
@@ -104,7 +90,7 @@
             justify-content: center;
             gap: 10px;
             padding: 16px 32px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, var(--primary-color), #8b5cf6);
             color: white;
             border: none;
             border-radius: 12px;
@@ -136,9 +122,7 @@
             transition: all 0.2s;
         }
 
-        .secondary-btn:hover {
-            background: rgba(102, 126, 234, 0.1);
-        }
+        .secondary-btn:hover { background: rgba(102, 126, 234, 0.1); }
 
         .help-text {
             margin-top: 30px;
@@ -151,10 +135,8 @@
 
         .confetti {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
             overflow: hidden;
             z-index: 1000;
@@ -169,15 +151,8 @@
         }
 
         @keyframes confettiFall {
-            0% {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
         }
     </style>
     <link rel="manifest" href="manifest.json">
@@ -188,27 +163,46 @@
 <body>
     <div class="app-container">
         <header class="main-header">
-            <div class="logo-section">
-                <div class="logo-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 8V4H8" />
-                        <rect width="16" height="12" x="4" y="8" rx="2" />
-                        <path d="M2 14h2" />
-                        <path d="M20 14h2" />
-                        <path d="M15 13v2" />
-                        <path d="M9 13v2" />
-                    </svg>
+            <a href="index.html" class="logo-link">
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 8V4H8" />
+                            <rect width="16" height="12" x="4" y="8" rx="2" />
+                            <path d="M2 14h2" />
+                            <path d="M20 14h2" />
+                            <path d="M15 13v2" />
+                            <path d="M9 13v2" />
+                        </svg>
+                    </div>
+                    <span class="logo-text">FlowAI Agent <span class="logo-sub">Amazon Analysis Platform</span></span>
                 </div>
-                <span class="logo-text">AI 竞品分析 <span class="logo-sub">Amazon Analysis Platform</span></span>
-            </div>
-            <nav class="main-nav">
+            </a>
+            <nav class="main-nav" id="mainNav">
                 <a href="index.html" class="nav-link">首页</a>
                 <a href="create.html" class="nav-link">创建分析</a>
                 <a href="cases.html" class="nav-link">案例展示</a>
                 <a href="blog.html" class="nav-link">博客</a>
             </nav>
+            <div class="header-right">
+                <button class="hamburger-btn" id="hamburgerBtn" aria-label="菜单" aria-expanded="false">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
         </header>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+            <nav class="mobile-nav">
+                <a href="index.html" class="mobile-nav-link">首页</a>
+                <a href="create.html" class="mobile-nav-link">创建分析</a>
+                <a href="cases.html" class="mobile-nav-link">案例展示</a>
+                <a href="blog.html" class="mobile-nav-link">博客</a>
+            </nav>
+        </div>
 
         <main class="main-content">
             <div class="success-container">
@@ -218,36 +212,35 @@
                     </svg>
                 </div>
 
-                <h1 class="success-title">🎉 支付成功�?/h1>
+                <h1 class="success-title">支付成功！</h1>
                 <p class="success-subtitle">您的完整分析报告已解锁，将在 10 分钟内发送至您的邮箱</p>
 
                 <div class="order-details">
-                    <h3>📋 订单详情</h3>
+                    <h3>订单详情</h3>
                     <div class="order-row">
                         <span class="label">订单编号</span>
                         <span class="value" id="orderNo">ORD20260124001</span>
                     </div>
                     <div class="order-row">
                         <span class="label">支付金额</span>
-                        <span class="value">¥299.00</span>
+                        <span class="value">&#165;299.00</span>
                     </div>
                     <div class="order-row">
                         <span class="label">支付时间</span>
-                        <span class="value" id="payTime">2026-01-24 09:23:00</span>
+                        <span class="value" id="payTime">-</span>
                     </div>
                     <div class="order-row">
                         <span class="label">接收邮箱</span>
-                        <span class="value" id="userEmail">user@example.com</span>
+                        <span class="value" id="userEmail">-</span>
                     </div>
                 </div>
 
                 <div class="action-buttons">
                     <a href="create.html" class="primary-btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M12 5v14M5 12h14" />
                         </svg>
-                        继续分析下一个产�?
+                        继续分析下一个产品
                     </a>
                     <a href="cases.html" class="secondary-btn">
                         查看更多案例
@@ -255,13 +248,54 @@
                 </div>
 
                 <div class="help-text">
-                    💡 <strong>提示:</strong> 报告通常�?5-10 分钟内生成完成。如果超�?30 分钟未收到，请检查垃圾邮件文件夹或联系客服�?
+                    <strong>提示：</strong>报告通常在 5-10 分钟内生成完成。如果超过 30 分钟未收到，请检查垃圾邮件文件夹或联系客服。
                 </div>
             </div>
         </main>
 
-        <footer class="main-footer">
-            <p>AI 竞品分析 © 2025 AI 竞品分析 - 让数据驱动决�?/p>
+        <!-- Footer -->
+        <footer class="main-footer enhanced-footer">
+            <div class="footer-content">
+                <div class="footer-section footer-brand">
+                    <div class="footer-logo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            class="lucide lucide-bot" stroke="currentColor" stroke-width="2">
+                            <path d="M12 8V4H8" />
+                            <rect width="16" height="12" x="4" y="8" rx="2" />
+                            <path d="M2 14h2" />
+                            <path d="M20 14h2" />
+                            <path d="M15 13v2" />
+                            <path d="M9 13v2" />
+                        </svg>
+                        <span>FlowAI Agent</span>
+                    </div>
+                    <p class="footer-tagline">AI 驱动的亚马逊竞品分析平台</p>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="create.html">创建分析</a></li>
+                        <li><a href="cases.html">案例展示</a></li>
+                        <li><a href="blog.html">博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <ul class="footer-links">
+                        <li>support@flowaiagent.com</li>
+                        <li>微信: FlowAI_Agent</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025-2026 FlowAI Agent - 数据驱动决策 <span
+                        style="opacity: 0.5; font-size: 0.8em; margin-left: 10px;">v2.9</span></p>
+                <div class="footer-legal">
+                    <a href="privacy.html">隐私政策</a>
+                    <a href="terms.html">服务条款</a>
+                </div>
+            </div>
         </footer>
     </div>
 
@@ -269,49 +303,41 @@
     <div class="confetti" id="confetti"></div>
 
     <script>
-        // Get order info from URL
         document.addEventListener('DOMContentLoaded', function () {
+            // Order info from URL
             const urlParams = new URLSearchParams(window.location.search);
             const orderNo = urlParams.get('order');
-
             if (orderNo) {
                 document.getElementById('orderNo').textContent = orderNo;
             }
 
             // Set current time
-            const now = new Date();
-            document.getElementById('payTime').textContent = now.toLocaleString('zh-CN');
+            document.getElementById('payTime').textContent = new Date().toLocaleString('zh-CN');
 
-            // Get email from localStorage
-            const email = localStorage.getItem('user_email');
+            // Get email: try multiple localStorage keys for compatibility
+            const email = localStorage.getItem('user_email') || localStorage.getItem('userEmail') || '';
             if (email) {
                 document.getElementById('userEmail').textContent = email;
             }
 
-            // Trigger confetti
             createConfetti();
         });
 
         function createConfetti() {
-            const confettiContainer = document.getElementById('confetti');
+            const container = document.getElementById('confetti');
             const colors = ['#667eea', '#764ba2', '#ff6b6b', '#4CAF50', '#FFD700'];
-
             for (let i = 0; i < 50; i++) {
                 const piece = document.createElement('div');
                 piece.className = 'confetti-piece';
                 piece.style.left = Math.random() * 100 + '%';
                 piece.style.background = colors[Math.floor(Math.random() * colors.length)];
                 piece.style.animationDelay = Math.random() * 2 + 's';
-                piece.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
-                confettiContainer.appendChild(piece);
+                container.appendChild(piece);
             }
-
-            // Remove confetti after animation
-            setTimeout(() => {
-                confettiContainer.innerHTML = '';
-            }, 5000);
+            setTimeout(() => { container.innerHTML = ''; }, 5000);
         }
     </script>
+    <script src="mobile-menu.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -324,4 +350,3 @@
 </body>
 
 </html>
-

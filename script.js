@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const compAsin = document.getElementById('comp-asin').value;
 
         if (!mainAsin || !compAsin) {
-            alert('Please fill in the required ASIN fields.');
+            alert('请填写必填的 ASIN 字段。');
             return;
         }
 
