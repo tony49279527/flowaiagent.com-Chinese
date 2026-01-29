@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>提交成功 | FlowAI Agent</title>
+    <meta name="description" content="分析请求已提交成功，AI正在生成竞品分析报告，完成后将发送至您的邮箱。">
     <link rel="icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,10 +39,28 @@
                 <a href="cases.html" class="nav-link">案例展示</a>
                 <a href="blog.html" class="nav-link">博客</a>
             </nav>
-            <div class="lang-switch">
-                <a href="success_en.html" class="lang-btn">EN</a>
+            <div class="header-right">
+                <div class="lang-switch">
+                    <span class="lang-btn active">CN</span>
+                    <a href="success_en.html" class="lang-btn">EN</a>
+                </div>
+                <button class="hamburger-btn" id="hamburgerBtn" aria-label="菜单" aria-expanded="false">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
             </div>
         </header>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+            <nav class="mobile-nav">
+                <a href="index.html" class="mobile-nav-link">首页</a>
+                <a href="create.html" class="mobile-nav-link">创建分析</a>
+                <a href="cases.html" class="mobile-nav-link">案例展示</a>
+                <a href="blog.html" class="mobile-nav-link">博客</a>
+            </nav>
+        </div>
 
         <main class="main-content">
             <div class="success-container">
@@ -60,14 +79,14 @@
                         我们已收到您的分析请求。AI 正在深入挖掘 ASIN 数据并生成策略报告。
                     </p>
                     <div class="email-notice">
-                        <p class="notice-title">🎁 您的免费额度还剩 1 次</p>
+                        <p class="notice-title" id="quotaNotice">正在查询剩余额度...</p>
                         <p>完整的分析报告将在 <strong>15-30 分钟</strong> 内发送至您的邮箱。</p>
                         <p class="sub-text">请留意您的收件箱（包括垃圾邮件文件夹）。</p>
                     </div>
                     <!-- Second Report CTA -->
-                    <div class="cta-box">
-                        <h3>💡 趁热打铁，再分析一个竞品？</h3>
-                        <p>您还有 <strong>1 次免费分析机会</strong>，不妨再选一个竞品对比一下，找出更多优化灵感。</p>
+                    <div class="cta-box" id="ctaBox">
+                        <h3>趁热打铁，再分析一个竞品？</h3>
+                        <p>您还有 <strong id="ctaRemaining">-</strong> 次免费分析机会，不妨再选一个竞品对比一下，找出更多优化灵感。</p>
                         <a href="create.html" class="cta-btn primary btn-primary-gradient">立即生成第2份报告 →</a>
                         <a href="cases.html" class="btn-secondary-link">或者先看看案例</a>
                     </div>
@@ -76,10 +95,89 @@
             </div>
         </main>
 
-        <footer class="main-footer">
-            <p>© 2025-2026 FlowAI Agent - 让数据驱动决策</p>
+        <!-- Footer -->
+        <footer class="main-footer enhanced-footer">
+            <div class="footer-content">
+                <div class="footer-section footer-brand">
+                    <div class="footer-logo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            class="lucide lucide-bot" stroke="currentColor" stroke-width="2">
+                            <path d="M12 8V4H8" />
+                            <rect width="16" height="12" x="4" y="8" rx="2" />
+                            <path d="M2 14h2" />
+                            <path d="M20 14h2" />
+                            <path d="M15 13v2" />
+                            <path d="M9 13v2" />
+                        </svg>
+                        <span>FlowAI Agent</span>
+                    </div>
+                    <p class="footer-tagline">AI 驱动的亚马逊竞品分析平台</p>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="create.html">创建分析</a></li>
+                        <li><a href="cases.html">案例展示</a></li>
+                        <li><a href="blog.html">博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <ul class="footer-links">
+                        <li>support@flowaiagent.com</li>
+                        <li>微信: FlowAI_Agent</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025-2026 FlowAI Agent - 数据驱动决策 <span
+                        style="opacity: 0.5; font-size: 0.8em; margin-left: 10px;">v2.9</span></p>
+                <div class="footer-legal">
+                    <a href="privacy.html">隐私政策</a>
+                    <a href="terms.html">服务条款</a>
+                </div>
+            </div>
         </footer>
     </div>
+    <script>
+        // Dynamic quota display
+        document.addEventListener('DOMContentLoaded', async function () {
+            const email = localStorage.getItem('user_email') || localStorage.getItem('userEmail') || '';
+            const noticeEl = document.getElementById('quotaNotice');
+            const ctaRemainingEl = document.getElementById('ctaRemaining');
+            const ctaBox = document.getElementById('ctaBox');
+            let remaining = 0;
+
+            if (email) {
+                try {
+                    const resp = await fetch('/api/check_quota', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: email })
+                    });
+                    if (resp.ok) {
+                        const data = await resp.json();
+                        remaining = Math.max(0, 2 - (data.usage || 0));
+                    }
+                } catch (e) {
+                    // Fallback to localStorage
+                    const usageKey = 'flowai_usage_' + email;
+                    const usage = parseInt(localStorage.getItem(usageKey) || '0');
+                    remaining = Math.max(0, 2 - usage);
+                }
+            }
+
+            if (remaining > 0) {
+                noticeEl.textContent = '您的免费额度还剩 ' + remaining + ' 次';
+                ctaRemainingEl.textContent = remaining;
+            } else {
+                noticeEl.textContent = '您的 2 次免费额度已全部使用';
+                ctaBox.style.display = 'none';
+            }
+        });
+    </script>
+    <script src="mobile-menu.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
