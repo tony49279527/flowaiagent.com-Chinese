@@ -73,14 +73,60 @@ def serve_static(path):
     """Explicitly serve static files"""
     return send_from_directory('.', path)
 
+@app.route('/api/check_quota', methods=['POST'])
+def check_quota():
+    """Check user quota (2 free uses)"""
+    data = request.json
+    email = data.get('email')
+    
+    if not email:
+        return jsonify({"allowed": False, "error": "Email required"}), 400
+
+    try:
+        conn = get_db_connection()
+        # Check usage for this email
+        row = conn.execute('SELECT quota_usage FROM orders WHERE email = ?', (email,)).fetchone()
+        
+        usage = 0
+        if row:
+            usage = row['quota_usage']
+        else:
+            # If no record, they have 0 usage. We might create a record or just return 0.
+            # For simplicity, we just return the usage.
+            pass
+            
+        conn.close()
+        
+        # Logic: Free quota is 2
+        allowed = usage < 2
+        return jsonify({"allowed": allowed, "usage": usage})
+    except Exception as e:
+        logger.error(f"Quota Check Error: {e}")
+        return jsonify({"error": str(e)}), 500
+
 @app.route('/api/check_status', methods=['GET'])
 def check_status():
     """Frontend Endpoint to Poll Status"""
+    order_id = request.args.get('order_id')
+    
     try:
         conn = get_db_connection()
-        row = conn.execute('SELECT status, updated_at FROM orders WHERE id = 1').fetchone()
+        if order_id:
+             # Try to find by custom order ID (if we stored it as string/int) or internal ID
+             # For now, let's assume order_id passed from frontend is the internal ID or a mapped ID
+             # If frontend passes "2026...", we might need to store that. 
+             # Let's simple look up by ID first.
+             row = conn.execute('SELECT status, updated_at FROM orders WHERE id = ?', (order_id,)).fetchone()
+        else:
+             # Fallback to ID 1 for backward compatibility
+             row = conn.execute('SELECT status, updated_at FROM orders WHERE id = 1').fetchone()
+             
         conn.close()
-        return jsonify(dict(row))
+        
+        if row:
+            return jsonify(dict(row))
+        else:
+            return jsonify({"status": "NOT_FOUND"}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -103,11 +149,45 @@ def trigger_n8n_webhook(order_data):
         logger.error(f"Error triggering n8n webhook: {e}")
         return False
 
+@app.route('/api/record_usage', methods=['POST'])
+def record_usage():
+    """Increment user usage count"""
+    data = request.json
+    email = data.get('email')
+    
+    if not email:
+        return jsonify({"error": "Email required"}), 400
+
+    try:
+        conn = get_db_connection()
+        # Check if user exists
+        row = conn.execute('SELECT id, quota_usage FROM orders WHERE email = ?', (email,)).fetchone()
+        
+        if row:
+            # Increment
+            new_usage = row['quota_usage'] + 1
+            conn.execute('UPDATE orders SET quota_usage = ? WHERE email = ?', (new_usage, email))
+        else:
+            # Create new user record
+            conn.execute('INSERT INTO orders (email, quota_usage, status, updated_at) VALUES (?, 1, "PENDING", ?)', 
+                         (email, datetime.now().isoformat()))
+        
+        conn.commit()
+        conn.close()
+        return jsonify({"success": True})
+    except Exception as e:
+        logger.error(f"Record Usage Error: {e}")
+        return jsonify({"error": str(e)}), 500
+
+# n8n Webhook URL for report generation
+N8N_WEBHOOK_URL = 'https://tony4927.app.n8n.cloud/webhook/1573cd32-8e6a-46ac-9d74-1e6f7c9ea5e7'
+
 @app.route('/api/update_status', methods=['POST'])
 def update_status():
     """Admin Endpoint to Update Status and trigger webhook on SUCCESS"""
     data = request.json
     new_status = data.get('status')
+    order_id = data.get('order_id', 1) # Default to 1 if not provided
     
     # Optional: Update specific order data
     order_data = data.get('order_data', {})
@@ -116,13 +196,21 @@ def update_status():
         updated_at = datetime.now().isoformat()
         try:
             conn = get_db_connection()
-            # Update default row 1
-            conn.execute('UPDATE orders SET status = ?, updated_at = ?, order_data = ? WHERE id = 1',
-                         (new_status, updated_at, json.dumps(order_data)))
+            
+            # Check if order exists, if not create it (for new orders)
+            cur = conn.execute('SELECT id FROM orders WHERE id = ?', (order_id,))
+            if not cur.fetchone():
+                 # Create new order if it doesn't exist
+                 conn.execute('INSERT INTO orders (id, status, updated_at, order_data) VALUES (?, ?, ?, ?)',
+                              (order_id, new_status, updated_at, json.dumps(order_data)))
+            else:
+                 # Update existing row
+                 conn.execute('UPDATE orders SET status = ?, updated_at = ?, order_data = ? WHERE id = ?',
+                              (new_status, updated_at, json.dumps(order_data), order_id))
             conn.commit()
             conn.close()
             
-            logger.info(f"State Updated: {new_status}")
+            logger.info(f"State Updated for Order {order_id}: {new_status}")
             
             # If SUCCESS, trigger n8n webhook in background thread
             if new_status == 'SUCCESS' and order_data:

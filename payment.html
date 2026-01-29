@@ -596,13 +596,11 @@
                         <!-- 支付方式切换 -->
                         <div class="method-switch">
                             <button class="method-btn active" id="wechatBtn" onclick="switchQR('wechat')">
-                                <img src="https://cdn.jsdelivr.net/gh/nicepkg/nice-cdn@latest/assets/icons/wechat-pay.svg"
-                                    alt="微信" loading="lazy">
+                                <img src="images/wechat-pay.svg" alt="微信" loading="lazy">
                                 微信支付
                             </button>
                             <button class="method-btn" id="alipayBtn" onclick="switchQR('alipay')">
-                                <img src="https://cdn.jsdelivr.net/gh/nicepkg/nice-cdn@latest/assets/icons/alipay.svg"
-                                    alt="支付宝" loading="lazy">
+                                <img src="images/alipay.svg" alt="支付宝" loading="lazy">
                                 支付宝
                             </button>
                         </div>
@@ -659,14 +657,15 @@
             showMsg('正在验证支付状态...', 'info');
             setTimeout(() => {
                 // 主动调用查询 API
-                fetch('/api/check_status')
+                const orderId = document.getElementById('orderId').textContent;
+                fetch('/api/check_status?order_id=' + orderId)
                     .then(res => res.json())
                     .then(data => {
                         if (data.status === 'SUCCESS') {
-                            window.location.href = 'payment_success.html?order=' + document.getElementById('orderId').textContent;
+                            window.location.href = 'payment_success.html?order=' + orderId;
                         } else {
                             if (confirm('服务器尚未收到付款通知。您确定已完成支付吗？\n\n如果已支付请点击"确定"强制跳转，否则点击"取消"等待自动确认。')) {
-                                window.location.href = 'payment_success.html?order=' + document.getElementById('orderId').textContent;
+                                window.location.href = 'payment_success.html?order=' + orderId;
                             } else {
                                 showMsg('请稍候，系统正在自动同步状态...', 'warn');
                             }
@@ -690,7 +689,8 @@
 
         // --- 自动轮询支付状态 ---
         let checkInterval = setInterval(() => {
-            fetch('/api/check_status')
+            const orderId = document.getElementById('orderId').textContent;
+            fetch('/api/check_status?order_id=' + orderId)
                 .then(res => res.json())
                 .then(data => {
                     console.log('Payment Status:', data.status);
@@ -698,7 +698,7 @@
                         clearInterval(checkInterval);
                         showMsg('已收到付款通知！正在跳转...', 'success');
                         setTimeout(() => {
-                            window.location.href = 'payment_success.html?order=' + document.getElementById('orderId').textContent;
+                            window.location.href = 'payment_success.html?order=' + orderId;
                         }, 1000);
                     } else if (data.status === 'FAILED') {
                         window.location.href = 'payment_failed.html';

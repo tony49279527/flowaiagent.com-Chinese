@@ -292,6 +292,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (progressBar) progressBar.style.width = '100%';
                 progressStatus.textContent = (rawData.language === 'en') ? 'Analysis Complete!' : '分析完成！';
 
+                // Record Usage
+                try {
+                    await fetch('/api/record_usage', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: rawData.userEmail })
+                    });
+                } catch (e) {
+                    console.warn('Failed to record usage:', e);
+                }
+
                 setTimeout(() => {
                     // Redirect to success page
                     window.location.href = (rawData.language === 'en') ? 'success_en.html' : 'success.html';
