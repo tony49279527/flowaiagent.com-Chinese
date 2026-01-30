@@ -568,12 +568,18 @@ textarea:focus {
     margin-top: auto;
 }
 
-/* Enhanced Footer */
+/* Enhanced Footer - full-width background */
 .enhanced-footer {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
     border-top: 1px solid var(--border-color);
     padding: 60px 20px 30px;
     text-align: left;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .footer-content {
