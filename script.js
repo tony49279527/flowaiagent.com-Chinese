@@ -106,6 +106,33 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeModalBtn = document.getElementById('closeModal');
     const submitBtn = document.getElementById('submitBtn'); // The button in the main form
 
+    // --- FAQ Accordion Logic (runs on all pages) ---
+    const faqHeaders = document.querySelectorAll('.faq-accordion-header');
+    faqHeaders.forEach(header => {
+        header.addEventListener('click', function () {
+            const item = this.parentElement;
+            const content = item.querySelector('.faq-accordion-content');
+
+            // Close all other items
+            document.querySelectorAll('.faq-accordion-item').forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                    const otherContent = otherItem.querySelector('.faq-accordion-content');
+                    if (otherContent) otherContent.style.maxHeight = null;
+                }
+            });
+
+            // Toggle current item
+            item.classList.toggle('active');
+
+            if (item.classList.contains('active')) {
+                if (content) content.style.maxHeight = content.scrollHeight + 'px';
+            } else {
+                if (content) content.style.maxHeight = null;
+            }
+        });
+    });
+
     if (!analysisForm || !leadGenModal || !leadGenForm) return;
 
     // 1. Handle Main Form "Start Analysis" Click
@@ -337,32 +364,4 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // --- FAQ Accordion Logic ---
-    const faqHeaders = document.querySelectorAll('.faq-accordion-header');
-    faqHeaders.forEach(header => {
-        header.addEventListener('click', function () {
-            const item = this.parentElement;
-            const content = item.querySelector('.faq-accordion-content');
-            const isActive = item.classList.contains('active');
-
-            // Close all other items
-            document.querySelectorAll('.faq-accordion-item').forEach(otherItem => {
-                if (otherItem !== item) {
-                    otherItem.classList.remove('active');
-                    const otherContent = otherItem.querySelector('.faq-accordion-content');
-                    if (otherContent) otherContent.style.maxHeight = null;
-                }
-            });
-
-            // Toggle current item
-            item.classList.toggle('active');
-
-            if (item.classList.contains('active')) {
-                // Set max-height to scrollHeight for smooth transition
-                if (content) content.style.maxHeight = content.scrollHeight + 'px';
-            } else {
-                if (content) content.style.maxHeight = null;
-            }
-        });
-    });
 });
