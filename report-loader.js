@@ -75,6 +75,47 @@ async function loadReport(id) {
         console.error('Failed to load report:', error);
         reportBody.innerHTML = `<p style="color:red; pading:20px;">抱歉，报告加载失败: ${error.message}<br><small>${error.stack}</small></p>`;
     }
+
+    // 6. Load Recommended Reports
+    if (typeof loadRecommended === 'function') {
+        loadRecommended(id);
+    }
+}
+
+async function loadRecommended(currentId) {
+    const container = document.getElementById('recommended-grid');
+    if (!container) return;
+
+    try {
+        const response = await fetch('data/reports/index.json');
+        const reports = await response.json();
+
+        // Filter out current and pick random 2-3
+        const others = reports.filter(r => r.id !== currentId);
+        const shuffled = others.sort(() => 0.5 - Math.random());
+        const selected = shuffled.slice(0, 3); // Show 3
+
+        container.innerHTML = selected.map(report => `
+            <a href="report.html?id=${report.id}" style="text-decoration: none; color: inherit;">
+                <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; transition: transform 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.02);" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='none'">
+                    <div style="height: 140px; background: #f1f5f9; position: relative; overflow: hidden;">
+                        <img src="${report.cover || 'assets/default-cover.png'}" alt="${report.title}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9;">
+                    </div>
+                    <div style="padding: 16px;">
+                        <h4 style="margin: 0 0 8px; font-size: 1rem; font-weight: 600; line-height: 1.4; color: #1e293b; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${report.title}</h4>
+                        <div style="font-size: 0.85rem; color: #64748b;">${report.date}</div>
+                    </div>
+                </div>
+            </a>
+        `).join('');
+
+        if (selected.length === 0) {
+            document.getElementById('recommended-section').style.display = 'none';
+        }
+
+    } catch (e) {
+        console.error('Failed to load recommended:', e);
+    }
 }
 
 function setupFeatures(data) {
