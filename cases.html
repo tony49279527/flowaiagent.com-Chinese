@@ -7,13 +7,13 @@
     <title>成功案例 - AI亚马逊竞品分析 | FlowAI Agent</title>
     <meta name="description" content="查看FlowAI Agent真实成功案例。了解卖家如何通过AI竞品分析发现竞品痛点，优化产品策略，提升销量和转化率。">
     <meta name="keywords" content="亚马逊案例,竞品分析案例,Amazon成功案例,FBA卖家案例,FlowAI Agent">
-    
+
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="成功案例 - AI亚马逊竞品分析 | FlowAI Agent">
     <meta property="og:description" content="查看FlowAI Agent真实成功案例。了解卖家如何通过AI竞品分析提升销量。">
     <meta property="og:url" content="https://flowaiagent.com/cases.html">
-    
+
     <link rel="canonical" href="https://flowaiagent.com/cases.html">
     <link rel="icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
@@ -162,51 +162,13 @@
                 <p class="hero-subtitle">真实分析报告展示，见证数据驱动的力量</p>
             </section>
 
-            <!-- Cases Grid (No Images) -->
-            <div class="cases-grid-container">
-
-                <!-- Case 1: Wireless Earbuds -->
-                <a href="report.html" class="blog-card-link">
-                    <article class="case-card-simple">
-                        <span class="case-tag">电子产品</span>
-                        <h3 class="case-title">如何通过分析Sony差评，让我的耳机月销从 $5K 涨到 $18K</h3>
-                        <p class="case-summary">发现 Sony 用户抱怨“续航不足”，我们的耳机主打“40小时超长续航”，一个月内月销售额从 $5K 增长到
-                            $18K。包含完整的评论情感分析与痛点挖掘过程。</p>
-                        <div class="case-meta">
-                            <span>📅 2025-01-10</span>
-                            <span>⏱️ 15 分钟阅读</span>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- Case 2: Smart Air Purifier -->
-                <a href="report.html" class="blog-card-link">
-                    <article class="case-card-simple">
-                        <span class="case-tag">家居生活</span>
-                        <h3 class="case-title">发现 Levoit 忽略的痛点：“噪音”关键词让转化率提升 8%</h3>
-                        <p class="case-summary">AI分析发现 Levoit 用户频繁抱怨“睡觉时噪音大”，我们在标题和五点描述中强调“低至 22dB 静音模式”，转化率从 8% 提升到
-                            16%。包含 YouTube 评测视频分析。</p>
-                        <div class="case-meta">
-                            <span>📅 2025-08-02</span>
-                            <span>⏱️ 12 分钟阅读</span>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- Case 3: Camping Tent -->
-                <a href="report.html" class="blog-card-link">
-                    <article class="case-card-simple">
-                        <span class="case-tag">户外运动</span>
-                        <h3 class="case-title">Coleman 退货率 18% 的秘密：解决“防水”问题让我 BSR 冲进前 10</h3>
-                        <p class="case-summary">深度挖掘 Coleman 用户退货原因，发现“下雨漏水”是最大痛点。我们的帐篷采用 5000mm 防水涂层并在主图展示下雨测试，BSR 从
-                            100+ 冲到前 10 名。</p>
-                        <div class="case-meta">
-                            <span>📅 2025-07-25</span>
-                            <span>⏱️ 10 分钟阅读</span>
-                        </div>
-                    </article>
-                </a>
-
+            <!-- Cases Grid (Dynamic) -->
+            <div class="cases-grid-container" id="cases-grid">
+                <!-- Loader placeholder -->
+                <div style="text-align: center; grid-column: 1/-1; padding: 40px;">
+                    <div class="loader-spinner"></div>
+                    <p>正在加载案例...</p>
+                </div>
             </div>
         </main>
 
@@ -255,6 +217,37 @@
             </div>
         </footer>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            const grid = document.getElementById('cases-grid');
+            try {
+                const res = await fetch('data/reports/index.json');
+                const reports = await res.json();
+
+                grid.innerHTML = ''; // Clear loader
+
+                reports.forEach(report => {
+                    const card = `
+                        <a href="report.html?id=${report.id}" class="blog-card-link">
+                            <article class="case-card-simple">
+                                <span class="case-tag">${report.tag}</span>
+                                <h3 class="case-title">${report.title}</h3>
+                                <p class="case-summary">${report.summary}</p>
+                                <div class="case-meta">
+                                    <span>📅 ${report.date}</span>
+                                    <span>⏱️ 10 分钟阅读</span>
+                                </div>
+                            </article>
+                        </a>
+                    `;
+                    grid.insertAdjacentHTML('beforeend', card);
+                });
+            } catch (e) {
+                console.error('Failed to load cases:', e);
+                grid.innerHTML = '<p>无法加载案例，请稍后再试。</p>';
+            }
+        });
+    </script>
     <script src="mobile-menu.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
