@@ -47,7 +47,7 @@ if hero_match:
             </div>
             <nav class="main-nav">
                 <a href="index.html" class="nav-link active">首页</a>
-                <a href="create.html" class="nav-link">创建分析</a>
+                <a href="create-analysis.html" class="nav-link">创建分析</a>
                 <a href="cases.html" class="nav-link">案例展示</a>
                 <a href="blog.html" class="nav-link">博客</a>
             </nav>

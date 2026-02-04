@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Analysis - AI Competitor Analysis Assistant</title>
     <link rel="icon" href="favicon.png" type="image/png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="manifest" href="manifest.json">
@@ -17,39 +17,43 @@
 <body>
     <div class="app-container">
         <header class="main-header">
-            <a href="index_en.html" class="logo-link">
-                <div class="logo-section">
-                    <div class="logo-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-bot">
-                            <path d="M12 8V4H8" />
-                            <rect width="16" height="12" x="4" y="8" rx="2" />
-                            <path d="M2 14h2" />
-                            <path d="M20 14h2" />
-                            <path d="M15 13v2" />
-                            <path d="M9 13v2" />
-                        </svg>
+            <div class="header-inner">
+                <a href="index_en.html" class="logo-link">
+                    <div class="logo-section">
+                        <div class="logo-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-bot">
+                                <path d="M12 8V4H8" />
+                                <rect width="16" height="12" x="4" y="8" rx="2" />
+                                <path d="M2 14h2" />
+                                <path d="M20 14h2" />
+                                <path d="M15 13v2" />
+                                <path d="M9 13v2" />
+                            </svg>
+                        </div>
+                        <span class="logo-text">FlowAI Agent <span class="logo-sub">Amazon Analysis
+                                Platform</span></span>
                     </div>
-                    <span class="logo-text">FlowAI Agent <span class="logo-sub">Amazon Analysis Platform</span></span>
+                </a>
+                <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+                    <a href="index_en.html" class="nav-link">Home</a>
+                    <a href="create_en.html" class="nav-link active">Create Analysis</a>
+                    <a href="cases_en.html" class="nav-link">Case Studies</a>
+                    <a href="blog_en.html" class="nav-link">Blog</a>
+                </nav>
+                <div class="header-right">
+                    <div class="lang-switch">
+                        <a href="create-analysis.html" class="lang-btn">CN</a>
+                        <span class="lang-separator">/</span>
+                        <span class="lang-btn active">EN</span>
+                    </div>
+                    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
                 </div>
-            </a>
-            <nav class="main-nav" id="mainNav">
-                <a href="index_en.html" class="nav-link">Home</a>
-                <a href="create_en.html" class="nav-link active">Create Analysis</a>
-                <a href="cases_en.html" class="nav-link">Case Studies</a>
-                <a href="blog_en.html" class="nav-link">Blog</a>
-            </nav>
-            <div class="header-right">
-                <div class="lang-switch">
-                    <a href="create.html" class="lang-btn">🇨🇳 CN</a>
-                    <span class="lang-btn active">🌐 EN</span>
-                </div>
-                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                </button>
             </div>
         </header>
 
@@ -60,7 +64,7 @@
                 <a href="create_en.html" class="mobile-nav-link active">Create Analysis</a>
                 <a href="cases_en.html" class="mobile-nav-link">Case Studies</a>
                 <a href="blog_en.html" class="mobile-nav-link">Blog</a>
-                <a href="create.html" class="mobile-nav-link">🇨🇳 Chinese</a>
+                <a href="create-analysis.html" class="mobile-nav-link">🇨🇳 Chinese</a>
             </nav>
         </div>
 
@@ -142,14 +146,16 @@
                                     </svg>
                                     Select Files
                                 </label>
-                                <button type="button" class="clear-all-btn" id="csv-clear-all" style="display:none;" title="Clear all">Clear All</button>
+                                <button type="button" class="clear-all-btn" id="csv-clear-all" style="display:none;"
+                                    title="Clear all">Clear All</button>
                             </div>
                             <div class="file-list" id="csv-file-list"></div>
                         </div>
                         <div class="config-item upload-item">
                             <label>Upload Product Persona CSV/TXT (Optional, multiple allowed)</label>
                             <div class="file-upload-box">
-                                <input type="file" id="persona-upload" name="personaFile" accept=".csv,.txt" multiple hidden>
+                                <input type="file" id="persona-upload" name="personaFile" accept=".csv,.txt" multiple
+                                    hidden>
                                 <label for="persona-upload" class="upload-label">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -160,7 +166,8 @@
                                     </svg>
                                     Select Files
                                 </label>
-                                <button type="button" class="clear-all-btn" id="persona-clear-all" style="display:none;" title="Clear all">Clear All</button>
+                                <button type="button" class="clear-all-btn" id="persona-clear-all" style="display:none;"
+                                    title="Clear all">Clear All</button>
                             </div>
                             <div class="file-list" id="persona-file-list"></div>
                         </div>

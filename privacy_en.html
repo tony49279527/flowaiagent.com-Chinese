@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy | FlowAI Agent</title>
-    <meta name="description" content="FlowAI Agent Privacy Policy. Learn how we collect, use, and protect your personal information.">
+    <meta name="description"
+        content="FlowAI Agent Privacy Policy. Learn how we collect, use, and protect your personal information.">
     <link rel="canonical" href="https://flowaiagent.com/privacy_en.html">
     <link rel="icon" href="favicon.png" type="image/png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2.0">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#667eea">
     <link rel="apple-touch-icon" href="icon-192.png">
@@ -18,27 +19,33 @@
             margin: 0 auto;
             padding: 40px 20px;
         }
+
         .legal-content h1 {
             font-size: 2.5rem;
             margin-bottom: 16px;
             color: var(--text-main);
         }
+
         .legal-content .last-updated {
             color: var(--text-secondary);
             margin-bottom: 40px;
             font-size: 0.9rem;
         }
+
         .legal-content h2 {
             font-size: 1.5rem;
             margin-top: 40px;
             margin-bottom: 16px;
             color: var(--text-main);
         }
-        .legal-content p, .legal-content li {
+
+        .legal-content p,
+        .legal-content li {
             color: var(--text-secondary);
             line-height: 1.8;
             margin-bottom: 16px;
         }
+
         .legal-content ul {
             padding-left: 24px;
         }
@@ -48,39 +55,43 @@
 <body>
     <div class="app-container">
         <header class="main-header">
-            <a href="index_en.html" class="logo-link">
-                <div class="logo-section">
-                    <div class="logo-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-bot">
-                            <path d="M12 8V4H8" />
-                            <rect width="16" height="12" x="4" y="8" rx="2" />
-                            <path d="M2 14h2" />
-                            <path d="M20 14h2" />
-                            <path d="M15 13v2" />
-                            <path d="M9 13v2" />
-                        </svg>
+            <div class="header-inner">
+                <a href="index_en.html" class="logo-link">
+                    <div class="logo-section">
+                        <div class="logo-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-bot">
+                                <path d="M12 8V4H8" />
+                                <rect width="16" height="12" x="4" y="8" rx="2" />
+                                <path d="M2 14h2" />
+                                <path d="M20 14h2" />
+                                <path d="M15 13v2" />
+                                <path d="M9 13v2" />
+                            </svg>
+                        </div>
+                        <span class="logo-text">FlowAI Agent <span class="logo-sub">Amazon Analysis
+                                Platform</span></span>
                     </div>
-                    <span class="logo-text">FlowAI Agent <span class="logo-sub">Amazon Analysis Platform</span></span>
+                </a>
+                <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+                    <a href="index_en.html" class="nav-link">Home</a>
+                    <a href="create_en.html" class="nav-link">Create Analysis</a>
+                    <a href="cases_en.html" class="nav-link">Case Studies</a>
+                    <a href="blog_en.html" class="nav-link">Blog</a>
+                </nav>
+                <div class="header-right">
+                    <div class="lang-switch">
+                        <a href="privacy.html" class="lang-btn">CN</a>
+                        <span class="lang-separator">/</span>
+                        <span class="lang-btn active">EN</span>
+                    </div>
+                    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
                 </div>
-            </a>
-            <nav class="main-nav" id="mainNav">
-                <a href="index_en.html" class="nav-link">Home</a>
-                <a href="create_en.html" class="nav-link">Create Analysis</a>
-                <a href="cases_en.html" class="nav-link">Case Studies</a>
-                <a href="blog_en.html" class="nav-link">Blog</a>
-            </nav>
-            <div class="header-right">
-                <div class="lang-switch">
-                    <a href="privacy.html" class="lang-btn">🇨🇳 CN</a>
-                    <span class="lang-btn active">🌐 EN</span>
-                </div>
-                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                </button>
             </div>
         </header>
 
@@ -100,14 +111,18 @@
                 <h1>Privacy Policy</h1>
                 <p class="last-updated">Last Updated: January 29, 2026</p>
 
-                <p>FlowAI Agent ("we", "our", or "us") takes your privacy seriously. This Privacy Policy explains how we collect, use, store, and protect your personal information.</p>
+                <p>FlowAI Agent ("we", "our", or "us") takes your privacy seriously. This Privacy Policy explains how we
+                    collect, use, store, and protect your personal information.</p>
 
                 <h2>1. Information We Collect</h2>
                 <p>We may collect the following types of information:</p>
                 <ul>
-                    <li><strong>Account Information:</strong> When you register or use our services, we collect your name, email address, and other information you provide.</li>
-                    <li><strong>Usage Data:</strong> We collect information about how you use our services, including ASINs you analyze and reports generated.</li>
-                    <li><strong>Technical Information:</strong> Including your IP address, browser type, device information, etc.</li>
+                    <li><strong>Account Information:</strong> When you register or use our services, we collect your
+                        name, email address, and other information you provide.</li>
+                    <li><strong>Usage Data:</strong> We collect information about how you use our services, including
+                        ASINs you analyze and reports generated.</li>
+                    <li><strong>Technical Information:</strong> Including your IP address, browser type, device
+                        information, etc.</li>
                 </ul>
 
                 <h2>2. How We Use Information</h2>
@@ -121,7 +136,8 @@
                 </ul>
 
                 <h2>3. Information Sharing</h2>
-                <p>We do not sell your personal information. We only share your information in the following circumstances:</p>
+                <p>We do not sell your personal information. We only share your information in the following
+                    circumstances:</p>
                 <ul>
                     <li>With your explicit consent</li>
                     <li>With service providers (such as payment processing, email delivery)</li>
@@ -129,7 +145,8 @@
                 </ul>
 
                 <h2>4. Data Security</h2>
-                <p>We implement appropriate technical and organizational measures to protect your personal information, including:</p>
+                <p>We implement appropriate technical and organizational measures to protect your personal information,
+                    including:</p>
                 <ul>
                     <li>Using HTTPS to encrypt data in transit</li>
                     <li>Encrypting sensitive data at rest</li>
@@ -138,7 +155,8 @@
                 </ul>
 
                 <h2>5. Data Retention</h2>
-                <p>We retain your information for as long as necessary to fulfill the purposes described in this Privacy Policy. When no longer needed, we securely delete or anonymize your data.</p>
+                <p>We retain your information for as long as necessary to fulfill the purposes described in this Privacy
+                    Policy. When no longer needed, we securely delete or anonymize your data.</p>
 
                 <h2>6. Your Rights</h2>
                 <p>You have the right to:</p>
@@ -151,7 +169,8 @@
                 </ul>
 
                 <h2>7. Cookies</h2>
-                <p>We use cookies and similar technologies to improve user experience and analyze website traffic. You can manage your cookie preferences through your browser settings.</p>
+                <p>We use cookies and similar technologies to improve user experience and analyze website traffic. You
+                    can manage your cookie preferences through your browser settings.</p>
 
                 <h2>8. Contact Us</h2>
                 <p>If you have any questions about this Privacy Policy, please contact us:</p>
@@ -161,7 +180,8 @@
                 </ul>
 
                 <h2>9. Policy Updates</h2>
-                <p>We may update this Privacy Policy from time to time. Updated policies will be posted on this page with the last updated date.</p>
+                <p>We may update this Privacy Policy from time to time. Updated policies will be posted on this page
+                    with the last updated date.</p>
             </div>
         </main>
 

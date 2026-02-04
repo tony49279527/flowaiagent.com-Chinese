@@ -7,7 +7,7 @@
     <title>分析报告 | FlowAI Agent</title>
     <meta name="description" content="查看AI自动生成的市场概况、用户情感分析和营销策略建议。">
     <link rel="icon" href="favicon.png" type="image/png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=3.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -102,13 +102,6 @@
             box-shadow: none;
             max-height: calc(100vh - 140px);
             overflow-y: auto;
-        }
-
-        /* Header Fix */
-        .main-header {
-            background-color: #ffffff !important;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            border-bottom: 1px solid var(--border-color);
         }
 
         .toc-title {
@@ -248,16 +241,17 @@
             border-color: #cbd5e1;
         }
 
-        /* Markdown Content */
+        /* Markdown Content - Simplified for clean look */
         #report-body {
-            background: var(--bg-card);
-            padding: 48px;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
+            background: transparent !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+            border: none !important;
+            box-shadow: none !important;
             line-height: 1.75;
             font-size: 1.05rem;
             color: #334155;
+            margin-bottom: 60px;
         }
 
         #report-body h1,
@@ -429,6 +423,79 @@
                 box-shadow: none;
                 padding: 0;
             }
+
+        }
+
+        /* Recommended Reading Grid - Strict 3 Columns */
+        .recommended-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .recommendation-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .recommendation-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-color: #cbd5e1;
+        }
+
+        .rec-card-image {
+            height: 150px;
+            background: #f1f5f9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rec-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .recommendation-card:hover .rec-card-image img {
+            transform: scale(1.05);
+        }
+
+        .rec-card-content {
+            padding: 16px;
+        }
+
+        .rec-card-title {
+            margin: 0 0 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--text-primary);
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .rec-card-date {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+        }
+
+        @media (max-width: 768px) {
+            .recommended-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
         }
     </style>
 </head>
@@ -437,8 +504,8 @@
     <div class="progress-container">
         <div class="progress-bar" id="reading-progress"></div>
     </div>
-    <div class="app-container">
-        <header class="main-header">
+    <header class="main-header">
+        <div class="header-inner">
             <a href="index.html" class="logo-link">
                 <div class="logo-section">
                     <div class="logo-icon">
@@ -458,14 +525,15 @@
             </a>
             <nav class="main-nav" id="mainNav">
                 <a href="index.html" class="nav-link">首页</a>
-                <a href="create.html" class="nav-link">创建分析</a>
+                <a href="create-analysis.html" class="nav-link">创建分析</a>
                 <a href="cases.html" class="nav-link">案例展示</a>
                 <a href="blog.html" class="nav-link">博客</a>
             </nav>
             <div class="header-right">
                 <div class="lang-switch">
-                    <span class="lang-btn active">🌐 CN</span>
-                    <a href="report_en.html" class="lang-btn">🌐 EN</a>
+                    <span class="lang-btn active">CN</span>
+                    <span class="lang-separator">/</span>
+                    <a href="report_en.html" class="lang-btn">EN</a>
                 </div>
                 <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单">
                     <span class="hamburger-line"></span>
@@ -473,7 +541,10 @@
                     <span class="hamburger-line"></span>
                 </button>
             </div>
-        </header>
+        </div>
+    </header>
+
+    <div class="app-container">
 
         <main class="main-content">
             <div class="report-layout">
@@ -556,7 +627,7 @@
                             准备好优化您的产品了吗？</h3>
                         <p style="margin-bottom: 24px; color: #475569; font-size: 1rem;">立即生成一份属于您的深度竞品分析报告，发掘下一个爆款机会。
                         </p>
-                        <a href="create.html" class="action-btn primary"
+                        <a href="create-analysis.html" class="action-btn primary"
                             style="text-decoration: none; height: 48px; border-radius: 9999px;">
                             免费创建分析
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
@@ -573,8 +644,7 @@
                         <h3
                             style="font-size: 1.25rem; font-weight: 700; color: #1e293b; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid #e2e8f0;">
                             推荐阅读</h3>
-                        <div id="recommended-grid"
-                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+                        <div id="recommended-grid" class="recommended-grid">
                             <!-- Populated by JS -->
                         </div>
                     </div>
@@ -605,7 +675,7 @@
                     <h4>快速链接</h4>
                     <ul class="footer-links">
                         <li><a href="index.html">首页</a></li>
-                        <li><a href="create.html">创建分析</a></li>
+                        <li><a href="create-analysis.html">创建分析</a></li>
                         <li><a href="cases.html">案例展示</a></li>
                         <li><a href="blog.html">博客</a></li>
                     </ul>
@@ -648,8 +718,8 @@
     <!-- External Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-    <script src="report-loader.js?v=3"></script>
-    <script src="mobile-menu.js?v=3"></script>
+    <script src="report-loader.js?v=4"></script>
+    <script src="mobile-menu.js?v=4"></script>
 </body>
 
 </html>

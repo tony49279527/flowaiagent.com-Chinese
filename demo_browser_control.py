@@ -28,7 +28,7 @@ def demo_browser_control():
         page.click("text=创建分析")
         
         print("Waiting for page load...")
-        page.wait_for_url("**/create.html")
+        page.wait_for_url("**/create-analysis.html")
         
         print("Taking a screenshot...")
         page.screenshot(path="demo_screenshot.png")

@@ -16,88 +16,95 @@
 
     <link rel="canonical" href="https://flowaiagent.com/cases.html">
     <link rel="icon" href="favicon.png" type="image/png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
-        /* Specific styles for text-only case cards */
-        .case-card-simple {
+        /* Visual case cards */
+        .case-card-visual {
             background: white;
             border-radius: 16px;
             border: 1px solid var(--border-color);
-            padding: 32px;
+            overflow: hidden;
             height: 100%;
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             position: relative;
-            overflow: hidden;
         }
 
-        .case-card-simple:hover {
+        .case-card-visual:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
             border-color: var(--primary-color);
         }
 
-        .case-card-simple::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        .case-image-container {
             width: 100%;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            height: 180px;
+            overflow: hidden;
+            position: relative;
         }
 
-        .case-card-simple:hover::before {
-            opacity: 1;
+        .case-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .case-card-visual:hover .case-image {
+            transform: scale(1.05);
+        }
+
+        .case-content {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .case-tag {
             display: inline-block;
-            padding: 6px 12px;
+            padding: 4px 10px;
             background: #f0f9ff;
             color: var(--primary-color);
-            border-radius: 20px;
-            font-size: 0.85rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             width: fit-content;
         }
 
         .case-title {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             color: var(--text-primary);
             line-height: 1.4;
         }
 
         .case-summary {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 24px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
             flex-grow: 1;
         }
 
         .case-meta {
             display: flex;
-            gap: 16px;
-            font-size: 0.85rem;
+            gap: 12px;
+            font-size: 0.8rem;
             color: #94a3b8;
             border-top: 1px solid var(--border-color);
-            padding-top: 20px;
+            padding-top: 16px;
         }
 
         .cases-grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 32px;
-            gap: 32px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
             margin-bottom: 80px;
             margin-top: 20px;
         }
@@ -110,49 +117,52 @@
 <body>
     <div class="app-container">
         <header class="main-header">
-            <a href="index.html" class="logo-link">
-                <div class="logo-section">
-                    <div class="logo-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-bot">
-                            <path d="M12 8V4H8" />
-                            <rect width="16" height="12" x="4" y="8" rx="2" />
-                            <path d="M2 14h2" />
-                            <path d="M20 14h2" />
-                            <path d="M15 13v2" />
-                            <path d="M9 13v2" />
-                        </svg>
+            <div class="header-inner">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-section">
+                        <div class="logo-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-bot">
+                                <path d="M12 8V4H8" />
+                                <rect width="16" height="12" x="4" y="8" rx="2" />
+                                <path d="M2 14h2" />
+                                <path d="M20 14h2" />
+                                <path d="M15 13v2" />
+                                <path d="M9 13v2" />
+                            </svg>
+                        </div>
+                        <span class="logo-text">AI 竞品分析 <span class="logo-sub">Amazon Analysis Platform</span></span>
                     </div>
-                    <span class="logo-text">AI 竞品分析 <span class="logo-sub">Amazon Analysis Platform</span></span>
+                </a>
+                <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+                    <a href="index.html" class="nav-link">首页</a>
+                    <a href="create-analysis.html" class="nav-link">创建分析</a>
+                    <a href="cases.html" class="nav-link active">案例展示</a>
+                    <a href="blog.html" class="nav-link">博客</a>
+                </nav>
+                <div class="header-right">
+                    <div class="lang-switch">
+                        <span class="lang-btn active">CN</span>
+                        <span class="lang-separator">/</span>
+                        <a href="cases_en.html" class="lang-btn">EN</a>
+                    </div>
+                    <button class="hamburger-btn" id="hamburgerBtn" aria-label="菜单" aria-expanded="false">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
                 </div>
-            </a>
-            <nav class="main-nav" id="mainNav">
-                <a href="index.html" class="nav-link">首页</a>
-                <a href="create.html" class="nav-link">创建分析</a>
-                <a href="cases.html" class="nav-link active">案例展示</a>
-                <a href="blog.html" class="nav-link">博客</a>
-            </nav>
-            <div class="header-right">
-                <div class="lang-switch">
-                    <span class="lang-btn active">🌐 CN</span>
-                    <a href="cases_en.html" class="lang-btn">🌐 EN</a>
-                </div>
-                <button class="hamburger-btn" id="hamburgerBtn" aria-label="菜单" aria-expanded="false">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                </button>
             </div>
         </header>
         <!-- Mobile Menu Overlay -->
         <div class="mobile-menu-overlay" id="mobileMenuOverlay">
             <nav class="mobile-nav">
                 <a href="index.html" class="mobile-nav-link">首页</a>
-                <a href="create.html" class="mobile-nav-link">创建分析</a>
+                <a href="create-analysis.html" class="mobile-nav-link">创建分析</a>
                 <a href="cases.html" class="mobile-nav-link active">案例展示</a>
                 <a href="blog.html" class="mobile-nav-link">博客</a>
-                <a href="cases_en.html" class="mobile-nav-link">🌐 EN</a>
+                <a href="cases_en.html" class="mobile-nav-link">EN</a>
             </nav>
         </div>
 
@@ -194,7 +204,7 @@
                     <h4>快速链接</h4>
                     <ul class="footer-links">
                         <li><a href="index.html">首页</a></li>
-                        <li><a href="create.html">创建分析</a></li>
+                        <li><a href="create-analysis.html">创建分析</a></li>
                         <li><a href="cases.html">案例展示</a></li>
                         <li><a href="blog.html">博客</a></li>
                     </ul>
@@ -229,13 +239,18 @@
                 reports.forEach(report => {
                     const card = `
                         <a href="report.html?id=${report.id}" class="blog-card-link">
-                            <article class="case-card-simple">
-                                <span class="case-tag">${report.tag}</span>
-                                <h3 class="case-title">${report.title}</h3>
-                                <p class="case-summary">${report.summary}</p>
-                                <div class="case-meta">
-                                    <span>📅 ${report.date}</span>
-                                    <span>⏱️ 10 分钟阅读</span>
+                            <article class="case-card-visual">
+                                <div class="case-image-container">
+                                    <img src="${report.cover_image}" alt="${report.title}" class="case-image" loading="lazy">
+                                </div>
+                                <div class="case-content">
+                                    <span class="case-tag">${report.tag}</span>
+                                    <h3 class="case-title">${report.title}</h3>
+                                    <p class="case-summary">${report.summary}</p>
+                                    <div class="case-meta">
+                                        <span>📅 ${report.date}</span>
+                                        <span>⏱️ 10 分钟阅读</span>
+                                    </div>
                                 </div>
                             </article>
                         </a>

@@ -8,7 +8,7 @@
     <meta name="description" content="深度拆解传统人工竞品调研的真实成本。了解 FlowAI Agent 如何通过自动化处理数据“脏活”，释放团队的高价值生产力。">
     <meta name="keywords" content="亚马逊竞品分析工具, 运营人效, 低效勤奋, 隐形运营成本, FlowAI Agent, 自动化运营">
     <link rel="icon" href="favicon.png" type="image/png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="manifest" href="manifest.json">
@@ -19,38 +19,42 @@
 <body>
     <div class="app-container">
         <header class="main-header">
-            <a href="index.html" class="logo-link">
-                <div class="logo-section">
-                    <div class="logo-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-bot">
-                            <path d="M12 8V4H8" />
-                            <rect width="16" height="12" x="4" y="8" rx="2" />
-                            <path d="M2 14h2" />
-                            <path d="M20 14h2" />
-                            <path d="M15 13v2" />
-                            <path d="M9 13v2" />
-                        </svg>
+            <div class="header-inner">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-section">
+                        <div class="logo-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-bot">
+                                <path d="M12 8V4H8" />
+                                <rect width="16" height="12" x="4" y="8" rx="2" />
+                                <path d="M2 14h2" />
+                                <path d="M20 14h2" />
+                                <path d="M15 13v2" />
+                                <path d="M9 13v2" />
+                            </svg>
+                        </div>
+                        <span class="logo-text">AI 竞品分析 <span class="logo-sub">Amazon Analysis Platform</span></span>
                     </div>
-                    <span class="logo-text">AI 竞品分析 <span class="logo-sub">Amazon Analysis Platform</span></span>
+                </a>
+                <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+                    <a href="index.html" class="nav-link">首页</a>
+                    <a href="create-analysis.html" class="nav-link">创建分析</a>
+                    <a href="cases.html" class="nav-link">案例展示</a>
+                    <a href="blog.html" class="nav-link active">博客</a>
+                </nav>
+                <div class="header-right">
+                    <div class="lang-switch">
+                        <span class="lang-btn active">CN</span>
+                        <span class="lang-separator">/</span>
+                        <a href="amazon-competitor-analysis-efficiency-cost-calculator_en.html" class="lang-btn">EN</a>
+                    </div>
+                    <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单" aria-expanded="false">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
                 </div>
-            </a>
-            <nav class="main-nav" id="mainNav">
-                <a href="index.html" class="nav-link">首页</a>
-                <a href="create.html" class="nav-link">创建分析</a>
-                <a href="cases.html" class="nav-link">案例展示</a>
-                <a href="blog.html" class="nav-link active">博客</a>
-            </nav>
-            <div class="header-right">
-                <div class="lang-switch">
-                    <a href="amazon-competitor-analysis-efficiency-cost-calculator_en.html" class="lang-btn">🌐 EN</a>
-                </div>
-                <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单" aria-expanded="false">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                </button>
             </div>
         </header>
 
@@ -97,7 +101,7 @@
                         <p>省下来的时间，应该用于构建真正的竞争壁垒：精细化广告操盘、供应链深度谈判、以及站外达人布局。</p>
 
                         <hr>
-                        <p>👉 <a href="create.html"
+                        <p>👉 <a href="create-analysis.html"
                                 style="color: var(--primary-color); font-weight: 600;">点击这里</a>，免费体验极速 AI 调研。</p>
                     </div>
                 </article>

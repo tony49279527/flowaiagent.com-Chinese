@@ -34,7 +34,7 @@ def run_seller_journey():
             page.click("text=Create", timeout=3000)
         except:
             try:
-                page.click("a[href='create.html']", timeout=3000)
+                page.click("a[href='create-analysis.html']", timeout=3000)
             except:
                 page.click("text=Analysis", timeout=3000)
         

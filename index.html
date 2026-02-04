@@ -17,7 +17,7 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://flowaiagent.com/index.html">
     <link rel="icon" href="favicon.png" type="image/png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -45,7 +45,7 @@
       "description": "AI驱动的亚马逊竞品分析平台",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://flowaiagent.com/create.html?q={search_term_string}",
+        "target": "https://flowaiagent.com/create-analysis.html?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     }
@@ -80,39 +80,42 @@
 <body>
     <div class="app-container">
         <header class="main-header">
-            <a href="index.html" class="logo-link">
-                <div class="logo-section">
-                    <div class="logo-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-bot" aria-label="FlowAI Agent Logo">
-                            <path d="M12 8V4H8" />
-                            <rect width="16" height="12" x="4" y="8" rx="2" />
-                            <path d="M2 14h2" />
-                            <path d="M20 14h2" />
-                            <path d="M15 13v2" />
-                            <path d="M9 13v2" />
-                        </svg>
+            <div class="header-inner">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-section">
+                        <div class="logo-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-bot" aria-label="FlowAI Agent Logo">
+                                <path d="M12 8V4H8" />
+                                <rect width="16" height="12" x="4" y="8" rx="2" />
+                                <path d="M2 14h2" />
+                                <path d="M20 14h2" />
+                                <path d="M15 13v2" />
+                                <path d="M9 13v2" />
+                            </svg>
+                        </div>
+                        <span class="logo-text">AI 竞品分析 <span class="logo-sub">Amazon Analysis Platform</span></span>
                     </div>
-                    <span class="logo-text">AI 竞品分析 <span class="logo-sub">Amazon Analysis Platform</span></span>
+                </a>
+                <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+                    <a href="index.html" class="nav-link active">首页</a>
+                    <a href="create-analysis.html" class="nav-link">创建分析</a>
+                    <a href="cases.html" class="nav-link">案例展示</a>
+                    <a href="blog.html" class="nav-link">博客</a>
+                </nav>
+                <div class="header-right">
+                    <div class="lang-switch">
+                        <span class="lang-btn active">CN</span>
+                        <span class="lang-separator">/</span>
+                        <a href="index_en.html" class="lang-btn">EN</a>
+                    </div>
+                    <button class="hamburger-btn" id="hamburgerBtn" aria-label="菜单" aria-expanded="false">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
                 </div>
-            </a>
-            <nav class="main-nav" id="mainNav" aria-label="Main navigation">
-                <a href="index.html" class="nav-link active">首页</a>
-                <a href="create.html" class="nav-link">创建分析</a>
-                <a href="cases.html" class="nav-link">案例展示</a>
-                <a href="blog.html" class="nav-link">博客</a>
-            </nav>
-            <div class="header-right">
-                <div class="lang-switch">
-                    <span class="lang-btn active">🌐 CN</span>
-                    <a href="index_en.html" class="lang-btn">🌐 EN</a>
-                </div>
-                <button class="hamburger-btn" id="hamburgerBtn" aria-label="菜单" aria-expanded="false">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                </button>
             </div>
         </header>
 
@@ -120,10 +123,10 @@
         <div class="mobile-menu-overlay" id="mobileMenuOverlay">
             <nav class="mobile-nav">
                 <a href="index.html" class="mobile-nav-link active">首页</a>
-                <a href="create.html" class="mobile-nav-link">创建分析</a>
+                <a href="create-analysis.html" class="mobile-nav-link">创建分析</a>
                 <a href="cases.html" class="mobile-nav-link">案例展示</a>
                 <a href="blog.html" class="mobile-nav-link">博客</a>
-                <a href="index_en.html" class="mobile-nav-link">🌐 EN</a>
+                <a href="index_en.html" class="mobile-nav-link">EN</a>
             </nav>
         </div>
 
@@ -137,7 +140,7 @@
                         无需绑定信用卡，无需店铺授权。AI帮你读完3000+条评论，自动总结竞品弱点。<br>平均帮卖家发现3-5个竞品遗漏的高频痛点，转化率提升15-30%。
                     </p>
                     <div class="hero-actions">
-                        <a href="create.html" class="submit-btn">立即生成我的2份免费报告</a>
+                        <a href="create-analysis.html" class="submit-btn">立即生成我的2份免费报告</a>
                         <a href="cases.html" class="upload-label"
                             style="text-decoration: none; padding: 16px 32px; font-size: 1.1rem; font-weight: 600;">查看真实案例</a>
                     </div>
@@ -319,7 +322,7 @@
                     <h4>快速链接</h4>
                     <ul class="footer-links">
                         <li><a href="index.html">首页</a></li>
-                        <li><a href="create.html">创建分析</a></li>
+                        <li><a href="create-analysis.html">创建分析</a></li>
                         <li><a href="cases.html">案例展示</a></li>
                         <li><a href="blog.html">博客</a></li>
                     </ul>

@@ -32,7 +32,7 @@ def run_real_user_journey():
             print("\n--- PHASE 2: Creating Analysis ---")
             print("User clicks 'Create Analysis'...")
             page.click("text=创建分析") # Adjust selector if needed
-            page.wait_for_url("**/create.html")
+            page.wait_for_url("**/create-analysis.html")
             
             # 3. Simulate Quota Exhaustion (Forcing the limit for test)
             print("Forcing user quota to limit (Simulating previous usage)...")

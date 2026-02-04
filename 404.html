@@ -7,7 +7,7 @@
     <title>页面未找到 - 404 | FlowAI Agent</title>
     <meta name="description" content="抱歉，您访问的页面不存在。">
     <link rel="icon" href="favicon.png" type="image/png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2.0">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#667eea">
     <link rel="apple-touch-icon" href="icon-192.png">
@@ -21,6 +21,7 @@
             text-align: center;
             padding: 40px 20px;
         }
+
         .error-code {
             font-size: 8rem;
             font-weight: 800;
@@ -31,24 +32,28 @@
             line-height: 1;
             margin-bottom: 16px;
         }
+
         .error-title {
             font-size: 2rem;
             font-weight: 700;
             color: var(--text-main);
             margin-bottom: 16px;
         }
+
         .error-message {
             font-size: 1.1rem;
             color: var(--text-secondary);
             margin-bottom: 32px;
             max-width: 500px;
         }
+
         .error-actions {
             display: flex;
             gap: 16px;
             flex-wrap: wrap;
             justify-content: center;
         }
+
         .error-btn {
             padding: 14px 32px;
             border-radius: 12px;
@@ -57,24 +62,29 @@
             text-decoration: none;
             transition: all 0.3s ease;
         }
+
         .error-btn-primary {
             background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
             color: white;
             box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39);
         }
+
         .error-btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px 0 rgba(37, 99, 235, 0.5);
         }
+
         .error-btn-secondary {
             background: white;
             color: #2563eb;
             border: 2px solid #e2e8f0;
         }
+
         .error-btn-secondary:hover {
             border-color: #2563eb;
             background: #f8fafc;
         }
+
         .error-illustration {
             font-size: 6rem;
             margin-bottom: 24px;
@@ -85,39 +95,42 @@
 <body>
     <div class="app-container">
         <header class="main-header">
-            <a href="index.html" class="logo-link">
-                <div class="logo-section">
-                    <div class="logo-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-bot">
-                            <path d="M12 8V4H8" />
-                            <rect width="16" height="12" x="4" y="8" rx="2" />
-                            <path d="M2 14h2" />
-                            <path d="M20 14h2" />
-                            <path d="M15 13v2" />
-                            <path d="M9 13v2" />
-                        </svg>
+            <div class="header-inner">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-section">
+                        <div class="logo-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-bot">
+                                <path d="M12 8V4H8" />
+                                <rect width="16" height="12" x="4" y="8" rx="2" />
+                                <path d="M2 14h2" />
+                                <path d="M20 14h2" />
+                                <path d="M15 13v2" />
+                                <path d="M9 13v2" />
+                            </svg>
+                        </div>
+                        <span class="logo-text">AI 竞品分析 <span class="logo-sub">Amazon Analysis Platform</span></span>
                     </div>
-                    <span class="logo-text">AI 竞品分析 <span class="logo-sub">Amazon Analysis Platform</span></span>
+                </a>
+                <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+                    <a href="index.html" class="nav-link">首页</a>
+                    <a href="create-analysis.html" class="nav-link">创建分析</a>
+                    <a href="cases.html" class="nav-link">案例展示</a>
+                    <a href="blog.html" class="nav-link">博客</a>
+                </nav>
+                <div class="header-right">
+                    <div class="lang-switch">
+                        <span class="lang-btn active">CN</span>
+                        <span class="lang-separator">/</span>
+                        <a href="404_en.html" class="lang-btn">EN</a>
+                    </div>
+                    <button class="hamburger-btn" id="hamburgerBtn" aria-label="菜单" aria-expanded="false">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
                 </div>
-            </a>
-            <nav class="main-nav" id="mainNav">
-                <a href="index.html" class="nav-link">首页</a>
-                <a href="create.html" class="nav-link">创建分析</a>
-                <a href="cases.html" class="nav-link">案例展示</a>
-                <a href="blog.html" class="nav-link">博客</a>
-            </nav>
-            <div class="header-right">
-                <div class="lang-switch">
-                    <span class="lang-btn active">🌐 CN</span>
-                    <a href="404_en.html" class="lang-btn">🌐 EN</a>
-                </div>
-                <button class="hamburger-btn" id="hamburgerBtn" aria-label="菜单" aria-expanded="false">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                </button>
             </div>
         </header>
 
@@ -125,7 +138,7 @@
         <div class="mobile-menu-overlay" id="mobileMenuOverlay">
             <nav class="mobile-nav">
                 <a href="index.html" class="mobile-nav-link">首页</a>
-                <a href="create.html" class="mobile-nav-link">创建分析</a>
+                <a href="create-analysis.html" class="mobile-nav-link">创建分析</a>
                 <a href="cases.html" class="mobile-nav-link">案例展示</a>
                 <a href="blog.html" class="mobile-nav-link">博客</a>
             </nav>
@@ -141,7 +154,7 @@
                 </p>
                 <div class="error-actions">
                     <a href="index.html" class="error-btn error-btn-primary">返回首页</a>
-                    <a href="create.html" class="error-btn error-btn-secondary">创建分析</a>
+                    <a href="create-analysis.html" class="error-btn error-btn-secondary">创建分析</a>
                 </div>
             </div>
         </main>
@@ -167,7 +180,7 @@
                     <h4>快速链接</h4>
                     <ul class="footer-links">
                         <li><a href="index.html">首页</a></li>
-                        <li><a href="create.html">创建分析</a></li>
+                        <li><a href="create-analysis.html">创建分析</a></li>
                         <li><a href="cases.html">案例展示</a></li>
                         <li><a href="blog.html">博客</a></li>
                     </ul>

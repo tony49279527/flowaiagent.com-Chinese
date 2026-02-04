@@ -3,7 +3,7 @@ import re
 
 files_to_update = [
     'index.html', 'index_en.html',
-    'create.html', 'create_en.html',
+    'create-analysis.html', 'create_en.html',
     'cases.html', 'cases_en.html',
     'blog.html', 'blog_en.html',
     'report.html', 'report_en.html',
